@@ -1,8 +1,10 @@
 # Starting composite manager. 
 exec --no-startup-id compton
 
+exec --no-startup-id udiskie -N
+
 # Initializing background.
-exec --no-startup-id feh --bg-center ~/Pictures/Sweet-Wallpapers/Sweet-space.png
+exec --no-startup-id feh --bg-center ~/Pictures/Wallpapers/arch2.jpg
 
 set $mod Mod1
 
@@ -170,7 +172,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+b mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -180,7 +182,7 @@ bar {
         font pango:mono 10
 }
 
-bindsym $mod+b exec konsole -e ranger
+bindsym $mod+r exec konsole -e ranger
 
 # Setting borders.
 for_window [class="^.*"] border pixel 2
@@ -200,3 +202,7 @@ bindsym $mod+v              exec --no-startup-id telegram-desktop
 
 # Initializing keyboard layout change.
 exec_always --no-startup-id "setxkbmap -layout us,ru -option 'grp:alt_space_toggle'"
+
+exec_always --no-startup-id xmodmap -e "clear lock"                # disable caps lock switch
+exec_always --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" # set caps_lock as escape
+

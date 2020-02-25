@@ -1,5 +1,4 @@
 # If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 # Assigning ranger config.
 export RANGER_LOAD_DEFAULT_RC=FALSE
@@ -26,9 +25,9 @@ else
     fi
 fi
 unset __conda_setup
+# <<< conda initialize <<<
 
 conda activate odom
-# <<< conda initialize <<<
 
 # Setting up a default editor
 export VISUAL=vim
