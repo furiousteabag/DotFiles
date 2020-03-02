@@ -1,10 +1,12 @@
 # Starting composite manager. 
 exec --no-startup-id compton
 
+exec --no-startup-id dunst
+
 exec --no-startup-id udiskie -N
 
 # Initializing background.
-exec --no-startup-id feh --bg-center ~/Pictures/Wallpapers/arch2.jpg
+exec --no-startup-id feh --bg-center ~/Pictures/Wallpapers/neon.png
 
 set $mod Mod1
 
@@ -183,6 +185,10 @@ bar {
 }
 
 bindsym $mod+r exec konsole -e ranger
+
+
+
+bindsym Print exec --no-startup-id flameshot gui
 
 # Setting borders.
 for_window [class="^.*"] border pixel 2

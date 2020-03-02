@@ -1,5 +1,3 @@
-# If not running interactively, don't do anything
-
 # Assigning ranger config.
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
@@ -14,20 +12,20 @@ PS1='\[\033[38;5;2m\]\u\[\033[38;5;15m\]:[\W]$(__git_ps1 " (%s)")\$ '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/furiousteabag/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/furiousteabag/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/furiousteabag/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/furiousteabag/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-conda activate odom
+#__conda_setup="$('/home/furiousteabag/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/home/furiousteabag/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/furiousteabag/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/furiousteabag/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+## <<< conda initialize <<<
+#
+#conda activate odom
 
 # Setting up a default editor
 export VISUAL=vim

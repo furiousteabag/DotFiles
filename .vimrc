@@ -4,7 +4,6 @@ filetype plugin on
 syntax on
 set laststatus=2
 
-
 set clipboard=unnamedplus
 set tabstop=4
 set shiftwidth=4
@@ -14,7 +13,6 @@ set smartindent
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-"nmap <CR> i<CR><Esc>
 nmap <CR> o<Esc>
 nmap <Tab> i<Tab><Esc>
 nmap <Space> i<Space><Esc>l
