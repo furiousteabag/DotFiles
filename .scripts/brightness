@@ -1,0 +1,4 @@
+#!/bin/bash
+
+BRIGHTNESS=$(( $(brightnessctl get) * 100 / $(brightnessctl max) ))
+echo "${BRIGHTNESS}%"

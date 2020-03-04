@@ -194,17 +194,19 @@ bindsym Print exec --no-startup-id flameshot gui
 for_window [class="^.*"] border pixel 2
 
 gaps inner 15
-gaps outer 15
+gaps outer 0
     
 bindsym $mod+x			    gaps inner current plus 5
 bindsym $mod+Shift+x		gaps inner current minus 5
 bindsym $mod+z  			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+t			    split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 0
 
 bindsym $mod+c              exec --no-startup-id chromium
 bindsym $mod+v              exec --no-startup-id telegram-desktop
+
+bindsym $mod+Shift+q		exec --no-startup-id systemctl suspend
 
 # Initializing keyboard layout change.
 exec_always --no-startup-id "setxkbmap -layout us,ru -option 'grp:alt_space_toggle'"

@@ -8,7 +8,7 @@ GIT_PS1_SHOWCOLORHINTS=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 
 # Initializing prompt.
-PS1='\[\033[38;5;2m\]\u\[\033[38;5;15m\]:[\W]$(__git_ps1 " (%s)")\$ '
+PS1='\[\033[38;5;2m\]\u\[\033[38;5;15m\]@\[\033[\e[38;5;34m\]\h\[\033[38;5;15m\]:[\W]$(__git_ps1 " (%s)")\$ '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
