@@ -1,8 +1,47 @@
 set nocompatible
-set nu
+set  nu
 filetype plugin on
 syntax on
 set laststatus=2
+set wildmode=longest,list,full
+
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'mboughaba/i3config.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-entire'
+Plug 'bps/vim-textobj-python'
+Plug 'junegunn/goyo.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+
+call plug#end()
+
+" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
+	set splitbelow
+	set splitright
+
+" Shortcutting split navigation, saving a keypress:
+	map <C-h> <C-w>h
+	map <C-j> <C-w>j
+	map <C-k> <C-w>k
+	map <C-l> <C-w>l
+
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+let mapleader = "\<Space>"
+
+noremap <F5> <ESC>:w<CR>:silent execute "!python %"<CR><CR>
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 set clipboard=unnamedplus
 set tabstop=4
@@ -10,6 +49,8 @@ set shiftwidth=4
 set smarttab
 set expandtab
 set smartindent
+set relativenumber
+set ignorecase
 
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 

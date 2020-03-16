@@ -1,6 +1,8 @@
 # Assigning ranger config.
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
+export PROMPT_COMMAND="pwd > /tmp/whereami"
+
 # Initializing git prompt
 source ~/.git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
@@ -45,6 +47,7 @@ alias tree='tree -Ca'
 alias p='prettier'
 alias pw='prettier --write'
 alias z='f() { zathura $ 1 & }; f'
+alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
 
 # Setting terminal in vi mode
 set -o vi
