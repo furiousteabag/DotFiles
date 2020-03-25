@@ -1,7 +1,5 @@
 # vim: filetype=i3config
 
-
-
 font pango:monospace 8
 
 set $mod Mod1
@@ -174,6 +172,9 @@ bar {
         status_command i3blocks
         position top
         font pango:mono 10
+        colors {
+    background #000052
+            }
 }
 
 bindsym $mod+r exec konsole -e ranger

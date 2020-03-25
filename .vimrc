@@ -20,6 +20,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'elzr/vim-json'
 
 call plug#end()
 

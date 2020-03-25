@@ -4,6 +4,9 @@ full_text=|
 separator=false
 separator_block_width=7
 
+[theme]
+name = "solarized-dark"
+
 [layout]
 command=$SCRIPT_DIR/layout
 interval=1
