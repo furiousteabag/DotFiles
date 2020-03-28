@@ -1,0 +1,14 @@
+#!/bin/bash
+
+info=$(grep 'Russia' ~/.cache/corona    \
+| sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" \
+     | sed 's: ::g'                     \
+     | sed 's:║::g'                     \
+     | sed 's:│:|:g'                    \
+     | cut -d'|' -f3,4                  \
+     | sed 's:▲::g') 
+
+russia_infected=$(echo $info | cut -d'|' -f1)
+russia_infected_today=$(echo $info | cut -d'|' -f2)
+
+echo "Russia: $russia_infected☹️ ($russia_infected_today⤴️)"
