@@ -5,6 +5,8 @@ syntax on
 set laststatus=2
 set wildmode=longest,list,full
 
+" Disable autocomment on next line.
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 call plug#begin('~/.vim/plugged')
 
@@ -22,6 +24,7 @@ Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/ReplaceWithRegister'
 " Plug 'elzr/vim-json'
+Plug 'nathanaelkane/vim-indent-guides'
 
 call plug#end()
 

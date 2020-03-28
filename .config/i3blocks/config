@@ -7,6 +7,12 @@ separator_block_width=7
 [theme]
 name = "solarized-dark"
 
+[corona]
+command=$SCRIPT_DIR/corona
+interval=60
+
+[separator]
+
 [layout]
 command=$SCRIPT_DIR/layout
 interval=1

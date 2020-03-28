@@ -48,6 +48,8 @@ alias p='prettier'
 alias pw='prettier --write'
 alias z='f() { zathura $ 1 & }; f'
 alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
+alias rpl='ssh furiousteabag@192.168.1.160'
+alias rpg='ssh furiousteabag@10.5.117.27'
 
 # Setting terminal in vi mode
 set -o vi

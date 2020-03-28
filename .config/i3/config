@@ -171,10 +171,10 @@ bindsym $mod+b mode "resize"
 bar {
         status_command i3blocks
         position top
-        font pango:mono 10
+        font pango:Source Code Pro 11
         colors {
-    background #000052
-            }
+            background #000052
+        }
 }
 
 bindsym $mod+r exec konsole -e ranger
@@ -186,7 +186,7 @@ bindsym Print exec --no-startup-id flameshot gui
 # Setting borders.
 for_window [class="^.*"] border pixel 2
 
-gaps inner 15
+gaps inner 0
 gaps outer 0
 
 bindsym $mod+x			    gaps inner current plus 5
