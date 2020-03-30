@@ -9,7 +9,7 @@ name = "solarized-dark"
 
 [corona]
 command=$SCRIPT_DIR/corona
-interval=60
+interval=18000
 
 [separator]
 
