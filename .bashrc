@@ -27,7 +27,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-conda activate tg
+conda activate comp
 
 # Setting up a default editor
 export VISUAL=vim
@@ -46,10 +46,11 @@ alias gd='git diff'
 alias tree='tree -Ca'
 alias p='prettier'
 alias pw='prettier --write'
-alias z='f() { zathura $ 1 & }; f'
+alias z='f() { zathura $1 & }; f'
 alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
 alias rpl='ssh furiousteabag@192.168.1.160'
 alias rpg='ssh furiousteabag@10.5.117.27'
+alias yv='youtube-viewer -C'
 
 # Setting terminal in vi mode
 set -o vi

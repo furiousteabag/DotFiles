@@ -181,7 +181,7 @@ bindsym $mod+r exec konsole -e ranger
 
 
 
-bindsym Print exec --no-startup-id "deepin-screenshot -n"
+bindsym Print exec --no-startup-id "xfce4-clipman & deepin-screenshot -n; killall xfce4-clipman"
 
 # Setting borders.
 for_window [class="^.*"] border pixel 2
@@ -196,15 +196,16 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+t			    split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 0
 
-bindsym $mod+c              exec --no-startup-id chromium
+bindsym $mod+c              exec --no-startup-id brave
 bindsym $mod+v              exec --no-startup-id telegram-desktop
+bindsym $mod+m              exec --no-startup-id konsole -e neomutt
 
 bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
 bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
 bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
 
 bindsym $mod+u              exec --no-startup-id udiskie-umount -a
-bindsym $mod+m              exec --no-startup-id udiskie-mount -a
+bindsym $mod+Shift+m        exec --no-startup-id udiskie-mount -a
 
 set $grey                #334455
 set $magenta             #ddbbcc
