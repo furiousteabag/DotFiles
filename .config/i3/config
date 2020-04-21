@@ -1,38 +1,32 @@
 # vim: filetype=i3config
-
+set $term --no-startup-id 
 font pango:Source Code Pro 8
 
 set $mod Mod1
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango:DejaVu Sans Mono 8
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  # Increase sound volume.
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%  # Decrease sound volume.
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec   --no-startup-id brightnessctl s +10%     # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-     # decrease screen brightness
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10%     # Increase screen brightness.
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-     # Decrease screen brightness.
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec --no-startup-id $TERMINAL
 bindsym $mod+Shift+Return exec konsole --workdir=$(cat /tmp/whereami)
 
 # kill 4ocused window
@@ -40,10 +34,6 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -fn 'Source Code Pro-11'
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -196,7 +186,7 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+t			    split toggle
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 0
 
-bindsym $mod+c              exec --no-startup-id brave
+bindsym $mod+c              exec --no-startup-id $BROWSER
 bindsym $mod+v              exec --no-startup-id telegram-desktop
 bindsym $mod+m              exec --no-startup-id konsole -e neomutt
 

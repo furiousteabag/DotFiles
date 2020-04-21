@@ -1,18 +1,23 @@
-###############################################################
-# General.
+# Initializes on every terminal open.
+
 ###############################################################
 # Setting variables.
+###############################################################
+# Default programs:
+export TERMINAL="konsole"
+export EDITOR="vim"
+export BROWSER="brave"
+export FILE_MANAGER="ranger"
+export READER="zathura"
+
 export LOAD_CONDA=0                         # Whether to load conda or not.
 export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
 export PROMPT_COMMAND="pwd > /tmp/whereami" # Saving current dir to file.
-export VISUAL=vim
-export EDITOR="$VISUAL"
+
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
-
-# Initializing prompt.
-PS1='\[\033[38;5;2m\]\u\[\033[38;5;15m\]@\[\033[\e[38;5;34m\]\h\[\033[38;5;15m\]:[\W]$(__git_ps1 " (%s)")\$ '
+export PS1='\[\033[38;5;2m\]\u\[\033[38;5;15m\]@\[\033[\e[38;5;34m\]\h\[\033[38;5;15m\]:[\W]$(__git_ps1 " (%s)")\$ '
 
 ###############################################################
 # Sourcing other configs.

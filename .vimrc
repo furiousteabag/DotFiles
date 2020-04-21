@@ -1,12 +1,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set encoding=UTF-8        " Set UTF8 as standard encoding and en_US as the standard language.
-set nocompatible          " Disable vi compatible mode.
-set hidden                " Buffer option
-filetype plugin on        " Sets different options for different filetypes.
-set clipboard=unnamedplus " Single clipboard for vim and outer space.
-set ignorecase            " Case insensetive search.
+set encoding=UTF-8         " Set UTF8 as standard encoding and en_US as the standard language.
+set nocompatible           " Disable vi compatible mode.
+set hidden                 " Buffer option
+set clipboard=unnamedplus  " Single clipboard for vim and outer space.
+set ignorecase             " Case insensetive search.
+filetype plugin on         " Sets different options for different filetypes.
+let mapleader = "\<Space>" " Setting leader key.
 
 " Edit text even if in russian layout.
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
@@ -80,7 +81,8 @@ inoremap {;<CR> {<CR>};<ESC>O
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on   " Syntax highlighting.
+syntax on          " Syntax highlighting.
+set number         " Display current line number.
 set relativenumber " Display relative line number.
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
@@ -99,8 +101,6 @@ let &t_EI = "\<Esc>[2 q"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = "\<Space>" " Setting leader key.
-
 " Disable autocomment on next line.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
