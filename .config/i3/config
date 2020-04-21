@@ -1,92 +1,112 @@
 # vim: filetype=i3config
-set $term --no-startup-id 
-font pango:Source Code Pro 8
-
+#
+###############################################################
+# General.
+###############################################################
 set $mod Mod1
+font pango:Source Code Pro 8
+for_window [class="^.*"] border pixel 2
+gaps inner 0
+gaps outer 0
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+###############################################################
+# Bar.
+###############################################################
+bar {
+        status_command i3blocks
+        position top
+        font pango:Source Code Pro 11
+        colors {
+            background #000052
+        }
+}
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
+###############################################################
+# Programs bindings.
+###############################################################
+bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
+bindsym $mod+c       exec --no-startup-id $BROWSER
+bindsym $mod+v       exec --no-startup-id telegram-desktop
+bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
+bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-11'
+bindsym $mod+u       exec --no-startup-id udiskie-umount -a
+bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 
-# Pulse Audio controls
+###############################################################
+# Basic bindings.
+###############################################################
+bindsym $mod+Return       exec --no-startup-id $TERMINAL
+bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL --workdir=$(cat /tmp/whereami)
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  # Increase sound volume.
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%  # Decrease sound volume.
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle # Mute sound
 
-# Sreen brightness controls
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10%     # Increase screen brightness.
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-     # Decrease screen brightness.
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+bindsym Print exec --no-startup-id "xfce4-clipman & deepin-screenshot -n; killall xfce4-clipman"
 
-# start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec --no-startup-id $TERMINAL
-bindsym $mod+Shift+Return exec konsole --workdir=$(cat /tmp/whereami)
+bindsym $mod+Shift+c reload  # Reload the configuration file.
+bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
 
-# kill 4ocused window
-bindsym $mod+q kill
+bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
+bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'Source Code Pro-11'
+# Exit i3.
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-# change focus
+###############################################################
+# Windows controls bindings.
+###############################################################
+# Change focus.
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
+# Change focus (arrows).
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# Move focused window.
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
+# Move focused window (arrows).
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-#bindsym $mod+c split h
-
-# split in vertical orientation
-#bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
+# Change container layout (stacked, tabbed, toggle split).
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
+# Change focus.
 bindsym $mod+a focus parent
+bindsym $mod+g focus child
 
-# focus the child container
-#bindsym $mod+d focus child
+# Gaps bindings.
+bindsym $mod+x			    gaps inner current plus 5
+bindsym $mod+Shift+x		gaps inner current minus 5
+bindsym $mod+z  			gaps outer current plus 5
+bindsym $mod+Shift+z		gaps outer current minus 5
+bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 0
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
+bindsym $mod+f fullscreen toggle 
+bindsym $mod+t split toggle
+bindsym $mod+q kill
+
+###############################################################
+# Workspace bindings.
+###############################################################
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -98,7 +118,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# switch to workspace
+# Switch to workspace.
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
@@ -110,7 +130,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-# move focused container to workspace
+# Move focused container to workspace.
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -122,33 +142,21 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
+###############################################################
+# Resize.
+###############################################################
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 3 px or 3 ppt
         bindsym j resize grow height 3 px or 3 ppt
         bindsym k resize shrink height 3 px or 3 ppt
         bindsym l resize grow width 3 px or 3 ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 3 px or 3 ppt
         bindsym Down resize grow height 3 px or 3 ppt
         bindsym Up resize shrink height 3 px or 3 ppt
         bindsym Right resize grow width 3 px or 3 ppt
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -156,47 +164,9 @@ mode "resize" {
 
 bindsym $mod+b mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3blocks
-        position top
-        font pango:Source Code Pro 11
-        colors {
-            background #000052
-        }
-}
-
-bindsym $mod+r exec konsole -e ranger
-
-
-
-bindsym Print exec --no-startup-id "xfce4-clipman & deepin-screenshot -n; killall xfce4-clipman"
-
-# Setting borders.
-for_window [class="^.*"] border pixel 2
-
-gaps inner 0
-gaps outer 0
-
-bindsym $mod+x			    gaps inner current plus 5
-bindsym $mod+Shift+x		gaps inner current minus 5
-bindsym $mod+z  			gaps outer current plus 5
-bindsym $mod+Shift+z		gaps outer current minus 5
-bindsym $mod+t			    split toggle
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 0
-
-bindsym $mod+c              exec --no-startup-id $BROWSER
-bindsym $mod+v              exec --no-startup-id telegram-desktop
-bindsym $mod+m              exec --no-startup-id konsole -e neomutt
-
-bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
-bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
-bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
-
-bindsym $mod+u              exec --no-startup-id udiskie-umount -a
-bindsym $mod+Shift+m        exec --no-startup-id udiskie-mount -a
-
+###############################################################
+# Colors.
+###############################################################
 set $grey                #334455
 set $magenta             #ddbbcc
 set $blue                #557788
@@ -207,13 +177,11 @@ set $yellow              #dd9933
 set $red                 #aa5566
 set $green               #779988
 
-# theme colors
 set $bg-color 	         #334455
 set $inactive-bg-color   #334455
 set $text-color          #aacccc
 set $inactive-text-color #557788
 set $urgent-bg-color     #ee3355
 
-# set window colors
 # class                 border              background         text                 indicator
 client.focused          $bg-color           $blue              $white  
