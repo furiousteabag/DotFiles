@@ -18,6 +18,7 @@ compton &                                                   # Composite manager 
 dunst &                                                     # Notification manager.
 udiskie -a -n &                                             # Automount manager.
 feh --bg-center ~/Pictures/Wallpapers/retrowavecar.jpg &    # Setting background.
+xset r rate 300 50 &	                                    # Speed xrate up.
 
 #######################################
 # Starting session.
