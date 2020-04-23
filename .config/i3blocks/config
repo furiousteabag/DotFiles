@@ -1,40 +1,35 @@
-SCRIPT_DIR=/home/furiousteabag/.scripts
-
 full_text=|
 separator=false
 separator_block_width=7
 
-[theme]
-name = "solarized-dark"
-
 [corona]
-command=$SCRIPT_DIR/corona
+command=corona
 interval=18000
 
 [separator]
 
 [layout]
-command=$SCRIPT_DIR/layout
+command=layout
 interval=1
 
 [separator]
 
 [volume]
-command=$SCRIPT_DIR/volume
+command=volume
 label=♪
 interval=1
 
 [separator]
 
 [brightness]
-command=$SCRIPT_DIR/brightness
+command=brightness
 label=☀
 interval=5
 
 [separator]
 
 [battery]
-command=$SCRIPT_DIR/battery
+command=battery
 markup=pango
 interval=30
 
