@@ -17,7 +17,7 @@ bar {
         position top
         font pango:Source Code Pro 11
         colors {
-            background #000052
+            background #00000000
         }
 }
 

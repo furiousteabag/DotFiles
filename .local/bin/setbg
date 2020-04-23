@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# This script does the following:
+#	Run by itself, set the wallpaper (at X start).
+#	If given a file, set that as the new wallpaper.
+#	If given a directory, choose random file in it.
+
+[ -f "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "Changing wallpaper..."
+
+[ -d "$1" ] && cp "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" ~/.config/wall.png && notify-send -i "Random Wallpaper chosen."
+
+xwallpaper --zoom ~/.config/wall.png

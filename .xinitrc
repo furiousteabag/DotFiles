@@ -17,7 +17,7 @@ unclutter &                                                 # Remove mouse curso
 compton &                                                   # Composite manager for transparency.
 dunst &                                                     # Notification manager.
 udiskie -a -n &                                             # Automount manager.
-# setbg                                                       # Setting background.
+setbg                                                       # Setting background.
 xset r rate 300 50 &	                                    # Speed xrate up.
 
 #######################################
