@@ -3,13 +3,9 @@
 # Initializes X session and starts some useful daemons.
 
 #######################################
-# Nvidia settings.
-#######################################
-xrandr --auto
-
-#######################################
 # Daemons.
 #######################################
+xrandr --auto                                               # Nvidia settings.
 powertop --auto-tune &                                      # Power management.
 setxkbmap -layout us,ru -option 'grp:alt_space_toggle' &    # Layout changing shortcut.
 setxkbmap -option caps:escape &                             # Caps -> Escape.
