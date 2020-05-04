@@ -1,5 +1,8 @@
 # Initialing shell on login.
 
+# Setting variables.
+[[ -f ~/.config/exportrc ]] && . ~/.config/exportrc
+
 # Loading config.
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
