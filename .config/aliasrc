@@ -1,0 +1,36 @@
+# This file contains aliases used
+# in the system.
+
+# Coloring.
+alias ls='ls --color=auto'
+alias tree='tree -Ca'
+alias yv='youtube-viewer -C'
+
+# Shortening.
+alias ll='ls -lah'
+alias h='htop'
+alias nmc='nmcli dev wifi'
+alias ka='killall'
+alias p='sudo pacman'
+# alias p='prettier'
+# alias pw='prettier --write'
+
+# Git.
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push -u origin master'
+alias gs='git status'
+alias gd='git diff'
+
+# Raspberry.
+alias rpl='ssh furiousteabag@192.168.1.160'
+alias rpg='ssh furiousteabag@10.5.117.27'
+
+# Compiling.
+alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
+alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
+
+# Etc.
+alias c='chromium --new-window'
+alias z='f() { zathura $1 & }; f'
+alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'

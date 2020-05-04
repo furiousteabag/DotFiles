@@ -1,0 +1,23 @@
+# This file contains all exports used is system.
+# It lies in separate file because it can be
+# used by multiple shells.
+
+# Default programs.
+export TERMINAL="konsole"
+export EDITOR="vim"
+export BROWSER="brave"
+export FILE_MANAGER="ranger"
+export READER="zathura"
+
+# Adds `~/.local/bin` to $PATH.
+export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+
+# Programs settings.
+export LOAD_CONDA=0                         # Whether to load conda or not.
+export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
+export PROMPT_COMMAND="pwd > /tmp/whereami" # Saving current dir to file.
+
+# Git prompt settings.
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
