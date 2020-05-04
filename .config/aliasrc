@@ -12,6 +12,7 @@ alias h='htop'
 alias nmc='nmcli dev wifi'
 alias ka='killall'
 alias p='sudo pacman'
+alias co='source ~/.config/conda-init'
 # alias p='prettier'
 # alias pw='prettier --write'
 
