@@ -1,4 +1,4 @@
-# Initialing shell on login.
+# Initialing bash on login.
 
 # Setting variables.
 [[ -f ~/.config/exportrc ]] && . ~/.config/exportrc
