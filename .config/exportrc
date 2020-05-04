@@ -12,6 +12,9 @@ export READER="zathura"
 # Adds `~/.local/bin` to $PATH.
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
+# Directories.
+export ZDOTDIR="$HOME/.config/zsh"
+
 # Programs settings.
 export LOAD_CONDA=0                         # Whether to load conda or not.
 export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
