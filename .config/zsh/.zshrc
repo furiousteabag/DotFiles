@@ -24,7 +24,7 @@ autoload -U colors && colors
 [[ -f ~/.config/aliasrc ]] && . ~/.config/aliasrc
 
 # Initializing git prompt.
-[[ -f ~/.config/git-prompt.sh ]] && . ~/.config/git-prompt.sh
+[[ -f ~/.config/git/git-prompt.sh ]] && . ~/.config/git/git-prompt.sh
 
 # Initializing conda.
 [ "$LOAD_CONDA" -eq 1 ] && [[ -f ~/.config/conda-init ]] && . ~/.config/conda-init
