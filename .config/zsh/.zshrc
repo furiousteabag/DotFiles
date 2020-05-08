@@ -8,18 +8,13 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-bindkey -v
-zstyle :compinstall filename '/home/furiousteabag/.zshrc'
-autoload -Uz compinit
-compinit
-autoload -U colors && colors
+bindkey -v                         # Enable vi mode.
+autoload -Uz compinit && compinit  # Completions.
+autoload -U colors && colors       # Prompt colors.
 
 ###############################################################
 # Sourcing configs.
 ###############################################################
-# Setting variables.
-[[ -f ~/.config/exportrc ]] && . ~/.config/exportrc
-
 # Loading aliases.
 [[ -f ~/.config/aliasrc ]] && . ~/.config/aliasrc
 
@@ -32,8 +27,8 @@ autoload -U colors && colors
 ###############################################################
 # Initializing prompt.
 ###############################################################
-setopt PROMPT_SUBST 
-PS1='%{$fg[green]%}%n%{$reset_color%}@%{$fg[blue]%}%m%{$reset_color%}:%{$fg[yellow]%}[%c]%{$reset_color%}$(__git_ps1 " (%s)")$ '
+setopt PROMPT_SUBST   # Evaluate prompt variables.
+PS1='%B%{$fg[green]%}%n%{$reset_color%}%B@%{$fg[blue]%}%m%{$reset_color%}%B:%{$fg[yellow]%}%B[%c]%{$reset_color%}%B$(__git_ps1 " (%s)")%b$ '
 
 ###############################################################
 # Cursor shape.
@@ -50,10 +45,17 @@ function zle-keymap-select {
   fi
 }
 zle -N zle-keymap-select
+
 zle-line-init() {
     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
     echo -ne "\e[6 q"
 }
 zle -N zle-line-init
-echo -ne '\e[6 q' # Use beam shape cursor on startup.
+
+echo -ne '\e[6 q'                # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
+
+###############################################################
+# Plugins.
+###############################################################
+source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Syntax highlight.
