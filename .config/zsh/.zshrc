@@ -9,8 +9,15 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 bindkey -v                         # Enable vi mode.
-autoload -Uz compinit && compinit  # Completions.
 autoload -U colors && colors       # Prompt colors.
+
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
 
 ###############################################################
 # Sourcing configs.
