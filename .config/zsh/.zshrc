@@ -11,6 +11,7 @@ SAVEHIST=1000
 bindkey -v                         # Enable vi mode.
 autoload -U colors && colors       # Prompt colors.
 
+PROMPT_EOL_MARK='' # Hide % at the end of output.
 
 # Basic auto/tab complete:
 autoload -U compinit

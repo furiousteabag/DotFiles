@@ -28,6 +28,7 @@ bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
 bindsym $mod+c       exec --no-startup-id $BROWSER
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
+bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
 bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-11'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
@@ -45,7 +46,7 @@ bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle #
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10%     # Increase screen brightness.
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%-     # Decrease screen brightness.
 
-bindsym Print exec --no-startup-id "xfce4-clipman & deepin-screenshot -n; killall xfce4-clipman"
+bindsym Print exec --no-startup-id "deepin-screen-recorder -s ~/Pictures/Screenshots"
 
 bindsym $mod+Shift+c reload  # Reload the configuration file.
 bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).

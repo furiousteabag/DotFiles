@@ -4,7 +4,6 @@
 # Coloring.
 alias ls='ls --color=auto'
 alias tree='tree -Ca'
-alias yv='youtube-viewer -C'
 
 # Shortening.
 alias ll='ls -lah'
@@ -12,9 +11,9 @@ alias h='htop'
 alias nmc='nmcli dev wifi'
 alias ka='killall'
 alias p='sudo pacman'
-alias co='source ~/.config/conda-init'
-# alias p='prettier'
-# alias pw='prettier --write'
+alias pi='sudo pacman -S'
+alias yv='youtube-viewer -q'
+alias jn='jupyter notebook'
 
 # Git.
 alias ga='git add'
@@ -35,3 +34,4 @@ alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
 alias c='chromium --new-window'
 alias z='f() { zathura $1 & }; f'
 alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
+alias co='source ~/.config/conda-init'

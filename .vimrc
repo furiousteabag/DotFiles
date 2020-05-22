@@ -68,6 +68,7 @@ map <C-l> <C-w>l
 nmap j gj
 nmap k gk
 nmap <CR> o<Esc>
+nmap 1 A<esc>p
 
 " Remaps in insert mode.
 inoremap " ""<left>
