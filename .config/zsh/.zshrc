@@ -8,8 +8,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-bindkey -v                         # Enable vi mode.
-autoload -U colors && colors       # Prompt colors.
+bindkey -v                                       # Enable vi mode.
+autoload -U colors && colors                     # Prompt colors.
+bindkey '^r' history-incremental-search-backward # Search in history.
 
 PROMPT_EOL_MARK='' # Hide % at the end of output.
 
