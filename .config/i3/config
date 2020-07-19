@@ -33,6 +33,18 @@ bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-11'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 
+bindsym $mod+i       exec --no-startup-id xdotool click --repeat 1000000 --delay 50 1
+bindsym $mod+o       exec --no-startup-id xdotool click --repeat 1000000 --delay 50 3
+bindsym $mod+p       exec --no-startup-id killall xdotool
+
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id xdotool click --repeat 1000000 --delay 50 3
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id xdotool click --repeat 1000000 --delay 50 1
+bindsym $mod+XF86AudioMute        exec --no-startup-id killall xdotool
+
+# bindsym --whole-window button2 exec notify-send hui
+# bindsym --whole-window button8 exec xdotool click --repeat 1000000 --delay 50 1
+# bindsym --whole-window button9 exec notify-send lil
+
 ###############################################################
 # Basic bindings.
 ###############################################################
