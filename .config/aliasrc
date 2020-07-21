@@ -23,8 +23,10 @@ alias gs='git status'
 alias gd='git diff'
 
 # Raspberry.
-alias rpl='ssh furiousteabag@192.168.1.160'
+alias rpl='ssh furiousteabag@192.168.1.161'
 alias rpg='ssh furiousteabag@10.5.117.27'
+alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs furiousteabag@192.168.1.161:/home/furiousteabag /run/media/furiousteabag/Raspberry'
+alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
 
 # Compiling.
 alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
