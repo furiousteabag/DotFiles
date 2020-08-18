@@ -13,7 +13,11 @@ dunst &                                                     # Notification manag
 udiskie -a -n &                                             # Automount manager.
 setbg                                                       # Setting background.
 xset r rate 300 50 &	                                    # Speed xrate up.
-xbindkeys                                                   # Autoclicks minecraft bindings.
+
+#######################################
+# Remaps.
+#######################################
+setxkbmap -option caps:escape, -layout us,ru -option 'grp:alt_space_toggle'
 
 #######################################
 # Starting session.
