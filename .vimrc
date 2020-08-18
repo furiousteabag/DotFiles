@@ -41,6 +41,9 @@ Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
 
 " Editing.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
+Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
+Plug 'dense-analysis/ale'                 " Linter.
+Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 
 call plug#end()
 
@@ -54,6 +57,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 nmap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
 nmap g[ [pfzz                                 " Go to next function with python textobj plugin.
 nmap g] ]pfzz                                 " Go to previous function with python textobj plugin.
+autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
