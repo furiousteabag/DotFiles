@@ -24,7 +24,6 @@ alias gd='git diff'
 
 # Raspberry.
 alias rpl='ssh furiousteabag@192.168.1.161'
-alias rpg='ssh furiousteabag@10.5.117.27'
 alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs furiousteabag@192.168.1.161:/home/furiousteabag /run/media/furiousteabag/Raspberry'
 alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
 
@@ -33,9 +32,11 @@ alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
 alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
 
 # Etc.
-alias c='chromium --new-window'
+alias torr='transmission-daemon && tremc'
+alias co='source ~/.config/conda-init'
+alias pp='ping asmirnov.xyz'
+alias web='ssh root@asmirnov.xyz'
 alias z='f() { zathura $1 & }; f'
 alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
-alias co='source ~/.config/conda-init'
 alias java8='/usr/lib/jvm/java-8-openjdk/jre/bin/java'
 alias mat='brave --new-window https://timetable.spbu.ru/MATH/StudentGroupEvents/Primary/247842 && exit'
