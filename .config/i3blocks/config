@@ -2,29 +2,30 @@ full_text=|
 separator=false
 separator_block_width=7
 
-[corona]
-command=corona
-interval=18000
+# [corona]
+# command=corona
+# interval=18000
 
-[separator]
+# [separator]
 
 [layout]
 command=layout
-interval=1
+interval=persist
 
 [separator]
 
 [volume]
 command=volume
-label=♪
-interval=1
+interval=once
+signal=10
 
 [separator]
 
 [brightness]
 command=brightness
 label=☀
-interval=5
+interval=once
+signal=12
 
 [separator]
 

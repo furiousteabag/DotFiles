@@ -1,4 +1,7 @@
 #!/bin/bash
 
-LAYOUT=$( xkblayout-state print %s )
-echo "${LAYOUT}"
+xkb-switch
+xkb-switch -W
+
+# LAYOUT=$( xkblayout-state print %s )
+# echo "${LAYOUT}"
