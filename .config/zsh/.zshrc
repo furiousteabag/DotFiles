@@ -12,6 +12,11 @@ bindkey -v                                       # Enable vi mode.
 autoload -U colors && colors                     # Prompt colors.
 bindkey '^r' history-incremental-search-backward # Search in history.
 
+# Edit command in $EDITOR.
+autoload -U edit-command-line      
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 PROMPT_EOL_MARK='' # Hide % at the end of output.
 
 # Basic auto/tab complete:
@@ -68,3 +73,4 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 # Plugins.
 ###############################################################
 source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Syntax highlight.
+source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh         # Autosuggestions.
