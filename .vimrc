@@ -45,13 +45,16 @@ Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 Plug 'dense-analysis/ale'                 " Linter.
 Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 
+" Etc.
+Plug 'iamcco/markdown-preview.nvim'       " Previewing md files.
+
 call plug#end()
 
 " Plugins settings.
 let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier annotation to prettify.
 let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
 " Close NerdTree when it's only window left.
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif  
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endiflet g:ale_set_highlights = 0 
 
 " Plugin remaps.
 nmap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
@@ -73,6 +76,9 @@ nmap j gj
 nmap k gk
 nmap <CR> o<Esc>
 nmap 1 A<esc>p
+nmap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
+nmap <leader>l :set lbr!<CR>        " Toggle word splits.
+autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -82,6 +88,8 @@ inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
+
+" Remaps in command mode.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
@@ -115,6 +123,23 @@ set tabstop=4     " Number of spaces to tab.
 set shiftwidth=4  " Number of spaces inserted for indentation.
 set smarttab      " Inserts blanks according to rules.
 set smartindent   " Autoindenting when starting a new line.
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Scripts.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Execute make watch in current directory.
+command Mw execute '!tmux new -d make watch'
+
+" Kill tmux session which was created from make watch.
+" command Kt execute '!pkill -f "tmux new"'
+command Kt execute '!killall make'
+
+" Open pdf in same folder with same name.
+let $NAME = expand('%:r')
+command Pdf execute "silent !zathura $NAME.pdf &"
+
+" Save file even with no access.
+command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HTML shortcuts.
