@@ -38,6 +38,7 @@ Plug 'junegunn/goyo.vim'                  " Zen mode.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
 Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
+Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 
 " Editing.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
@@ -110,6 +111,15 @@ set wildmode=list:longest,full
 let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
+
+" Setting colorsheme.
+let g:gruvbox_contrast_dark = 'soft'
+colorscheme gruvbox
+
+" Transparent background.
+highlight Normal     ctermbg=NONE guibg=NONE
+highlight LineNr     ctermbg=NONE guibg=NONE
+highlight SignColumn ctermbg=NONE guibg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing.
