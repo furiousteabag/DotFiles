@@ -12,6 +12,9 @@ let mapleader = "\<Space>" " Setting leader key.
 " Edit text even if in russian layout.
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
+" Folder vim code templates.
+let $TEMPLATES = "~/.config/vim/vim_templates/"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,8 +93,6 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-" Remaps in command mode.
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,7 +136,7 @@ set smarttab      " Inserts blanks according to rules.
 set smartindent   " Autoindenting when starting a new line.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Scripts.
+" Commands.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Execute make watch in current directory.
 command Mw execute '!tmux new -d make watch'
@@ -150,6 +151,12 @@ command Pdf execute "silent !zathura $NAME.pdf &"
 
 " Save file even with no access.
 command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Latex shortcuts.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd filetype tex nmap <leader>f :read $TEMPLATES/latex/frame.tex <CR>
+autocmd filetype tex nmap <leader>i :read $TEMPLATES/latex/itemize.tex <CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HTML shortcuts.
