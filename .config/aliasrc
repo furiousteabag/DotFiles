@@ -21,6 +21,7 @@ alias gc='git commit'
 alias gp='git push -u origin master'
 alias gs='git status'
 alias gd='git diff'
+alias gr='git rm'
 
 # Raspberry.
 alias rpl='ssh furiousteabag@192.168.1.161'
@@ -32,6 +33,8 @@ alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
 alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
 
 # Etc.
+alias webmount='sudo mkdir /run/media/furiousteabag/Server ; chown furiousteabag:furiousteabag /run/media/furiousteabag/Server ; sshfs root@asmirnov.xyz:/root /run/media/furiousteabag/Server'
+alias untar='tar xvzf'
 alias torr='transmission-daemon && tremc'
 alias co='source ~/.config/conda-init'
 alias pp='ping asmirnov.xyz'
@@ -39,4 +42,4 @@ alias web='ssh root@asmirnov.xyz'
 alias z='f() { zathura $1 & }; f'
 alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
 alias java8='/usr/lib/jvm/java-8-openjdk/jre/bin/java'
-alias mat='brave --new-window https://timetable.spbu.ru/MATH/StudentGroupEvents/Primary/247842 && exit'
+alias mat='brave --new-window https://timetable.spbu.ru/MATH/StudentGroupEvents/Primary/275408 && exit'
