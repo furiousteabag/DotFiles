@@ -4,7 +4,7 @@
 # General.
 ###############################################################
 set $mod Mod1
-font pango:Source Code Pro 8
+font pango:Source Code Pro 10
 for_window [class="^.*"] border pixel 2
 gaps inner 0
 gaps outer 0
@@ -15,7 +15,7 @@ gaps outer 0
 bar {
         status_command i3blocks
         position top
-        font pango:Source Code Pro 11
+        font pango:Source Code Pro 12
         colors {
             background #00000000
         }
@@ -41,7 +41,11 @@ bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL --workdir=$(cat /tmp/wh
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%  && pkill -RTMIN+10 i3blocks  # Increase sound volume.
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%  && pkill -RTMIN+10 i3blocks  # Decrease sound volume.
-bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks  # Mute sound
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks  # Mute sound.
+
+bindcode $mod+60 exec --no-startup-id pactl set-sink-volume bluez_sink.00_25_DB_94_C1_4D.a2dp_sink +5%    # Increase sound volume headphones.
+bindcode $mod+59 exec --no-startup-id pactl set-sink-volume bluez_sink.00_25_DB_94_C1_4D.a2dp_sink -5%    # Decrease sound volume headphones.
+bindcode $mod+61 exec --no-startup-id pactl set-sink-mute   bluez_sink.00_25_DB_94_C1_4D.a2dp_sink toggle # Mute sound headphones.
 
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10% && pkill -RTMIN+12 i3blocks  # Increase screen brightness.
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && pkill -RTMIN+12 i3blocks  # Decrease screen brightness.
