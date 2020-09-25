@@ -64,7 +64,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 nmap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
 nmap g[ [pfzz                                 " Go to next function with python textobj plugin.
 nmap g] ]pfzz                                 " Go to previous function with python textobj plugin.
-autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
@@ -80,9 +79,11 @@ nmap j gj
 nmap k gk
 nmap <CR> o<Esc>
 nmap 1 A<esc>p
+nnoremap <leader>ы :w<CR>               " Save.
 nmap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 nmap <leader>l :set lbr!<CR>        " Toggle word splits.
 autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
+autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -155,8 +156,9 @@ command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex shortcuts.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd filetype tex nmap <leader>f :read $TEMPLATES/latex/frame.tex <CR>
+autocmd filetype tex nmap <leader>b :read $TEMPLATES/latex/frame.tex <CR>
 autocmd filetype tex nmap <leader>i :read $TEMPLATES/latex/itemize.tex <CR>
+autocmd filetype tex nmap <leader>f :read $TEMPLATES/latex/figure.tex <CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HTML shortcuts.
