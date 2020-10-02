@@ -2,11 +2,15 @@
 #
 # Output monitor handler utility.
 
+PS3=">>> "
+COLUMNS=1
 select option in "HDMI-0 off && eDP-1-1 on" \
                  "eDP-1-1 off && HDMI-0 on" \
                  "HDMI-0 dublicate eDP-1-1" \
                  "HDMI-0 right of eDP-1-1" \
-                 "HDMI-0 left of eDP-1-1"
+                 "HDMI-0 left of eDP-1-1" \
+                 "eDP-1-1 right of HDMI-0" \
+                 "eDP-1-1 left of HDMI-0"
 do
     case $option in
         "HDMI-0 off && eDP-1-1 on")
@@ -23,6 +27,12 @@ do
     ;;
         "HDMI-0 left of eDP-1-1")
         xrandr --output HDMI-0 --auto --left-of eDP-1-1
+    ;;
+        "eDP-1-1 right of HDMI-0")
+        xrandr --output eDP-1-1 --auto --left-of HDMI-0
+    ;;
+        "eDP-1-1 left of HDMI-0")
+        xrandr --output eDP-1-1 --auto --left-of HDMI-0
     ;;
         *)
         echo "Invalid entry."
