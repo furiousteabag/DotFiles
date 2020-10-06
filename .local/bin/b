@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Bluetooth devices handler utility.
+
+PS3=">>> "
+COLUMNS=1
+select option in "connect DualShock 4" \
+                 "disconnect all"
+do
+    case $option in
+        "connect DualShock 4")
+        bluetoothctl power on && bluetoothctl connect A4:AE:12:AE:BD:10
+    ;;
+        "disconnect all")
+        bluetoothctl disconnect
+    ;;
+        *)
+        echo "Invalid entry."
+        break
+    ;;
+    esac
+    break
+done
