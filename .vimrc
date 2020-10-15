@@ -148,7 +148,7 @@ command Kt execute '!killall make'
 
 " Open pdf in same folder with same name.
 let $NAME = expand('%:r')
-command Pdf execute "silent !zathura $NAME.pdf &"
+command Pdf execute "silent !zathura $NAME.pdf > /dev/null 2>&1 &"
 
 " Save file even with no access.
 command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
