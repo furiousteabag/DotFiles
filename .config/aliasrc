@@ -23,24 +23,27 @@ alias gs='git status'
 alias gd='git diff'
 alias gr='git rm'
 
+# ssh.
+alias comp='ssh furiousteabag@192.168.1.155'
+alias web='ssh root@asmirnov.xyz'
+alias res='ssh root@resourses.xyz'
+
+# Latex.
+alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
+alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
+
 # Raspberry.
 alias rpl='ssh furiousteabag@192.168.1.161'
 alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs furiousteabag@192.168.1.161:/home/furiousteabag /run/media/furiousteabag/Raspberry'
 alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
 
-# Compiling.
-alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
-alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
-
 # Etc.
-alias webmount='sudo mkdir /run/media/furiousteabag/Server ; chown furiousteabag:furiousteabag /run/media/furiousteabag/Server ; sshfs root@asmirnov.xyz:/root /run/media/furiousteabag/Server'
 alias untar='tar xvzf'
-alias torr='transmission-daemon && tremc'
-alias co='source ~/.config/conda-init'
 alias pp='ping asmirnov.xyz'
-alias web='ssh root@asmirnov.xyz'
-alias comp='ssh furiousteabag@192.168.1.155'
+alias co='source ~/.config/conda-init'
+alias torr='transmission-daemon && tremc'
 alias z='f() { zathura $1 & }; f'
 alias i3lock='i3lock -i ~/Pictures/Wallpapers/arch2.jpg'
 alias java8='/usr/lib/jvm/java-8-openjdk/jre/bin/java'
 alias mat='brave --new-window https://timetable.spbu.ru/MATH/StudentGroupEvents/Primary/275408 && exit'
+alias webmount='sudo mkdir /run/media/furiousteabag/Server ; chown furiousteabag:furiousteabag /run/media/furiousteabag/Server ; sshfs root@asmirnov.xyz:/root /run/media/furiousteabag/Server'
