@@ -29,7 +29,7 @@ do
         xrandr --output HDMI-0 --auto --left-of eDP-1-1
     ;;
         "eDP-1-1 right of HDMI-0")
-        xrandr --output eDP-1-1 --auto --left-of HDMI-0
+        xrandr --output eDP-1-1 --auto --right-of HDMI-0
     ;;
         "eDP-1-1 left of HDMI-0")
         xrandr --output eDP-1-1 --auto --left-of HDMI-0
