@@ -4,12 +4,20 @@
 
 PS3=">>> "
 COLUMNS=1
-select option in "connect DualShock 4" \
+select option in "enable bluetooth" \
+                 "connect DualShock 4" \
+                 "connect Pulse Escape" \
                  "disconnect all"
 do
     case $option in
+        "enable bluetooth")
+        bluetoothctl power on
+    ;;
         "connect DualShock 4")
         bluetoothctl power on && bluetoothctl connect A4:AE:12:AE:BD:10
+    ;;
+        "connect Pulse Escape")
+        bluetoothctl power on && bluetoothctl connect 00:25:DB:94:C1:4D
     ;;
         "disconnect all")
         bluetoothctl disconnect
