@@ -4,7 +4,7 @@
 # Global settings.
 ###############################################################
 # History.
-HISTFILE=~/.histfile
+HISTFILE="$HOME/.local/share/zsh/.histfile"
 HISTSIZE=1000
 SAVEHIST=1000
 
@@ -72,5 +72,5 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 ###############################################################
 # Plugins.
 ###############################################################
-source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Syntax highlight.
-source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh         # Autosuggestions.
+source ~/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Syntax highlight.
+source ~/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh         # Autosuggestions.
