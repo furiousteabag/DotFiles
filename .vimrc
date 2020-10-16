@@ -13,12 +13,12 @@ let mapleader = "\<Space>" " Setting leader key.
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 " Folder vim code templates.
-let $TEMPLATES = "~/.config/vim/vim_templates/"
+let $TEMPLATES = "~/.config/nvim/templates/"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Motions.
 Plug 'tpope/vim-surround'                 " Surround motions.
@@ -114,14 +114,14 @@ let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
-" Setting colorsheme.
-let g:gruvbox_contrast_dark = 'soft'
-colorscheme gruvbox
+" " Setting colorsheme.
+" let g:gruvbox_contrast_dark = 'soft'
+" colorscheme gruvbox
 
-" Transparent background.
-highlight Normal     ctermbg=NONE guibg=NONE
-highlight LineNr     ctermbg=NONE guibg=NONE
-highlight SignColumn ctermbg=NONE guibg=NONE
+" " Transparent background.
+" highlight Normal     ctermbg=NONE guibg=NONE
+" highlight LineNr     ctermbg=NONE guibg=NONE
+" highlight SignColumn ctermbg=NONE guibg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing.
