@@ -7,4 +7,4 @@
 [[ -f ~/.config/zsh/.zshrc ]] && . ~/.config/zsh/.zshrc
 
 # Start X session on login.
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
