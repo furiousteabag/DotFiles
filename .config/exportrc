@@ -9,19 +9,20 @@ export BROWSER="brave"
 export FILE_MANAGER="ranger"
 export READER="zathura"
 
-# Adds `~/.local/bin` to $PATH.
+# Adds `~/.local/bin` and all subfolders to $PATH.
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
 # XDG base directory.
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-
+export XDG_CONFIG_HOME="$HOME"/.config    # User-specific configurations (analogous to /etc).
+export XDG_CACHE_HOME="$HOME"/.cache      # User-specific non-essential (cached) data (analogous to /var/cache).
+export XDG_DATA_HOME="$HOME"/.local/share # User-specific data files (analogous to /usr/share).
+ 
 # Program configs.
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"                   # Zsh directory.
-export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nv" # Nvidia drivers.
-export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"           # Less history file.
-export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"            # Wget settings.
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh                   # Zsh directory.
+export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME"/nv # Nvidia drivers.
+export LESSHISTFILE="$XDG_CACHE_HOME"/lesshst           # Less history file.
+export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc            # Wget settings.
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority         # Doesn't work on LightDM.
 
 # Programs settings.
 export LOAD_CONDA=0                         # Whether to load conda or not.
