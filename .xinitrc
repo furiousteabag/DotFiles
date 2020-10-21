@@ -2,21 +2,20 @@
 #
 # Initializes X session and starts some useful daemons.
 
-#######################################
-# Daemons.
-#######################################
-xrandr --auto                                               # Nvidia settings.
-powertop --auto-tune &                                      # Power management.
+########################################
+## Daemons.
+########################################
+picom &                                                     # Composite manager for transparency.
 unclutter &                                                 # Remove mouse cursor.
-compton &                                                   # Composite manager for transparency.
-dunst &                                                     # Notification manager.
-udiskie -a -n &                                             # Automount manager.
 setbg                                                       # Setting background.
-xset r rate 300 50 &	                                    # Speed xrate up.
+#powertop --auto-tune &                                      # Power management.
+#dunst &                                                     # Notification manager.
+#udiskie -a -n &                                             # Automount manager.
+xset r rate 300 50  	                                    # Speed xrate up.
 
-#######################################
-# Remaps.
-#######################################
+########################################
+## Remaps.
+########################################
 setxkbmap -option caps:escape, -layout us,ru -option 'grp:alt_space_toggle'
 
 #######################################
