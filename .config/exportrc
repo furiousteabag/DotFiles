@@ -3,7 +3,7 @@
 # used by multiple shells.
 
 # Default programs.
-export TERMINAL="konsole"
+export TERMINAL="st"
 export EDITOR="nvim"
 export BROWSER="brave"
 export FILE_MANAGER="ranger"
@@ -12,8 +12,16 @@ export READER="zathura"
 # Adds `~/.local/bin` to $PATH.
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 
-# Directories.
-export ZDOTDIR="$HOME/.config/zsh"
+# XDG base directory.
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Program configs.
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"                   # Zsh directory.
+export __GL_SHADER_DISK_CACHE_PATH="$XDG_CACHE_HOME/nv" # Nvidia drivers.
+export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"           # Less history file.
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"            # Wget settings.
 
 # Programs settings.
 export LOAD_CONDA=0                         # Whether to load conda or not.
