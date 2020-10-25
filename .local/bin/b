@@ -17,7 +17,7 @@ do
         bluetoothctl power on && bluetoothctl connect A4:AE:12:AE:BD:10
     ;;
         "connect Pulse Escape")
-        bluetoothctl power on && bluetoothctl connect 00:25:DB:94:C1:4D
+        bluetoothctl power on && bluetoothctl connect 00:25:DB:94:C1:4D && pulsemixer
     ;;
         "disconnect all")
         bluetoothctl disconnect
