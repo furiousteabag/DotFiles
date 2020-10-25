@@ -7,16 +7,17 @@
 ########################################
 picom &                                                     # Composite manager for transparency.
 unclutter &                                                 # Remove mouse cursor.
-setbg                                                       # Setting background.
+dunst &                                                     # Notification manager.
+udiskie -a -n &                                             # Automount manager.
 #powertop --auto-tune &                                      # Power management.
-#dunst &                                                     # Notification manager.
-#udiskie -a -n &                                             # Automount manager.
-xset r rate 300 50  	                                    # Speed xrate up.
 
 ########################################
-## Remaps.
+## Presets.
 ########################################
-setxkbmap -option caps:escape, -layout us,ru -option 'grp:alt_space_toggle'
+setxkbmap -option caps:escape, \
+    -layout us,ru -option 'grp:alt_space_toggle'            # caps -> esc; toggle layout.
+setbg                                                       # Setting background.
+xset r rate 300 50  	                                    # Speed xrate up.
 
 #######################################
 # Starting session.
