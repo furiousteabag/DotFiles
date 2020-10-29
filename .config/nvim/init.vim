@@ -45,25 +45,29 @@ Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 
 " Editing.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
-" Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 Plug 'dense-analysis/ale'                 " Linter.
 Plug 'rhysd/vim-clang-format'             " Prettier cpp.
+" Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 
 " Etc.
 Plug 'iamcco/markdown-preview.nvim'       " Previewing md files.
+Plug 'chrisbra/csv.vim'                   " csv editing.
 
 call plug#end()
 
 " Plugins settings.
 let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier annotation to prettify.
 let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
-" Close NerdTree when it's only window left.
+                                              " Close NerdTree when it's only window left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endiflet g:ale_set_highlights = 0 
+let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
 
 " Plugin remaps.
-nmap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
-nmap g[ [pfzz                                 " Go to next function with python textobj plugin.
-nmap g] ]pfzz                                 " Go to previous function with python textobj plugin.
+nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
+nnoremap g[ [pfzz                                 " Go to next function with python textobj plugin.
+nnoremap g] ]pfzz                                 " Go to previous function with python textobj plugin.
+nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
+nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
