@@ -39,6 +39,8 @@ alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs furiousteabag@192.16
 alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
 
 # Etc.
+alias hota="cd /home/furiousteabag/.local/share/wineprefixes/hota/drive_c/Games/Heroes3_HotA/ && wine HD_Launcher.exe"
+alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 alias untar='tar xvzf'
 alias pp='ping asmirnov.xyz'
 alias co='source ~/.config/conda-init'
