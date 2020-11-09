@@ -1,11 +1,15 @@
 #!/bin/bash
 
-VOLUME=$( pactl list sinks | grep '^[[:space:]]Volume:' | \
-          head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' )
+# VOLUME=$( pactl list sinks | grep '^[[:space:]]Volume:' | \
+#           head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' )
 
-MUTED=$(pactl list sinks | grep Mute | head -1 | cut -d' ' -f 2)
+# MUTED=$(pactl list sinks | grep Mute | head -1 | cut -d' ' -f 2)
 
-if [ "$MUTED" = "yes" ]; then
+VOLUME=$( pulsemixer --get-volume | cut -d' ' -f1 )
+
+MUTED=$( pulsemixer --get-mute )
+
+if [ $MUTED = 1 ]; then
 	ICON="🔇"
 elif [ "$VOLUME" -gt "70" ]; then
 	ICON="🔊"
