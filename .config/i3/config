@@ -39,18 +39,18 @@ bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 bindsym $mod+Return       exec --no-startup-id $TERMINAL
 bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL --workdir=$(cat /tmp/whereami)
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +10%  && pkill -RTMIN+10 i3blocks  # Increase sound volume.
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -10%  && pkill -RTMIN+10 i3blocks  # Decrease sound volume.
-bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+10 i3blocks  # Mute sound.
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume.
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume.
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks  # Mute sound.
 
-bindcode $mod+60 exec --no-startup-id pactl set-sink-volume bluez_sink.00_25_DB_94_C1_4D.a2dp_sink +10%    # Increase sound volume headphones.
-bindcode $mod+59 exec --no-startup-id pactl set-sink-volume bluez_sink.00_25_DB_94_C1_4D.a2dp_sink -10%    # Decrease sound volume headphones.
-bindcode $mod+61 exec --no-startup-id pactl set-sink-mute   bluez_sink.00_25_DB_94_C1_4D.a2dp_sink toggle # Mute sound headphones.
+bindcode $mod+60 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume headphones.
+bindcode $mod+59 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume headphones.
+bindcode $mod+61 exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks  # Mute sound headphones.
 
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10% && pkill -RTMIN+12 i3blocks  # Increase screen brightness.
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && pkill -RTMIN+12 i3blocks  # Decrease screen brightness.
 
-bindsym Print exec --no-startup-id "deepin-screen-recorder -s ~/Pictures/Screenshots"
+bindsym Print exec --no-startup-id "deepin-screen-recorder -s ~/Pictures/Screenshots && rm -rf ~/.deepin-screen-recorder/"
 
 bindsym $mod+Shift+c reload  # Reload the configuration file.
 bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
