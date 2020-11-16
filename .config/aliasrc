@@ -34,13 +34,13 @@ alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
 alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
 
 # Raspberry.
-alias rpl='ssh git@192.168.1.160'
-alias rpg='ssh git@git.asmirnov.xyz'
-alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs furiousteabag@192.168.1.161:/home/furiousteabag /run/media/furiousteabag/Raspberry'
+alias rpl='ssh git@192.168.1.160 -p 1488'
+alias rpg='ssh git@git.asmirnov.xyz -p 1488'
+alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs git@git.asmirnov.xyz:/ -p 1488 /run/media/furiousteabag/Raspberry'
 alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
 
 # Etc.
-alias hota="cd /home/furiousteabag/.local/share/wineprefixes/hota/drive_c/Games/Heroes3_HotA/ && wine HD_Launcher.exe"
+alias hota="export WINEPREFIX=$XDG_DATA_HOME/wineprefixes/hota && cd $XDG_DATA_HOME/wineprefixes/hota/drive_c/Games/Heroes3_HotA/ && wine HD_Launcher.exe"
 alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 alias untar='tar xvzf'
 alias pp='ping asmirnov.xyz'
