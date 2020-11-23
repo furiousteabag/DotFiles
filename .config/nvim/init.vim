@@ -60,7 +60,7 @@ let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier anno
 let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
                                               " Close NerdTree when it's only window left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endiflet g:ale_set_highlights = 0 
-let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
+let b:csv_arrange_align = 'l'                " csv.vim arrange columns to left.
 
 " Plugin remaps.
 nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
@@ -84,8 +84,8 @@ nmap k gk
 nmap <CR> o<Esc>
 nmap 1 A<esc>p
 nnoremap <leader>ы :w<CR>               " Save.
-nmap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
-nmap <leader>l :set lbr!<CR>        " Toggle word splits.
+nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
+nnoremap <leader>l :set lbr!<CR>        " Toggle word splits.
 autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
 autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
 
