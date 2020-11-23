@@ -37,7 +37,7 @@ bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 # Basic bindings.
 ###############################################################
 bindsym $mod+Return       exec --no-startup-id $TERMINAL
-bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL --workdir=$(cat /tmp/whereami)
+bindsym $mod+Shift+Return exec --no-startup-id cd "$(xcwd)" && exec $TERMINAL 
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume.
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume.
