@@ -26,6 +26,7 @@ alias gr='git rm'
 
 # ssh.
 alias comp='ssh furiousteabag@192.168.1.155'
+alias compr='ssh furiousteabag@79.174.184.49 -p 5426'
 alias web='ssh root@asmirnov.xyz'
 alias res='ssh root@resourses.xyz'
 
