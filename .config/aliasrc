@@ -31,6 +31,7 @@ alias rpg='ssh git@git.asmirnov.xyz -p 1488'
 alias big='ssh furiousteabag@192.168.1.155'
 alias bigr='ssh furiousteabag@79.174.184.49 -p 5426'
 
+alias comp='ssh furiousteabag@192.168.1.85 -p 5125'
 alias trans='ssh furiousteabag@80.250.182.94'
 alias web='ssh root@asmirnov.xyz'
 alias res='ssh root@resourses.xyz'
