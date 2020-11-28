@@ -32,6 +32,9 @@ alias big='ssh furiousteabag@192.168.1.155'
 alias bigr='ssh furiousteabag@79.174.184.49 -p 5426'
 
 alias comp='ssh furiousteabag@192.168.1.85 -p 5125'
+alias compr='ssh furiousteabag@79.174.184.49 -p 5125'
+
+
 alias trans='ssh furiousteabag@80.250.182.94'
 alias web='ssh root@asmirnov.xyz'
 alias res='ssh root@resourses.xyz'
@@ -43,6 +46,9 @@ alias pmpb='pandoc --pdf-engine=pdflatex -V lang=ru -t beamer'
 # Raspberry.
 alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs git@git.asmirnov.xyz:/ -p 1488 /run/media/furiousteabag/Raspberry'
 alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
+
+# Sourcing venvs wrapper if exists.
+alias venv="[[ -f "$HOME"/.local/bin/virtualenvwrapper.sh ]] && . "$HOME"/.local/bin/virtualenvwrapper.sh"
 
 # Etc.
 alias hota="export WINEPREFIX=$XDG_DATA_HOME/wineprefixes/hota && cd $XDG_DATA_HOME/wineprefixes/hota/drive_c/Games/Heroes3_HotA/ && wine HD_Launcher.exe"
