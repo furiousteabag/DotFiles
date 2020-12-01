@@ -9,6 +9,7 @@ picom &                                                     # Composite manager 
 unclutter &                                                 # Remove mouse cursor.
 dunst &                                                     # Notification manager.
 udiskie -a -n &                                             # Automount manager.
+flameshot &                                                 # Screenshot tool.
 #powertop --auto-tune &                                      # Power management.
 
 ########################################
