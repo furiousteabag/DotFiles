@@ -50,7 +50,8 @@ bindcode $mod+61 exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggl
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10% && pkill -RTMIN+12 i3blocks  # Increase screen brightness.
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && pkill -RTMIN+12 i3blocks  # Decrease screen brightness.
 
-bindsym Print exec --no-startup-id "deepin-screen-recorder -s ~/Pictures/Screenshots && rm -rf ~/.deepin-screen-recorder/"
+# bindsym Print exec --no-startup-id "deepin-screen-recorder -s ~/Pictures/Screenshots && rm -rf ~/.deepin-screen-recorder/"
+bindsym Print exec --no-startup-id "flameshot gui"
 
 bindsym $mod+Shift+c reload  # Reload the configuration file.
 bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
