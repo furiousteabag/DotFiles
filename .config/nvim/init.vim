@@ -47,7 +47,7 @@ Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
 Plug 'dense-analysis/ale'                 " Linter.
 Plug 'rhysd/vim-clang-format'             " Prettier cpp.
-" Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
+Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 
 " Etc.
 Plug 'iamcco/markdown-preview.nvim'       " Previewing md files.
@@ -58,6 +58,7 @@ call plug#end()
 " Plugins settings.
 let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier annotation to prettify.
 let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
+let g:python3_host_prog = "/usr/bin/python3"
                                               " Close NerdTree when it's only window left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endiflet g:ale_set_highlights = 0 
 let b:csv_arrange_align = 'l'                " csv.vim arrange columns to left.
@@ -153,6 +154,7 @@ command Kt execute '!killall make'
 " Open pdf in same folder with same name.
 let $NAME = expand('%:r')
 command Pdf execute "silent !zathura $NAME.pdf > /dev/null 2>&1 &"
+command Comp execute "silent !pandoc $NAME.md -o $NAME.pdf"
 
 " Save file even with no access.
 command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
