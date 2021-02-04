@@ -37,6 +37,7 @@ export PROJECT_HOME="$HOME"/Projects                    # virtualenvwrapper.
 export LOAD_CONDA=0                         # Whether to load conda or not.
 export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
 export PROMPT_COMMAND="pwd > /tmp/whereami" # Saving current dir to file.
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 
 # Git prompt settings.
 export GIT_PS1_SHOWDIRTYSTATE=1
