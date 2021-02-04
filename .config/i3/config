@@ -4,7 +4,7 @@
 # General.
 ###############################################################
 set $mod Mod1
-font pango:Source Code Pro 10
+font pango:Source Code Pro 12
 for_window [class="^.*"] border pixel 2
 gaps inner 0
 gaps outer 0
@@ -15,7 +15,7 @@ gaps outer 0
 bar {
         status_command i3blocks
         position top
-        font pango:Source Code Pro 12
+        font pango:Source Code Pro 16
         colors {
             background #00000000
         }
@@ -29,7 +29,7 @@ bindsym $mod+c       exec --no-startup-id $BROWSER
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
 bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
-bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-11'
+bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-16'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 
@@ -122,7 +122,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8 ∙∙∙"
 set $ws9 "9 "
-set $ws10 "10 "
+set $ws10 "10 "
 
 # Switch to workspace.
 bindsym $mod+1 workspace number $ws1
