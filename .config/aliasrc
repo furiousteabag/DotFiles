@@ -51,6 +51,8 @@ alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/
 alias venv="[[ -f "$HOME"/.local/bin/virtualenvwrapper.sh ]] && . "$HOME"/.local/bin/virtualenvwrapper.sh && workon base"
 
 # Etc.
+# alias sr="echo kek"
+alias sr="vim \$(find $XDG_CONFIG_HOME -type f | fzf -q \')"
 alias printer="systemctl start avahi-daemon && systemctl start cups"
 alias hota="export WINEPREFIX=$XDG_DATA_HOME/wineprefixes/hota && cd $XDG_DATA_HOME/wineprefixes/hota/drive_c/Games/Heroes3_HotA/ && wine HD_Launcher.exe"
 alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
