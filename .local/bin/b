@@ -2,22 +2,27 @@
 #
 # Bluetooth devices handler utility.
 
+power_on() {
+    systemctl start bluetooth
+    bluetoothctl power on
+}
+
 PS3=">>> "
 COLUMNS=1
-select option in "enable bluetooth" \
+select option in "connect Pulse Escape" \
                  "connect DualShock 4" \
-                 "connect Pulse Escape" \
+                 "enable bluetooth" \
                  "disconnect all"
 do
     case $option in
-        "enable bluetooth")
-        bluetoothctl power on
+        "connect Pulse Escape")
+        power_on && bluetoothctl connect 00:25:DB:94:C1:4D && pulsemixer
     ;;
         "connect DualShock 4")
-        bluetoothctl power on && bluetoothctl connect A4:AE:12:AE:BD:10
+        power_on && bluetoothctl connect A4:AE:12:AE:BD:10
     ;;
-        "connect Pulse Escape")
-        bluetoothctl power on && bluetoothctl connect 00:25:DB:94:C1:4D && pulsemixer
+        "enable bluetooth")
+        power_on
     ;;
         "disconnect all")
         bluetoothctl disconnect
