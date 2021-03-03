@@ -88,7 +88,6 @@ map <S-j> <C-w>j
 map <S-k> <C-w>k
 map <S-l> <C-w>l
 
-
 " Remaps in normal mode.
 nmap j gj
 nmap k gk
@@ -99,9 +98,10 @@ nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 nnoremap <leader>l :set lbr!<CR>        " Toggle word splits.
 autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
 autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
-nnoremap _ :vertical resize -5<CR>
+nnoremap _ :vertical resize -5<CR>      " Resizing shortcuts.
 nnoremap + :vertical resize +5<CR>
-
+map <C-o> <C-o>zz                       " Center screen after moving.
+map <C-i> <C-i>zz
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -138,6 +138,7 @@ let &t_SI = "\<Esc>[6 q"
 let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
+set scrolloff=2  " Keep lines before and after cursor when scrolling.
 " " Setting colorsheme.
 " let g:gruvbox_contrast_dark = 'soft'
 " colorscheme gruvbox
