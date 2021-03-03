@@ -50,12 +50,16 @@ Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 
 " Etc.
-Plug 'iamcco/markdown-preview.nvim'       " Previewing md files.
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 
 call plug#end()
 
 " Plugins settings.
+" let g:loaded_youcompleteme = 1
+
+" specify browser to open preview page
+let g:mkdp_browser = 'brave'
 let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier annotation to prettify.
 let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
 let g:python3_host_prog = "/usr/bin/python3"
@@ -69,6 +73,7 @@ nnoremap g[ [pfzz                                 " Go to next function with pyt
 nnoremap g] ]pfzz                                 " Go to previous function with python textobj plugin.
 nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
 nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
+nnoremap <leader>m :MarkdownPreview<CR>               " Toggle md preview.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
@@ -78,6 +83,11 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+map <S-h> <C-w>h
+map <S-j> <C-w>j
+map <S-k> <C-w>k
+map <S-l> <C-w>l
+
 
 " Remaps in normal mode.
 nmap j gj
@@ -89,6 +99,9 @@ nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 nnoremap <leader>l :set lbr!<CR>        " Toggle word splits.
 autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
 autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
+nnoremap _ :vertical resize -5<CR>
+nnoremap + :vertical resize +5<CR>
+
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -98,6 +111,12 @@ inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
+
+" Tabs switching.
+nnoremap <C-j> :tabprevious<CR>                                                                            
+nnoremap <C-k> :tabnext<CR>
+nnoremap <S-j> :tabprevious<CR>                                                                            
+nnoremap <S-k> :tabnext<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
