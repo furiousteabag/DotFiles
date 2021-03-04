@@ -58,13 +58,17 @@ call plug#end()
 " Plugins settings.
 " let g:loaded_youcompleteme = 1
 
-" specify browser to open preview page
-let g:mkdp_browser = 'brave'
+
+let g:mkdp_browser = 'brave'                  " specify browser to open preview page
 let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier annotation to prettify.
 let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
 let g:python3_host_prog = "/usr/bin/python3"
+let g:airline#extensions#tabline#enabled = 1  " Enable tabline
+let g:airline#extensions#tabline#formatter = 'unique_tail' " Display only filename.
                                               " Close NerdTree when it's only window left.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endiflet g:ale_set_highlights = 0 
+autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
+
 let b:csv_arrange_align = 'l'                " csv.vim arrange columns to left.
 
 " Plugin remaps.
@@ -73,16 +77,16 @@ nnoremap g[ [pfzz                                 " Go to next function with pyt
 nnoremap g] ]pfzz                                 " Go to previous function with python textobj plugin.
 nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
 nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
-nnoremap <leader>m :MarkdownPreview<CR>               " Toggle md preview.
+nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Shortcutting split navigation, saving a keypress:
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+" map <C-h> <C-w>h
+" map <C-j> <C-w>j
+" map <C-k> <C-w>k
+" map <C-l> <C-w>l
 map <S-h> <C-w>h
 map <S-j> <C-w>j
 map <S-k> <C-w>k
@@ -102,6 +106,7 @@ nnoremap _ :vertical resize -5<CR>      " Resizing shortcuts.
 nnoremap + :vertical resize +5<CR>
 map <C-o> <C-o>zz                       " Center screen after moving.
 map <C-i> <C-i>zz
+nnoremap <C-j> :join!<CR>               " Joing lines.
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -113,8 +118,8 @@ inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
 " Tabs switching.
-nnoremap <C-j> :tabprevious<CR>                                                                            
-nnoremap <C-k> :tabnext<CR>
+" nnoremap <C-j> :tabprevious<CR>                                                                            
+" nnoremap <C-k> :tabnext<CR>
 nnoremap <S-j> :tabprevious<CR>                                                                            
 nnoremap <S-k> :tabnext<CR>
 
