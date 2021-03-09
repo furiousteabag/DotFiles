@@ -9,6 +9,8 @@ set ignorecase             " Case insensetive search.
 filetype plugin on         " Sets different options for different filetypes.
 let mapleader = "\<Space>" " Setting leader key.
 
+set noswapfile " Disable swap file.
+
 " Edit text even if in russian layout.
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
@@ -65,8 +67,21 @@ let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
 let g:python3_host_prog = "/usr/bin/python3"
 let g:airline#extensions#tabline#enabled = 1  " Enable tabline
 let g:airline#extensions#tabline#formatter = 'unique_tail' " Display only filename.
-                                              " Close NerdTree when it's only window left.
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endiflet g:ale_set_highlights = 0 
+let g:airline#extensions#tabline#enabled = 1           " enable airline tabline
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
+let g:airline#extensions#tabline#tabs_label = ''       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
+let g:airline#extensions#tabline#buffers_label = ''    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
+" let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab
+let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right
+let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline
+let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs needed to display the tabline
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
+let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers
+let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
 autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
 
 let b:csv_arrange_align = 'l'                " csv.vim arrange columns to left.
