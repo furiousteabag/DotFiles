@@ -15,9 +15,12 @@ result=""
 # iterating throw column names of file
 for column_name in $(head -1 $FILE | sed "s/,/ /g"); do
 
+    # if current columns in a date,
+    # asking if we have to fill it
+    # for user
     if [ $column_name = "date" ]; then
         read -p "Fill $column_name automatically (yn): " yn
-        if [ $yn != "n" -o $yn != "N" ]; then
+        if [[ $yn = "" || $yn = "y" ]]; then
             date=$(date +'%Y.%m.%d')
             result+=",$date"
             continue
@@ -33,4 +36,4 @@ done
 # cutting of first comma
 result="${result:1}"
 
-echo $result
+echo $result >> $FILE
