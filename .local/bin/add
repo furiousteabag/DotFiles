@@ -8,7 +8,7 @@
 FILES="$HOME/Files"
 
 # choosing file to append to
-FILE=$(find $FILES -maxdepth 4 -regex ".*\.\(csv\)" | fzf)
+FILE=$(find $FILES -maxdepth 4 -regex ".*\.\(csv\)" | fzf -q \')
 
 result=""
 
@@ -36,4 +36,8 @@ done
 # cutting of first comma
 result="${result:1}"
 
-echo $result >> $FILE
+# appending just before head
+# (recent are better)
+sed -i "1 a$result" $FILE
+
+# echo $result >> $FILE
