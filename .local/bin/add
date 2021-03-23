@@ -1,0 +1,36 @@
+#!/bin/bash
+#
+# Appending line to csv file.
+# If csv have date field, suggests
+# to fill it automatically.
+
+# directory with files
+FILES="$HOME/Files"
+
+# choosing file to append to
+FILE=$(find $FILES -maxdepth 4 -regex ".*\.\(csv\)" | fzf)
+
+result=""
+
+# iterating throw column names of file
+for column_name in $(head -1 $FILE | sed "s/,/ /g"); do
+
+    if [ $column_name = "date" ]; then
+        read -p "Fill $column_name automatically (yn): " yn
+        if [ $yn != "n" -o $yn != "N" ]; then
+            date=$(date +'%Y.%m.%d')
+            result+=",$date"
+            continue
+        fi
+    fi
+
+    # reading and appending value
+    read -p "$column_name: " value
+    result+=",\"$value\""
+
+done
+
+# cutting of first comma
+result="${result:1}"
+
+echo $result
