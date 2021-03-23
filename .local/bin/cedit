@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# directory with files
+FILES="$HOME/Files"
+
+# choosing file to append to
+FILE=$(find $FILES -maxdepth 4 -regex ".*\.\(csv\)" | fzf)
+
+nvim $FILE
