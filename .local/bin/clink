@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# directory with files
+FILES="$HOME/Files"
+
+# choosing file to find link in
+FILE=$FILES/data/links.csv
+
+COLUMN_NUMBER=$(head -1 $FILE | sed 's/,/\n/g' | nl | grep link | awk '{print $1;}')
+ROW=$(tail -n +2 $FILE | fzf)
+LINK=$(echo $ROW | cut -d, -f$COLUMN_NUMBER | sed -e 's/^"//' -e 's/"$//' | xclip -selection clipboard | exit)
