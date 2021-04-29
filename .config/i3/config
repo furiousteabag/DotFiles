@@ -29,6 +29,7 @@ bindsym $mod+c       exec --no-startup-id $BROWSER
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
 bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
+bindsym $mod+o       exec --no-startup-id $TERMINAL -e clink
 bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-16'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
