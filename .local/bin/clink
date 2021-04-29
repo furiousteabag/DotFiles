@@ -7,5 +7,12 @@ FILES="$HOME/Files"
 FILE=$FILES/data/links.csv
 
 COLUMN_NUMBER=$(head -1 $FILE | sed 's/,/\n/g' | nl | grep link | awk '{print $1;}')
-ROW=$(tail -n +2 $FILE | fzf)
-LINK=$(echo $ROW | cut -d, -f$COLUMN_NUMBER | sed -e 's/^"//' -e 's/"$//' | xclip -selection clipboard | exit)
+ROW=$(tail -n +2 $FILE | fzf -q \')
+LINK=$(echo $ROW | cut -d, -f$COLUMN_NUMBER | sed -e 's/^"//' -e 's/"$//')
+
+echo $LINK | xclip -selection clipboard
+brave $LINK
+
+exit
+# kill $PPID
+
