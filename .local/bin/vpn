@@ -5,7 +5,7 @@
 
 CONFIGURATION=alexander.smirnov.tsg
 SERVICE=openvpn-client@$CONFIGURATION.service
-TUN_LOCATION=/lib/modules/5.12.4-arch1-2/kernel/drivers/net/tun.ko.xz
+TUN_LOCATION=/lib/modules/5.12.9-arch1-1/kernel/drivers/net/tun.ko.xz
 
 if [ $# -eq 0 ]; then
     sudo systemctl status $SERVICE
