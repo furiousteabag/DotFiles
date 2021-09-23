@@ -4,6 +4,7 @@
 # General.
 ###############################################################
 set $mod Mod1
+floating_modifier $mod
 font pango:Source Code Pro 12
 for_window [class="^.*"] border pixel 2
 gaps inner 0
@@ -27,10 +28,11 @@ bar {
 bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
 bindsym $mod+c       exec --no-startup-id $BROWSER
 bindsym $mod+v       exec --no-startup-id telegram-desktop
-bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
+# bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
 bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
 bindsym $mod+o       exec --no-startup-id $TERMINAL -e clink
 bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-16'
+bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-16'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 
@@ -64,6 +66,7 @@ bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
 # Exit i3.
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+
 ###############################################################
 # Windows controls bindings.
 ###############################################################
@@ -80,16 +83,16 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Move focused window.
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 3ppt
+bindsym $mod+Shift+j move down 3ppt
+bindsym $mod+Shift+k move up 3ppt
+bindsym $mod+Shift+l move right 3ppt
 
 # Move focused window (arrows).
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left 3ppt
+bindsym $mod+Shift+Down move down 3ppt
+bindsym $mod+Shift+Up move up 3ppt
+bindsym $mod+Shift+Right move right 3ppt
 
 # Change container layout (stacked, tabbed, toggle split).
 bindsym $mod+s layout stacking
@@ -105,11 +108,26 @@ bindsym $mod+x			    gaps inner current plus 5
 bindsym $mod+Shift+x		gaps inner current minus 5
 bindsym $mod+z  			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 0
+bindsym $mod+Shift+t		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f fullscreen toggle 
 bindsym $mod+t split toggle
 bindsym $mod+q kill
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+# toggle tiling / floating
+bindsym $mod+Shift+f floating toggle
+
+# toggle focus tiling / floating
+bindsym $mod+n focus mode_toggle
+
+# toggle focus tiling / floating
+bindsym $mod+m sticky toggle
 
 ###############################################################
 # Workspace bindings.
@@ -149,23 +167,22 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-bindsym $mod+minus move workspace to output left
-bindsym $mod+equal move workspace to output right
-
+# bindsym $mod+minus move workspace to output left
+# bindsym $mod+equal move workspace to output right
 
 ###############################################################
 # Resize.
 ###############################################################
 mode "resize" {
-        bindsym h resize shrink width 3 px or 3 ppt
-        bindsym j resize grow height 3 px or 3 ppt
-        bindsym k resize shrink height 3 px or 3 ppt
-        bindsym l resize grow width 3 px or 3 ppt
+        bindsym h resize shrink width 15 px or 3 ppt
+        bindsym j resize grow height 15 px or 3 ppt
+        bindsym k resize shrink height 15 px or 3 ppt
+        bindsym l resize grow width 15 px or 3 ppt
 
-        bindsym Left resize shrink width 3 px or 3 ppt
-        bindsym Down resize grow height 3 px or 3 ppt
-        bindsym Up resize shrink height 3 px or 3 ppt
-        bindsym Right resize grow width 3 px or 3 ppt
+        bindsym Left resize shrink width 15 px or 3 ppt
+        bindsym Down resize grow height 15 px or 3 ppt
+        bindsym Up resize shrink height 15 px or 3 ppt
+        bindsym Right resize grow width 15 px or 3 ppt
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
