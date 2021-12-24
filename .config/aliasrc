@@ -28,8 +28,8 @@ alias gr='git rm'
 alias rp='ssh git@192.168.1.160 -p 1488'
 alias rpg='ssh git@git.asmirnov.xyz -p 1488'
 
-alias big='ssh furiousteabag@192.168.1.155'
-alias bigr='ssh furiousteabag@79.174.184.49 -p 5426'
+alias big='ssh furiousteabag@192.168.1.211'
+alias bigr='ssh furiousteabag@79.174.184.49 -p 5424'
 
 alias comp='ssh furiousteabag@192.168.1.85 -p 5125'
 alias compr='ssh furiousteabag@79.174.184.49 -p 5125'
@@ -52,6 +52,8 @@ alias venv="[[ -f "$HOME"/.local/bin/virtualenvwrapper.sh ]] && . "$HOME"/.local
 
 # Etc.
 # alias sr="echo kek"
+alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
+alias vert="vsql -h vertica.tensquaregames.net -d vertica_db -U bi_user -w GxrQpym5iXuF5cFEuF8UF"
 alias sr="vim \$(find $XDG_CONFIG_HOME $HOME/.local/bin -type f | fzf -q \')"
 alias printer="systemctl start avahi-daemon && systemctl start cups"
 alias hota="export WINEPREFIX=$XDG_DATA_HOME/wineprefixes/hota && cd $XDG_DATA_HOME/wineprefixes/hota/drive_c/Games/Heroes3_HotA/ && wine HD_Launcher.exe"
