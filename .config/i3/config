@@ -35,6 +35,7 @@ bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-16'
 bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-16'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
+bindsym control+space   exec --no-startup-id dunstctl close
 
 ###############################################################
 # Basic bindings.
