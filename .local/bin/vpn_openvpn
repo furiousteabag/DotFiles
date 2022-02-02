@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Connecting and disconnecting vpn,
+# which profiles located in /etc/openvpn/client
+
+CONFIGURATION=alexander.smirnov.tsg
+SERVICE=openvpn-client@$CONFIGURATION.service
+TUN_LOCATION="/lib/modules/$(uname -r)/kernel/drivers/net/tun.ko.zst"
+
+if [ $# -eq 0 ]; then
+    sudo systemctl status $SERVICE
+elif [ $1 = "on" ]; then
+    sudo insmod $TUN_LOCATION
+    sudo systemctl start $SERVICE
+elif [ $1 = "off" ]; then
+    sudo systemctl stop $SERVICE
+    sudo modprobe -r tun
+else
+    echo "possible args: on / off / status"
+fi
