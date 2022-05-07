@@ -15,6 +15,7 @@ alias pi='sudo pacman -S'
 alias yv='youtube-viewer -q'
 alias jn='jupyter notebook'
 alias vim='nvim'
+alias ta='tmux attach'
 
 # Git.
 alias ga='git add'
