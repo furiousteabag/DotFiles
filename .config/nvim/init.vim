@@ -39,6 +39,7 @@ Plug 'preservim/nerdtree'                 " File browser.
 Plug 'jistr/vim-nerdtree-tabs'            " Nerdtree tabs fixer.
 Plug 'vim-airline/vim-airline'            " Status line.
 Plug 'junegunn/goyo.vim'                  " Zen mode.
+Plug 'edkolev/tmuxline.vim'               " Make tmux look like airline.
 
 " Color changes.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
