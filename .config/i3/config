@@ -3,7 +3,8 @@
 ###############################################################
 # General.
 ###############################################################
-set $mod Mod1
+# WIN KEY (ALT is Mod1)
+set $mod Mod4 
 floating_modifier $mod
 font pango:Source Code Pro 12
 for_window [class="^.*"] border pixel 2
