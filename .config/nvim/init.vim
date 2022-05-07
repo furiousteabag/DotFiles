@@ -36,6 +36,7 @@ Plug 'bps/vim-textobj-python'             " Python functions and classes objects
 
 " Visual changes.
 Plug 'preservim/nerdtree'                 " File browser.
+Plug 'jistr/vim-nerdtree-tabs'            " Nerdtree tabs fixer.
 Plug 'vim-airline/vim-airline'            " Status line.
 Plug 'junegunn/goyo.vim'                  " Zen mode.
 
@@ -81,16 +82,18 @@ let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs neede
 let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
 let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers
 let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
+let g:airline#extensions#whitespace#enabled = 0        " disable trailing whitespace badge on the bottom left
 
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
-autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
+" " Exit Vim if NERDTree is the only window left.
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+"     \ quit | endif
+" autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
 
 let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
 
 " Plugin remaps.
-nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
+" nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
+nnoremap <Leader>n <plug>NERDTreeTabsToggle<CR>
 nnoremap g[ [pfzz                                 " Go to next function with python textobj plugin.
 nnoremap g] ]pfzz                                 " Go to previous function with python textobj plugin.
 nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
