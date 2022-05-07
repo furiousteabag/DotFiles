@@ -1,0 +1,6 @@
+zsh
+neovim
+ranger
+tldr
+tree
+git
