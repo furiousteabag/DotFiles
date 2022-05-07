@@ -1,6 +1,8 @@
 zsh
+tmux
 neovim
 ranger
 tldr
 tree
 git
+neofetch
