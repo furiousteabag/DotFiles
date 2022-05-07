@@ -48,11 +48,11 @@ Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 Plug 'TovarishFin/vim-solidity'
 
 " Editing.
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
-Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 Plug 'dense-analysis/ale'                 " Linter.
 Plug 'rhysd/vim-clang-format'             " Prettier cpp.
-Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
+" Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 
 " Etc.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
