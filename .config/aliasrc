@@ -48,7 +48,7 @@ alias rpm='mkdir /run/media/furiousteabag/Raspberry ; sshfs git@git.asmirnov.xyz
 alias rpu='fusermount3 -u /run/media/furiousteabag/Raspberry ; rmdir /run/media/furiousteabag/Raspberry'
 
 # Sourcing venvs wrapper if exists.
-alias venv="[[ -f "$HOME"/.local/bin/virtualenvwrapper.sh ]] && . "$HOME"/.local/bin/virtualenvwrapper.sh && workon base"
+alias venv="source $XDG_DATA_HOME/virtualenvs/base/bin/activate"
 
 # Etc.
 # alias sr="echo kek"

@@ -8,7 +8,7 @@ set clipboard=unnamedplus  " Single clipboard for vim and outer space.
 set ignorecase             " Case insensetive search.
 filetype plugin on         " Sets different options for different filetypes.
 let mapleader = "\<Space>" " Setting leader key.
-
+set shellcmdflag=-ic       " Access aliases from vim shell (act as interactive calls).
 set noswapfile " Disable swap file.
 
 " Edit text even if in russian layout.
@@ -44,9 +44,12 @@ Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
 Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
 Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
+" Plug 'tomlion/vim-solidity'
+Plug 'TovarishFin/vim-solidity'
 
 " Editing.
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
 Plug 'dense-analysis/ale'                 " Linter.
 Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
@@ -84,7 +87,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
     \ quit | endif
 autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
 
-let b:csv_arrange_align = 'l'                " csv.vim arrange columns to left.
+let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
 
 " Plugin remaps.
 nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
@@ -111,7 +114,7 @@ map <S-l> <C-w>l
 nmap j gj
 nmap k gk
 nmap <CR> o<Esc>
-nmap 1 A<esc>p
+" nmap 1 A<esc>p
 nnoremap <leader>ы :w<CR>               " Save.
 nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 nnoremap <leader>l :set lbr!<CR>        " Toggle word splits.
@@ -121,7 +124,7 @@ nnoremap _ :vertical resize -5<CR>      " Resizing shortcuts.
 nnoremap + :vertical resize +5<CR>
 map <C-o> <C-o>zz                       " Center screen after moving.
 map <C-i> <C-i>zz
-nnoremap <C-j> :join!<CR>               " Joing lines.
+nnoremap <C-j> :join<CR>               " Joing lines.
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -137,6 +140,18 @@ inoremap {;<CR> {<CR>};<ESC>O
 " nnoremap <C-k> :tabnext<CR>
 nnoremap <S-j> :tabprevious<CR>                                                                            
 nnoremap <S-k> :tabnext<CR>
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+noremap <leader>j :tabm -1<cr>
+noremap <leader>k :tabm +1<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
@@ -198,6 +213,12 @@ command Comp execute "silent !pandoc $NAME.md -o $NAME.pdf"
 
 " Save file even with no access.
 command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+function! Synctex()
+        " remove 'silent' for debugging
+        execute "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " " . g:syncpdf
+endfunction
+nnoremap <C-enter> :call Synctex()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Latex shortcuts.

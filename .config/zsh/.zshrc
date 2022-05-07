@@ -7,6 +7,7 @@
 HISTFILE="$HOME/.local/share/zsh/.histfile"
 HISTSIZE=1000
 SAVEHIST=1000
+# DISABLE_MAGIC_FUNCTIONS=true
 
 bindkey -v                                       # Enable vi mode.
 autoload -U colors && colors                     # Prompt colors.

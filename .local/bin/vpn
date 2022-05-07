@@ -22,7 +22,7 @@ elif [ $1 = "on" ]; then
     sudo ipsec up myvpn
     echo "c myvpn" | sudo tee $CONTROL_PIPE
     sudo route add $VPN_IP gw $LOCAL_IP
-    sleep 1
+    sleep 5
     sudo route add default dev ppp0
 
 elif [ $1 = "off" ]; then
