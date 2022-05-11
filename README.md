@@ -17,6 +17,7 @@ Install vim plugins:
 
 # TODO
 
+- add virtualenv creation with vim jupyter extension
 - add softlinks instead of copying files
     * may pull changes from remote
 - add branches for home pc / server setups
