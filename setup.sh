@@ -1,7 +1,5 @@
 #!/bin/sh
 
-git clone git@github.com:SmirnovAlexander/DotFiles.git
-cd DotFiles
 cp -R .config/* ~/.config/
 cp -R .local/bin ~/.local/
 cp .zprofile ~/

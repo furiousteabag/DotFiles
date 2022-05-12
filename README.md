@@ -7,6 +7,8 @@ TODO
 
 Execute setup script:
 ```bash
+git clone https://github.com/SmirnovAlexander/DotFiles.git
+cd DotFiles
 ./setup.sh
 ```
 
