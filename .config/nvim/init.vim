@@ -59,6 +59,7 @@ Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 " Etc.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'chrisbra/csv.vim'                   " csv editing.
+Plug 'kenn7/vim-arsync'                   " Sync files with remote.
 
 call plug#end()
 
@@ -91,6 +92,7 @@ let g:airline#extensions#whitespace#enabled = 0        " disable trailing whites
 " autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
 
 let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
+autocmd BufNewFile,BufRead *.hql set syntax=sql
 
 " Plugin remaps.
 " nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
