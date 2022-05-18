@@ -17,6 +17,11 @@ Install vim plugins:
 :PlugInstall
 ```
 
+Install tmux plugins:
+```
+prefix + I
+```
+
 # TODO
 
 - add virtualenv creation with vim jupyter extension
