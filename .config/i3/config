@@ -27,7 +27,7 @@ bar {
 # Programs bindings.
 ###############################################################
 bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
-bindsym $mod+c       exec --no-startup-id $BROWSER
+bindsym $mod+c       exec --no-startup-id $BROWSER --new-window
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 # bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
 bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
@@ -134,16 +134,28 @@ bindsym $mod+m sticky toggle
 ###############################################################
 # Workspace bindings.
 ###############################################################
-set $ws1 "1 "
+
+set $ws1 "1 "
 set $ws2 "2"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5 "
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8 ∙∙∙"
-set $ws9 "9 "
-set $ws10 "10 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 "10 "
+
+# set $ws8 "8 ∙∙∙"
+# set $ws9 "9 "
+# set $ws10 "10 "
+
+# Open programs on startup.
+exec --no-startup-id i3-msg "workspace number $ws1; exec brave"
+exec --no-startup-id i3-msg "workspace number $ws5; exec telegram-desktop"
+exec --no-startup-id i3-msg "workspace number $ws9; exec slack"
+exec --no-startup-id i3-msg "workspace number $ws10; exec brave --new-window calendar.google.com"
+
 
 # Switch to workspace.
 bindsym $mod+1 workspace number $ws1
