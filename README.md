@@ -12,6 +12,8 @@ cd DotFiles
 ./setup.sh
 ```
 
+Restart shell
+
 Install vim plugins:
 ```
 :PlugInstall
@@ -20,6 +22,13 @@ Install vim plugins:
 Install tmux plugins:
 ```
 prefix + I
+```
+
+Install and configure venvs:
+```
+python -m pip install virtualenvwrapper
+source virtualenvwrapper.sh
+mkvirtualenv base
 ```
 
 # TODO
