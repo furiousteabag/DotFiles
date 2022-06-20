@@ -1,6 +1,7 @@
 zsh
 tmux
 neovim
+python
 ranger
 tldr
 tree
