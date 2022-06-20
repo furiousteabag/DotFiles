@@ -31,6 +31,11 @@ source virtualenvwrapper.sh
 mkvirtualenv base
 ```
 
+# Files that are stored locally
+
+- `~/.ssh/`
+- `~/.local/share/gnupg/`
+
 # TODO
 
 - add virtualenv creation with vim jupyter extension
