@@ -1,2 +1,12 @@
 [user]
-	email = ru.alexander.smirnov@gmail.com
+    name = Alexander Smirnov
+    email = furiousteabag@gmail.com
+    signingkey = 2A69AD470B45A51A12338B302D0E951FA7E26990
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[includeIf "gitdir:~/Projects/HOBOD/"]
+    path = ~/Projects/HOBOD/.gitconfig
