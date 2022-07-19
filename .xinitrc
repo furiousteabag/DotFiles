@@ -10,17 +10,15 @@ unclutter &                                                 # Remove mouse curso
 dunst &                                                     # Notification manager.
 udiskie -a -n &                                             # Automount manager.
 flameshot &                                                 # Screenshot tool.
+xautolock -corners 00+- -time 5 -locker "betterlockscreen -l" & # Screen lock.
+# xautolock -time 7 -locker "systemctl suspend" &
 #powertop --auto-tune &                                      # Power management.
 
 ########################################
 ## Presets.
 ########################################
-setxkbmap -option caps:escape                               # caps -> esc
-setxkbmap -option altwin:swap_alt_win                       # change alt w/ win
-# setxkbmap -layout us,ru -option 'grp:alt_space_toggle'      # toggle layout.
-setxkbmap -layout us,ru -option 'grp:win_space_toggle'      # toggle layout.
-setbg                                                       # Setting background.
-xset r rate 300 50  	                                    # Speed xrate up.
+setkb                                           # Set keyboard layout.
+setbg                                           # Setting background.
 
 #######################################
 # Starting session.
