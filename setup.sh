@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cp -R .config/* ~/.config/
-cp -R .local/bin ~/.local/
-cp .zprofile ~/
+cp -rs $PWD/.config/ ~/.config/
+cp -rs $PWD/.local/ ~/.local/
+cp -rs $PWD/.zprofile ~/
 chsh -s $(which zsh)
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.local/share/zsh/plugins/zsh-autosuggestions/
