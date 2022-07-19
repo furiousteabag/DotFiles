@@ -63,6 +63,7 @@ bindsym $mod+Shift+c reload  # Reload the configuration file.
 bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
 
 bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+w		  exec --no-startup-id betterlockscreen -l
 bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
 bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
 
