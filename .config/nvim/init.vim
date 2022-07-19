@@ -40,6 +40,7 @@ Plug 'jistr/vim-nerdtree-tabs'            " Nerdtree tabs fixer.
 Plug 'vim-airline/vim-airline'            " Status line.
 Plug 'junegunn/goyo.vim'                  " Zen mode.
 Plug 'edkolev/tmuxline.vim'               " Make tmux look like airline.
+Plug 'Yggdroot/indentLine'                " Indent line.
 
 " Color changes.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
@@ -52,8 +53,11 @@ Plug 'TovarishFin/vim-solidity'
 " Editing.
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
-Plug 'dense-analysis/ale'                 " Linter.
-Plug 'rhysd/vim-clang-format'             " Prettier cpp.
+" Plug 'dense-analysis/ale'                 " Linter.
+" Plug 'rhysd/vim-clang-format'             " Prettier cpp.
+Plug 'github/copilot.vim'                 " Suggestions.
+" Plug 'davidhalter/jedi-vim' " Autocompletions.
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Autocompletions.
 " Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
 
 " Etc.
@@ -66,6 +70,7 @@ call plug#end()
 
 " Plugins settings.
 " let g:loaded_youcompleteme = 1
+let g:indentLine_enabled = 0
 
 
 let g:mkdp_browser = 'brave'                  " specify browser to open preview page
