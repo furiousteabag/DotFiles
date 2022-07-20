@@ -38,6 +38,10 @@ mkvirtualenv base
 
 # TODO
 
+- generate GPG and push to keychain
+- clone passwords
+- generate ssh
+- disable lightdm
 - add virtualenv creation with vim jupyter extension
 - add softlinks instead of copying files
     * may pull changes from remote
