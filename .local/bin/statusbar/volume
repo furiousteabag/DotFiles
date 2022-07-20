@@ -10,13 +10,13 @@ VOLUME=$( pulsemixer --get-volume | cut -d' ' -f1 )
 MUTED=$( pulsemixer --get-mute )
 
 if [ $MUTED = 1 ]; then
-	ICON="🔇"
+	ICON=""
 elif [ "$VOLUME" -gt "70" ]; then
-	ICON="🔊"
+	ICON=""
 elif [ "$VOLUME" -lt "30" ]; then
-	ICON="🔈"
+	ICON=""
 else
-	ICON="🔉"
+    ICON=""
 fi
 
 echo "${ICON}${VOLUME}%"
