@@ -30,7 +30,7 @@ bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
 bindsym $mod+c       exec --no-startup-id $BROWSER --new-window
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 # bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
-bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
+# bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
 bindsym $mod+o       exec --no-startup-id $TERMINAL -e clink
 bindsym $mod+i       exec --no-startup-id $TERMINAL -e calc
 bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-16'
@@ -48,6 +48,7 @@ bindsym $mod+Shift+Return exec --no-startup-id cd "$(xcwd)" && exec $TERMINAL
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume.
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume.
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks  # Mute sound.
+bindsym $mod+m       exec --no-startup-id toggle_microphone 
 
 bindcode $mod+60 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume headphones.
 bindcode $mod+59 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume headphones.
@@ -131,7 +132,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+n focus mode_toggle
 
 # toggle focus tiling / floating
-bindsym $mod+m sticky toggle
+bindsym $mod+y sticky toggle
 
 ###############################################################
 # Workspace bindings.
