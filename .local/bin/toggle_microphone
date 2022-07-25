@@ -1,0 +1,4 @@
+#!/bin/sh
+
+SOURCE_ID=$(pulsemixer --list-sources | cut -f3 | grep 'Built-in' | cut -d ',' -f 1 | cut -c 6- | tail -1)
+pulsemixer --id $SOURCE_ID --toggle-mute
