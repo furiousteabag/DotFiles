@@ -15,3 +15,5 @@ acpi
 brightnessctl
 pulsemixer
 xkb-switch
+gtk2
+nm-connection-editor
