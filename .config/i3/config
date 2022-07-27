@@ -31,7 +31,8 @@ bindsym $mod+c       exec --no-startup-id $BROWSER --new-window
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 # bindsym $mod+m       exec --no-startup-id $TERMINAL -e neomutt
 # bindsym $mod+y       exec --no-startup-id $TERMINAL -e youtube-viewer -q
-bindsym $mod+o       exec --no-startup-id $TERMINAL -e clink
+# bindsym $mod+o       exec --no-startup-id $TERMINAL -e clink
+bindsym $mod+o       exec --no-startup-id flameshot gui
 bindsym $mod+i       exec --no-startup-id $TERMINAL -e calc
 bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-16'
 bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-16'
