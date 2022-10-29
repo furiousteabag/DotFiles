@@ -10,7 +10,7 @@ unclutter &                                                 # Remove mouse curso
 dunst &                                                     # Notification manager.
 udiskie -a -n &                                             # Automount manager.
 flameshot &                                                 # Screenshot tool.
-xautolock -corners 00+- -time 10 -locker "betterlockscreen -l" & # Screen lock.
+# xautolock -corners 00+- -time 10 -locker "betterlockscreen -l" & # Screen lock.
 # xautolock -time 7 -locker "systemctl suspend" &
 #powertop --auto-tune &                                      # Power management.
 
