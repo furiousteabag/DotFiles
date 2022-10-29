@@ -202,11 +202,12 @@ set scrolloff=2  " Keep lines before and after cursor when scrolling.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Indentaion rules.
-set expandtab     " Insert spaces when tab is pressed.
+filetype plugin indent on
 set tabstop=4     " Number of spaces to tab.
 set shiftwidth=4  " Number of spaces inserted for indentation.
-set smarttab      " Inserts blanks according to rules.
-set smartindent   " Autoindenting when starting a new line.
+set expandtab     " Insert spaces when tab is pressed.
+" set smarttab      " Inserts blanks according to rules.
+" set smartindent   " Autoindenting when starting a new line.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Commands.
@@ -227,8 +228,8 @@ command Comp execute "silent !pandoc $NAME.md -o $NAME.pdf"
 command Ss execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 function! Synctex()
-        " remove 'silent' for debugging
-        execute "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " " . g:syncpdf
+    " remove 'silent' for debugging
+    execute "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " " . g:syncpdf
 endfunction
 nnoremap <C-enter> :call Synctex()<cr>
 
