@@ -1,2 +1,4 @@
 brave-bin
 xkb-switch
+betterlockscreen
+zoom

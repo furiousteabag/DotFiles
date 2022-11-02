@@ -1,4 +1,5 @@
 zsh
+zsh-completions
 tmux
 neovim
 python
@@ -10,3 +11,4 @@ git
 neofetch
 rsync
 pass
+fzf

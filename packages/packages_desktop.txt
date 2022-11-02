@@ -4,7 +4,6 @@ unclutter
 dunst
 udiskie
 flameshot
-xautolock
 xwallpaper
 xorg-xinit
 acpi
@@ -13,5 +12,9 @@ pulsemixer
 gtk2
 nm-connection-editor
 adobe-source-code-pro-fonts
+ttf-nerd-fonts-symbols-2048-em-mono
 zathura
 xclip
+mpv
+blueberry
+autorandr
