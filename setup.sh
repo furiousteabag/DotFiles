@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# disable useless daemons
+sudo systemctl disable lightdm.service
+sudo systemctl disable bluetooth.service
+
 # yay
 mkdir -p $HOME/Programs/yay-bin
 pacman -S --needed git base-devel
@@ -34,18 +38,6 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 
 # tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
-
-# python virtualenv
-python -m pip install virtualenvwrapper
-source virtualenvwrapper.sh
-mkvirtualenv base
-
-# generate ssh key
-ssh-keygen
-
-# generate gpg key and clone password store
-gpg --full-generate-key
-# gpg --keyserver hkps://keys.openpgp.org --send-keys <keyid>
 
 # install st and change fonts
 mkdir -p $HOME/Programs/st
