@@ -1,2 +1,2 @@
-brave
+brave-bin
 xkb-switch
