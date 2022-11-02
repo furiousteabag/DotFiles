@@ -8,3 +8,4 @@ tree
 git
 neofetch
 rsync
+pass
