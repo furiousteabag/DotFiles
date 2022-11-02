@@ -31,7 +31,7 @@ signal=20
 
 [brightness]
 command=brightness
-label=☀
+label=
 interval=once
 signal=12
 
