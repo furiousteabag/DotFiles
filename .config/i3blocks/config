@@ -2,12 +2,6 @@ full_text=|
 separator=false
 separator_block_width=7
 
-# [corona]
-# command=corona
-# interval=18000
-
-# [separator]
-
 [layout]
 command=layout
 interval=persist
@@ -25,6 +19,13 @@ interval=persist
 command=volume
 interval=once
 signal=10
+
+# [separator]
+
+[volume]
+command=micro
+interval=once
+signal=20
 
 [separator]
 
