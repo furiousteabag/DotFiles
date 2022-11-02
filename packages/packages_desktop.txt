@@ -14,3 +14,4 @@ gtk2
 nm-connection-editor
 adobe-source-code-pro-fonts
 zathura
+xclip
