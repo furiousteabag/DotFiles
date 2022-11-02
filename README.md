@@ -7,15 +7,24 @@
     cd DotFiles
     ./setup.sh
     ```
-2) Restart `Xorg`, `i3` and `shell`
-3) Install vim plugins:
+2) Reboot
+3) Execute post setup script:
+    ```bash
+    ./post_setup.sh
+    ```
+4) Install vim plugins:
     ```
     :PlugInstall
     ```
-4) Install tmux plugins:
+5) Install tmux plugins:
     ```
     <C-b> + I
     ```
+6) Brave settings
+    - disable password savings
+    - [vimium extension](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
+    - [workspaces extension](https://chrome.google.com/webstore/detail/workspaces/hpljjefgmnkloakbfckghmlapghabgfa?hl=en)
+    - [grammarly extension](https://chrome.google.com/webstore/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen)
 
 ## TODO
 
@@ -23,9 +32,9 @@
     * generate GPG keys and push to keychain
     * pull keys, reencrypt passwords and push to remote
     * clone passwords
-- disable lightdm
 - add st plugins patches
-- add jupyter extension to base virtualenv
+    * [scroll](https://st.suckless.org/patches/scrollback/)
+    * [transparency](https://st.suckless.org/patches/alpha/)
 - add flag for desktop / server setup
 - add flag for debian and if so pull from latest repositories
     * install `tmux`, `ranger`, `neovim` from source
