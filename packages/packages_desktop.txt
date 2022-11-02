@@ -18,3 +18,4 @@ xclip
 mpv
 blueberry
 autorandr
+openvpn
