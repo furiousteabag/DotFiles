@@ -16,6 +16,7 @@ cp -rs $PWD/.config/ ~/
 cp -rs $PWD/.local/ ~/
 cp -rs $PWD/.zprofile ~/
 cp -rs $PWD/.xinitrc ~/
+sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
 sudo cp -rs $PWD/.config/etc /
 
 # zsh with plugins
