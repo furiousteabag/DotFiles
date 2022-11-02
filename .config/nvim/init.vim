@@ -64,7 +64,7 @@ Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
-Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
+" Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 
 call plug#end()
 
