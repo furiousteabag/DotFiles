@@ -36,9 +36,6 @@ _comp_options+=(globdots)		# Include hidden files.
 # Initializing git prompt.
 [[ -f ~/.config/git/git-prompt.sh ]] && . ~/.config/git/git-prompt.sh
 
-# Initializing conda.
-[ "$LOAD_CONDA" -eq 1 ] && [[ -f ~/.config/conda-init ]] && . ~/.config/conda-init
-
 ###############################################################
 # Initializing prompt.
 ###############################################################
