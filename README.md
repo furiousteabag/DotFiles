@@ -1,54 +1,32 @@
 # Setup
 
-Install latest version of programs from source:
-```bash
-TODO
-```
+1) Execute setup script:
+    ```bash
+    sudo pacman -S git
+    git clone https://github.com/SmirnovAlexander/DotFiles.git
+    cd DotFiles
+    ./setup.sh
+    ```
+2) Restart `Xorg`, `i3` and `shell`
+3) Install vim plugins:
+    ```
+    :PlugInstall
+    ```
+4) Install tmux plugins:
+    ```
+    <C-b> + I
+    ```
 
-Execute setup script:
-```bash
-git clone https://github.com/SmirnovAlexander/DotFiles.git
-cd DotFiles
-./setup.sh
-```
+## TODO
 
-Restart shell
-
-Install vim plugins:
-```
-:PlugInstall
-```
-
-Install tmux plugins:
-```
-prefix + I
-```
-
-Install and configure venvs:
-```
-python -m pip install virtualenvwrapper
-source virtualenvwrapper.sh
-mkvirtualenv base
-```
-
-# Files that are stored locally
-
-- `~/.ssh/`
-- `~/.local/share/gnupg/`
-
-# TODO
-
-- generate GPG and push to keychain
-- clone passwords
-- generate ssh
+- pull password storage
+    * generate GPG keys and push to keychain
+    * pull keys, reencrypt passwords and push to remote
+    * clone passwords
 - disable lightdm
-- add virtualenv creation with vim jupyter extension
-- add softlinks instead of copying files
-    * may pull changes from remote
-- add branches for home pc / server setups
-- add script for packages installation from source / latest versions
-    * install tmux from source
-    * install ranger from source
-    * install neovim from source
+- add st plugins patches
+- add jupyter extension to base virtualenv
+- add flag for desktop / server setup
+- add flag for debian and if so pull from latest repositories
+    * install `tmux`, `ranger`, `neovim` from source
     * **[IMPORTANT]** tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
-
