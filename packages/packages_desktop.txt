@@ -1,6 +1,4 @@
 networkmanager
-yay
-brave
 picom
 unclutter
 dunst
@@ -8,12 +6,11 @@ udiskie
 flameshot
 xautolock
 xwallpaper
-nerd-font-source-code-pro
-st
 xorg-xinit
 acpi
 brightnessctl
 pulsemixer
-xkb-switch
 gtk2
 nm-connection-editor
+adobe-source-code-pro-fonts
+zathura
