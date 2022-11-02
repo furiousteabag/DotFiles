@@ -2,6 +2,7 @@ zsh
 tmux
 neovim
 python
+python-pip
 ranger
 tldr
 tree
