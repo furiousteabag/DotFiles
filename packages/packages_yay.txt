@@ -1,0 +1,3 @@
+brave
+xkb-switch
+nerd-fonts-fira-code
