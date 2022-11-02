@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CURRENT_SOURCE=$(pactl info | grep "Default Source" | cut -f3 -d" ")
+
+MUTED=$(pactl list sources | grep -A 10 $CURRENT_SOURCE | grep "Mute:" | cut -d' ' -f 2)
+
+if [ $MUTED = "yes" ]; then
+	ICON=""
+else
+    ICON=""
+fi
+
+echo "${ICON}"
