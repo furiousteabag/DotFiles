@@ -19,3 +19,4 @@ mpv
 blueberry
 autorandr
 openvpn
+nm-applet
