@@ -28,6 +28,9 @@ ssh-add ~/.ssh/id_rsa
 # generate gpg key and clone password store
 mkdir -p "$XDG_DATA_HOME"/gnupg
 gpg --full-generate-key
+chown -R $(whoami) $GNUPGHOME
+sudo chmod 600 $GNUPGHOME/*
+chmod 700 $GNUPGHOME
 gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys furiousteabag@gmail.com
 gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys ru.alexander.smirnov@gmail.com
 gpg --edit-key furiousteabag@gmail.com trust
