@@ -21,10 +21,18 @@ mkdir -p $(jupyter --data-dir)/nbextensions
 
 # generate ssh key
 ssh-keygen
+sudo systemctl --user enable --now ~/.config/systemd/user/ssh-agent.service
+ssh-add -K ~/.ssh/id_rsa
+# add this new key to github
 
 # generate gpg key and clone password store
 mkdir -p "$XDG_DATA_HOME"/gnupg
 gpg --full-generate-key
-# gpg --keyserver hkps://keys.openpgp.org --send-keys <keyid>
-
-
+# gpg --export your_address@example.net | curl -T - https://keys.openpgp.org
+# on host machine: 
+#   gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys user@example.net
+#   gpg --refresh-keys --keyserver hkps://keys.openpgp.org
+#   gpg --edit-key key-id trust
+#   pass init key1 key2 key3
+#   pass git push
+# (cd ~/.local/share && git clone repo)
