@@ -22,10 +22,11 @@ signal=10
 
 # [separator]
 
-[volume]
+[micro]
 command=micro
 interval=once
 signal=20
+markup=pango
 
 [separator]
 

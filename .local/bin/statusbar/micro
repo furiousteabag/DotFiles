@@ -8,6 +8,7 @@ if [ $MUTED = "yes" ]; then
 	ICON=""
 else
     ICON=""
+    ICON="<span color='red'><span font='FontAwesome'>$ICON</span></span>"
 fi
 
 echo "${ICON}"
