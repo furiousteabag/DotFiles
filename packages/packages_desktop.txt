@@ -14,6 +14,7 @@ nm-connection-editor
 adobe-source-code-pro-fonts
 ttf-nerd-fonts-symbols-2048-em-mono
 zathura
+zathura-pdf-mupdf
 xclip
 mpv
 blueberry
