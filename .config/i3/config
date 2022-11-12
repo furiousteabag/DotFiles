@@ -17,7 +17,7 @@ gaps outer 0
 bar {
         status_command i3blocks
         position top
-        font pango:Source Code Pro 22
+        font pango:Source Code Pro 18
         colors {
             background #00000000
         }
@@ -31,8 +31,8 @@ bindsym $mod+c       exec --no-startup-id $BROWSER --new-window
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 bindsym $mod+o       exec --no-startup-id flameshot gui
 bindsym $mod+i       exec --no-startup-id $TERMINAL -e calc
-bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-22'
-bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-22'
+bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-18'
+bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-18'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 bindsym control+space   exec --no-startup-id dunstctl close
