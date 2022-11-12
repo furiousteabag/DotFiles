@@ -42,4 +42,4 @@ git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 # install st and change fonts
 mkdir -p $HOME/Programs/st
 git clone https://git.suckless.org/st $HOME/Programs/st
-(cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=22";/' config.def.h && sudo make clean install)
+(cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && sudo make clean install)
