@@ -22,20 +22,17 @@
     ```
 6) Brave settings
     - disable password savings
+    - change search engine to Google and enable `Autocomplete searches and URLs` option
     - [vimium extension](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
     - [workspaces extension](https://chrome.google.com/webstore/detail/workspaces/hpljjefgmnkloakbfckghmlapghabgfa?hl=en)
     - [grammarly extension](https://chrome.google.com/webstore/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen)
 
 ## TODO
 
-- pull password storage
-    * generate GPG keys and push to keychain
-    * pull keys, reencrypt passwords and push to remote
-    * clone passwords
 - add st plugins patches
     * [scroll](https://st.suckless.org/patches/scrollback/)
     * [transparency](https://st.suckless.org/patches/alpha/)
-- add flag for desktop / server setup
-- add flag for debian and if so pull from latest repositories
-    * install `tmux`, `ranger`, `neovim` from source
+    * clickable links
+- add flags for arch desktop / arch server / debian no-root server
+    * for debian no-root setup install and use [nix package manager](https://nixos.org/download.html)
     * **[IMPORTANT]** tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
