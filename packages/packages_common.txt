@@ -16,3 +16,4 @@ pass-import
 fzf
 zip
 unzip
+ncdu
