@@ -34,5 +34,6 @@
     * [transparency](https://st.suckless.org/patches/alpha/)
     * clickable links
 - add flags for arch desktop / arch server / debian no-root server
+    * chsh is not possible w/o root so add `zsh --login` to profile
     * for debian no-root setup install and use [nix package manager](https://nixos.org/download.html)
     * **[IMPORTANT]** tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
