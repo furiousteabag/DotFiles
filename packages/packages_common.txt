@@ -10,9 +10,6 @@ tree
 git
 neofetch
 rsync
-pass
-pass-update
-pass-import
 fzf
 zip
 unzip
