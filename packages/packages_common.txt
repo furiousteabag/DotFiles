@@ -2,15 +2,15 @@ zsh
 zsh-completions
 tmux
 neovim
-python
+python3
 python-pip
 ranger
 tldr
 tree
-git
 neofetch
 rsync
 fzf
 zip
 unzip
 ncdu
+man
