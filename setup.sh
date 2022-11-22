@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 read -p "OS [arch / debian]: " OS
 read -p "Setup [desktop (0) / server (1)]: " SERVER

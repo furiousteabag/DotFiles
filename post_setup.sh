@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # cleanup
 [ -e ~/.gnupg ] && rm -rf ~/.gnupg
