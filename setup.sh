@@ -1,27 +1,49 @@
 #!/bin/sh
 
+read -p "OS [arch / debian]: " OS
+read -p "Setup [desktop (0) / server (1)]: " SERVER
+
 # disable useless daemons
-sudo systemctl disable lightdm.service
-sudo systemctl disable bluetooth.service
+if [[ "$OS" == "arch" ]] && [[ "$SERVER" == 0 ]]; then
+    sudo systemctl disable lightdm.service
+    sudo systemctl disable bluetooth.service
+fi
 
-# yay
-mkdir -p $HOME/Programs/yay-bin
-pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
-(cd $HOME/Programs/yay-bin && makepkg -si)
+# alternative package manager
+if [[ "$OS" == "arch" ]]; then
+    mkdir -p $HOME/Programs/yay-bin
+    pacman -S --needed git base-devel
+    git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
+    (cd $HOME/Programs/yay-bin && makepkg -si)
+elif [[ "$OS" == "debian" ]]; then
+    mkdir -p $HOME/Programs/nix
+    (cd $HOME/Programs/nix && sh <(curl -L https://nixos.org/nix/install) --no-daemon)
+    . $HOME/.nix-profile/etc/profile.d/nix.sh
+    echo '[[ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]] && . $HOME/.nix-profile/etc/profile.d/nix.sh' >> .zprofile
+fi
 
-# all packages (comment out the ones you don't want)
-sudo pacman -S - < ./packages/packages_common.txt
-sudo pacman -S - < ./packages/packages_desktop.txt
-yay -S - < ./packages/packages_yay.txt
+# packages installation
+if [[ "$OS" == "arch" ]]; then
+    sudo pacman -S - < ./packages/packages_common.txt
+    if [[ "$SERVER" == 0 ]]; then
+        sudo pacman -S - < ./packages/packages_desktop.txt
+        yay -S - < ./packages/packages_yay.txt
+    fi
+elif [[ "$OS" == "debian" ]]; then
+    while read package; do
+        nix-env -i $package
+    done < ./packages/packages_common.txt
+fi
 
 # symlink dotfiles
 cp -rs $PWD/.config/ ~/
 cp -rs $PWD/.local/ ~/
 cp -rs $PWD/.zprofile ~/
-cp -rs $PWD/.xinitrc ~/
-sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
-sudo cp -rs $PWD/.config/etc /
+if [[ "$SERVER" == 0 ]]; then
+    cp -rs $PWD/.xinitrc ~/
+    sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
+    sudo cp -rs $PWD/.config/etc /
+fi
 
 # zsh with plugins
 chsh -s $(which zsh)
@@ -38,8 +60,11 @@ git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger
 
 # tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+[[ "$SERVER" == 1 ]] && echo "tmux attach" >> .zprofile
 
 # install st and change fonts
-mkdir -p $HOME/Programs/st
-git clone https://git.suckless.org/st $HOME/Programs/st
-(cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && sudo make clean install)
+if [[ "$SERVER" == 0 ]]; then
+    mkdir -p $HOME/Programs/st
+    git clone https://git.suckless.org/st $HOME/Programs/st
+    (cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && sudo make clean install)
+fi
