@@ -4,18 +4,18 @@ read -p "OS [arch / debian]: " OS
 read -p "Setup [desktop (0) / server (1)]: " SERVER
 
 # disable useless daemons
-if [[ "$OS" == "arch" ]] && [[ "$SERVER" == 0 ]]; then
+if [ "$OS" == "arch" ] && [ "$SERVER" == 0 ]; then
     sudo systemctl disable lightdm.service
     sudo systemctl disable bluetooth.service
 fi
 
 # alternative package manager
-if [[ "$OS" == "arch" ]]; then
+if [ "$OS" == "arch" ]; then
     mkdir -p $HOME/Programs/yay-bin
     pacman -S --needed git base-devel
     git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
     (cd $HOME/Programs/yay-bin && makepkg -si)
-elif [[ "$OS" == "debian" ]]; then
+elif [ "$OS" == "debian" ]; then
     mkdir -p $HOME/Programs/nix
     (cd $HOME/Programs/nix && sh <(curl -L https://nixos.org/nix/install) --no-daemon)
     . $HOME/.nix-profile/etc/profile.d/nix.sh
@@ -23,13 +23,13 @@ elif [[ "$OS" == "debian" ]]; then
 fi
 
 # packages installation
-if [[ "$OS" == "arch" ]]; then
+if [ "$OS" == "arch" ]; then
     sudo pacman -S - < ./packages/packages_common.txt
-    if [[ "$SERVER" == 0 ]]; then
+    if [ "$SERVER" == 0 ]; then
         sudo pacman -S - < ./packages/packages_desktop.txt
         yay -S - < ./packages/packages_yay.txt
     fi
-elif [[ "$OS" == "debian" ]]; then
+elif [ "$OS" == "debian" ]; then
     while read package; do
         nix-env -i $package
     done < ./packages/packages_common.txt
@@ -39,7 +39,7 @@ fi
 cp -rs $PWD/.config/ ~/
 cp -rs $PWD/.local/ ~/
 cp -rs $PWD/.zprofile ~/
-if [[ "$SERVER" == 0 ]]; then
+if [ "$SERVER" == 0 ]; then
     cp -rs $PWD/.xinitrc ~/
     sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
     sudo cp -rs $PWD/.config/etc /
@@ -63,7 +63,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 [[ "$SERVER" == 1 ]] && echo "tmux attach" >> .zprofile
 
 # install st and change fonts
-if [[ "$SERVER" == 0 ]]; then
+if [ "$SERVER" == 0 ]; then
     mkdir -p $HOME/Programs/st
     git clone https://git.suckless.org/st $HOME/Programs/st
     (cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && sudo make clean install)
