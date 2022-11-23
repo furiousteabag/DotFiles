@@ -46,7 +46,14 @@ if [ "$SERVER" == 0 ]; then
 fi
 
 # zsh with plugins
-chsh -s $(which zsh)
+if [ "$OS" == "arch" ]; then
+    chsh -s $(which zsh)
+elif [ "$OS" == "debian" ]; then
+    [[ -e $HOME/.profile ]] && mv $HOME/.profile $HOME/.profile_copy
+    [[ -e $HOME/.bash_profile ]] && mv $HOME/.bash_profile $HOME/.bash_profile_copy
+    echo 'export SHELL=`which zsh`; [ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' > $HOME/.profile
+
+fi
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.local/share/zsh/plugins/zsh-autosuggestions/
 
