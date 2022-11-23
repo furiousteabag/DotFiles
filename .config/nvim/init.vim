@@ -51,19 +51,15 @@ Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 Plug 'TovarishFin/vim-solidity'
 
 " Editing.
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }   " Prettifying web files.
-" Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
-" Plug 'dense-analysis/ale'                 " Linter.
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 Plug 'github/copilot.vim'                 " Suggestions.
-" Plug 'davidhalter/jedi-vim' " Autocompletions.
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Autocompletions.
-" Plug 'ycm-core/YouCompleteMe'             " Autocompletions.
+Plug 'chrisbra/csv.vim'                   " csv editing.
 
 " Etc.
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
-Plug 'chrisbra/csv.vim'                   " csv editing.
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
+Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
+
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 
 call plug#end()
