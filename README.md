@@ -7,8 +7,8 @@
     cd DotFiles
     ./setup.sh
     ```
-2) Reboot
-3) Execute post setup script:
+2) Reboot in case of desktop and relogin in case of server
+3) Execute post setup script if on desktop:
     ```bash
     ./post_setup.sh
     ```
@@ -21,8 +21,9 @@
     <C-b> + I
     ```
 6) Brave settings
-    - disable password savings
-    - change search engine to Google and enable `Autocomplete searches and URLs` option
+    - [disable password savings](brave://settings/passwords)
+    - [change search engine to Google](brave://settings/search)
+        * [enable autocomplete searches option](brave://settings/privacy)
     - [vimium extension](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
     - [workspaces extension](https://chrome.google.com/webstore/detail/workspaces/hpljjefgmnkloakbfckghmlapghabgfa?hl=en)
     - [grammarly extension](https://chrome.google.com/webstore/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen)
@@ -33,7 +34,7 @@
     * [scroll](https://st.suckless.org/patches/scrollback/)
     * [transparency](https://st.suckless.org/patches/alpha/)
     * clickable links
-- add flags for arch desktop / arch server / debian no-root server
-    * chsh is not possible w/o root so add `zsh --login` to profile
-    * for debian no-root setup install and use [nix package manager](https://nixos.org/download.html)
-    * **[IMPORTANT]** tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
+
+## Notes
+
+- tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
