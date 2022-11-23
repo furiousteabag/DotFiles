@@ -1,0 +1,3 @@
+#!/bin/bash
+
+SUDO_ASKPASS="$HOME/.local/bin/dpass" sudo -A ~/Programs/ledger-live-desktop-*.AppImage --no-sandbox
