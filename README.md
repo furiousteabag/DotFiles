@@ -31,9 +31,11 @@
 ## TODO
 
 - add st plugins patches
-    * [scroll](https://st.suckless.org/patches/scrollback/)
-    * [transparency](https://st.suckless.org/patches/alpha/)
-    * clickable links
+    * [scrollback](https://st.suckless.org/patches/scrollback/)
+    * [alpha](https://st.suckless.org/patches/alpha/)
+    * [copyurl](https://st.suckless.org/patches/copyurl/)
+    * [open_copied_url](https://st.suckless.org/patches/open_copied_url/)
+- add `conda` support instead of `venv` for easy OS-independent python versions management
 
 ## Notes
 
