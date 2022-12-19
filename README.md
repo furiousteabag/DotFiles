@@ -36,6 +36,9 @@
     * [copyurl](https://st.suckless.org/patches/copyurl/)
     * [open_copied_url](https://st.suckless.org/patches/open_copied_url/)
 - add `conda` support instead of `venv` for easy OS-independent python versions management
+- add filetype `xdg-open` support
+    * https://github.com/LukeSmithxyz/voidrice/blob/master/.config/mimeapps.list
+    * https://github.com/LukeSmithxyz/voidrice/tree/master/.local/share/applications
 
 ## Notes
 
