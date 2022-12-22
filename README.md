@@ -30,13 +30,16 @@
 
 ## TODO
 
+- open all terminal windows at tmux
+    * tmux attach-session -t random \; new-window ranger
+- solution for notes management
+- rewrite mute script to iterate through all sources and mute/unmute them
+    * display muted status as **every** output is muted
 - add st plugins patches
     * [scrollback](https://st.suckless.org/patches/scrollback/)
     * [alpha](https://st.suckless.org/patches/alpha/)
     * [copyurl](https://st.suckless.org/patches/copyurl/)
     * [open_copied_url](https://st.suckless.org/patches/open_copied_url/)
-- add `conda` support instead of `venv` for easy OS-independent python versions management
-- open all terminal windows at tmux
 
 ## Known issues
 
