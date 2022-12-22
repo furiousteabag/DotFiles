@@ -10,14 +10,18 @@ find ~/ -maxdepth 1 -name .xsession\* -exec rm {} \;
 [ -e ~/.dmrc ] && rm ~/.dmrc
 
 # python virtualenv with jupyter vim binding
-pip install virtualenvwrapper
-source ~/.local/bin/virtualenvwrapper.sh
-mkvirtualenv base
+(cd ~/Programs && wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh && bash Anaconda3-2022.10-Linux-x86_64.sh)
+sed -i '/^\# >>> conda initialize >>>$/Q' $HOME/DotFiles/.config/zsh/.zshrc
+sed -i '${/^$/d}' $HOME/DotFiles/.config/zsh/.zshrc
+rm -rf $HOME/.conda
 pip install jupyter jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
 jupyter nbextensions_configurator enable --user
 mkdir -p $(jupyter --data-dir)/nbextensions
 (cd $(jupyter --data-dir)/nbextensions && git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding && chmod -R go-w vim_binding)
+# pip install virtualenvwrapper
+# source ~/.local/bin/virtualenvwrapper.sh
+# mkvirtualenv base
 
 # generate ssh key
 ssh-keygen
