@@ -2,3 +2,7 @@ brave-bin
 xkb-switch
 betterlockscreen
 zoom
+mendeley-reference-manager
+pass-update
+pass-import
+imlib2-heic-git

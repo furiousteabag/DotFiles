@@ -22,6 +22,4 @@ autorandr
 openvpn
 nm-applet
 pass
-pass-update
-pass-import
 sxiv
