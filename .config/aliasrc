@@ -32,7 +32,7 @@ alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
 alias printer="systemctl start avahi-daemon && systemctl start cups"
 
 # Etc.
-alias sr="vim \$(find $XDG_CONFIG_HOME $HOME/.local/bin -type f -o -type l | fzf -q \')"
-alias venv="source virtualenvwrapper.sh && workon base"
+alias sr="vim \$(find $HOME/DotFiles -type f -o -type l | fzf -q \')"
+alias venv="source $XDG_DATA_HOME/conda"
 alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 alias untar='tar xvzf'
