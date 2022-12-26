@@ -73,5 +73,5 @@ git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 if [ "$SERVER" == 0 ]; then
     mkdir -p $HOME/Programs/st
     git clone https://git.suckless.org/st $HOME/Programs/st
-    (cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && sudo make clean install)
+    (cd $HOME/Programs/st && sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && sed -i 's/int allowwindowops = 0;/int allowwindowops = 1;/' config.def.h && sudo make clean install)
 fi

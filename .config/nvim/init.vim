@@ -54,6 +54,7 @@ Plug 'TovarishFin/vim-solidity'
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
+Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 
 " Etc.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
@@ -68,6 +69,10 @@ call plug#end()
 " Plugins settings.
 " let g:loaded_youcompleteme = 1
 let g:indentLine_enabled = 0
+
+let g:oscyank_term = 'default' " fix copy from tmux
+let g:oscyank_silent = v:true  " do not show copy msg
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
 
 
 let g:mkdp_browser = 'brave'                  " specify browser to open preview page
