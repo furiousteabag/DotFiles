@@ -23,3 +23,6 @@ openvpn
 nm-applet
 pass
 sxiv
+syncthing
+perl-image-exiftool
+transmission-cli
