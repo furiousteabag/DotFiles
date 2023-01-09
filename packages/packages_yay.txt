@@ -7,3 +7,4 @@ pass-update
 pass-import
 imlib2-heic-git
 tremc
+nsxiv
