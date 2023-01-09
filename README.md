@@ -24,15 +24,22 @@
     - [disable password savings](brave://settings/passwords)
     - [change search engine to Google](brave://settings/search)
         * [enable autocomplete searches option](brave://settings/privacy)
-    - [vimium extension](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
-    - [workspaces extension](https://chrome.google.com/webstore/detail/workspaces/hpljjefgmnkloakbfckghmlapghabgfa?hl=en)
-    - [grammarly extension](https://chrome.google.com/webstore/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen)
-    - [copy unicode urls](https://chrome.google.com/webstore/detail/copy-unicode-urls/fnbbfiapefhkicjhecnoepbijhanpkjp/)
+    - install extensions
+        - [vimium extension](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb?hl=en)
+        - [workspaces extension](https://chrome.google.com/webstore/detail/workspaces/hpljjefgmnkloakbfckghmlapghabgfa?hl=en)
+        - [grammarly extension](https://chrome.google.com/webstore/detail/grammarly-grammar-checker/kbfnbcaeplbcioakkpcpgfkobkghlhen)
+        - [copy unicode urls](https://chrome.google.com/webstore/detail/copy-unicode-urls/fnbbfiapefhkicjhecnoepbijhanpkjp/)
+
 
 ## TODO
 
+- make sleep work well
+    * work while sleeping and drains battery
+- complete deletion [script](./config/nsxiv/exec/key-handler) of marked photos in nsxiv
+- add update-pc script for symlinking new files from repo to host machine
+- find font pack with icons
 - open all terminal windows at tmux
-    * tmux attach-session -t random \; new-window ranger
+    * `tmux attach-session -t random \; new-window ranger`
 - solution for notes management
 - rewrite mute script to iterate through all sources and mute/unmute them
     * display muted status as **every** output is muted
@@ -42,6 +49,8 @@
     * [copyurl](https://st.suckless.org/patches/copyurl/)
     * [open_copied_url](https://st.suckless.org/patches/open_copied_url/)
 
+
 ## Known issues
 
 - tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
+- nsxiv images in thumbnail mode are rotated according to `EXIF:Orientation` tag but they shouldn't
