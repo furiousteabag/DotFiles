@@ -1,0 +1,91 @@
+#!/usr/bin/python
+
+# Script used to update photo(s) filenames
+# according to EXIF metadata.
+
+# pip install PyExifTool
+
+import argparse
+import os
+from pathlib import Path
+from typing import Tuple
+
+import exiftool
+
+ET = exiftool.ExifToolHelper()
+
+
+def absolute_file_paths(dir_path: str) -> str:
+    for dirpath, _, filenames in os.walk(dir_path):
+        for f in filenames:
+            yield os.path.abspath(os.path.join(dirpath, f))
+
+
+def get_filename(path: str) -> str:
+    metadata = ET.get_metadata(path)[0]
+    keys = ["EXIF:DateTimeOriginal", "QuickTime:CreationDate"]
+    new_filename, i = "", 0
+    while not new_filename and i < len(keys):
+        if keys[i] in metadata:
+            new_filename = metadata[keys[i]]
+        i += 1
+
+    # QuickTime:CreationDate adds +04:00 as timezone.
+    if new_filename.find("+") != -1:
+        new_filename = new_filename[: new_filename.find("+")]
+
+    # Exfat doesn't allow ":" if filenames.
+    new_filename = new_filename.replace(":", "-")
+
+    return new_filename if new_filename else Path(path).stem
+
+
+def update_file(path: str) -> Tuple[int, int]:
+    updated, unchanged = 0, 0
+
+    filename = Path(path).stem
+    new_filename = get_filename(path)
+    new_path = path.replace(filename, new_filename)
+
+    # if photos were taken in same time we don't want to overwrite
+    if new_filename != filename and not os.path.exists(new_path):
+        os.rename(path, new_path)
+        print(f"Renaming {path} -> {new_path}")
+        updated += 1
+    else:
+        unchanged += 1
+
+    return updated, unchanged
+
+
+def update_folder(path: str) -> Tuple[int, int]:
+    n_updated, n_unchanged = 0, 0
+
+    for file_path in absolute_file_paths(path):
+        updated, unchanged = update_file(file_path)
+        n_updated += updated
+        n_unchanged += unchanged
+
+    return n_updated, n_unchanged
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Script used to update photo(s) filenames according to EXIF metadata.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument("path", help="Path to file or folder")
+    args = parser.parse_args()
+    path = vars(args)["path"]
+
+    n_updated, n_unchanged = (
+        update_folder(path) if os.path.isdir(path) else update_file(path)
+    )
+
+    print(
+        f"{n_updated} filename(s) updated, {n_unchanged} filename(s) unchanged ({n_updated + n_unchanged} in total)."
+    )
+
+
+if __name__ == "__main__":
+    main()
