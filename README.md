@@ -35,6 +35,7 @@
 
 - make sleep work well
     * work while sleeping and drains battery
+- rm move to trash folder but not delete
 - complete deletion [script](./config/nsxiv/exec/key-handler) of marked photos in nsxiv
 - add update-pc script for symlinking new files from repo to host machine
 - find font pack with icons
@@ -53,4 +54,4 @@
 ## Known issues
 
 - tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
-- nsxiv images in thumbnail mode are rotated according to `EXIF:Orientation` tag but they shouldn't
+- nsxiv images in thumbnail mode and .HEIC are rotated according to `EXIF:Orientation` tag but they shouldn't
