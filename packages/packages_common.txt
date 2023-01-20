@@ -16,3 +16,4 @@ ncdu
 man
 the_silver_searcher
 htop
+xorg-xkill
