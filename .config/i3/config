@@ -30,12 +30,13 @@ bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
 bindsym $mod+c       exec --no-startup-id $BROWSER --new-window
 bindsym $mod+v       exec --no-startup-id telegram-desktop
 bindsym $mod+o       exec --no-startup-id flameshot gui
-bindsym $mod+i       exec --no-startup-id $TERMINAL -e calc
+# bindsym $mod+i       exec --no-startup-id $TERMINAL -e venv && ipython
 bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-18'
 bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-18'
 bindsym $mod+u       exec --no-startup-id udiskie-umount -a
 bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
 bindsym control+space   exec --no-startup-id dunstctl close
+bindsym $mod+y exec nmcli c show --active | grep yandex && nmcli c down yandex || nmcli c up yandex
 
 ###############################################################
 # Basic bindings.
@@ -131,7 +132,7 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+n focus mode_toggle
 
 # toggle focus tiling / floating
-bindsym $mod+y sticky toggle
+# bindsym $mod+y sticky toggle
 
 ###############################################################
 # Workspace bindings.
