@@ -47,7 +47,6 @@ Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
 Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
 Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
-" Plug 'tomlion/vim-solidity'
 Plug 'TovarishFin/vim-solidity'
 
 " Editing.
@@ -55,16 +54,27 @@ Plug 'TovarishFin/vim-solidity'
 Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
+Plug 'davidhalter/jedi-vim'               " Python autocompletion.
+Plug 'ervandew/supertab'                  " Autocompletion on tab
 
 " Etc.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf' } " In case of conflicts with local fzf installation.
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " Nvim in browser.
 
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 
 call plug#end()
+
+let g:firenvim_config = { 
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'takeover': 'never'
+        \ },
+    \ }
+\ }
 
 " Plugins settings.
 " let g:loaded_youcompleteme = 1
@@ -102,14 +112,19 @@ let g:airline#extensions#whitespace#enabled = 0        " disable trailing whites
 let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
 autocmd BufNewFile,BufRead *.hql set syntax=sql
 
+
 " Plugin remaps.
 " nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
 nnoremap <Leader>n <plug>NERDTreeTabsToggle<CR>
 nnoremap g[ [pfzz                                 " Go to next function with python textobj plugin.
 nnoremap g] ]pfzz                                 " Go to previous function with python textobj plugin.
-nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
-nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
-nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
+" nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
+" nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
+" nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
+
+let g:jedi#completions_command = "<C-p>"
+let g:jedi#usages_command = "<leader>u"
+let g:SuperTabDefaultCompletionType = "context" " Trigger jedi vim completion
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
@@ -123,6 +138,7 @@ map <S-h> <C-w>h
 map <S-j> <C-w>j
 map <S-k> <C-w>k
 map <S-l> <C-w>l
+
 
 " Remaps in normal mode.
 nmap j gj
