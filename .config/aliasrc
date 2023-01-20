@@ -9,6 +9,7 @@ alias ka='killall'
 alias pi='sudo pacman -S'
 alias vim='nvim'
 alias ta='tmux attach'
+alias s='sudo systemctl'
 
 # Git.
 alias ga='git add'
