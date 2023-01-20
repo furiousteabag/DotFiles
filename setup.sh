@@ -60,6 +60,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.local/share/zs
 # vim plugin manager
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+pip3 install neovim
 
 # ranger devicons
 git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
