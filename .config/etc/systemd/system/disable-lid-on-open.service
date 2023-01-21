@@ -1,5 +1,5 @@
 [Unit]
-Description=Echo LID to Wakeup
+Description=Disable waking up from suspend when lid is opened
 
 [Service]
 User=root
