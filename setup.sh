@@ -43,6 +43,10 @@ if [ "$SERVER" == 0 ]; then
     cp -rs $PWD/.xinitrc ~/
     sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
     sudo cp -rs $PWD/.config/etc /
+
+    # disable lid on open
+    sudo systemctl daemon-reload
+    sudo systemctl enable --now disable-lid-on-open
 fi
 
 # zsh with plugins
