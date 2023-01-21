@@ -2,8 +2,6 @@
 Description=Disable waking up from suspend when lid is opened
 
 [Service]
-User=root
-Group=root
 Type=oneshot
 ExecStart=/bin/sh -c "echo ' LID' > /proc/acpi/wakeup"
 
