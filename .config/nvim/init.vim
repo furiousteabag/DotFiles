@@ -183,6 +183,9 @@ noremap <leader>0 :tablast<cr>
 noremap <leader>j :tabm -1<cr>
 noremap <leader>k :tabm +1<cr>
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo -A tee > /dev/null %
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
