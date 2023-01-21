@@ -15,6 +15,7 @@
 4) Install vim plugins:
     ```
     :PlugInstall
+    :Copilot auth
     ```
 5) Install tmux plugins:
     ```
@@ -55,3 +56,13 @@
 
 - tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
 - nsxiv images in thumbnail mode and .HEIC are rotated according to `EXIF:Orientation` tag but they shouldn't
+    * maybe because of `imagemagick` package required by `betterlockscreen`
+- suspend vs hibernate
+    * suspend seems to drain a lot of battery, but it might be because of lid opens in backpack and laptop turns on
+        - investigate the effect of disabling waking on lid open
+    * hibernate
+        - doesn't work by default
+        - general instruction https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation
+        - create swap for hibernation https://wiki.archlinux.org/title/swap#Swap_file_creation (maybe not needed)
+        - add kernel parameters https://wiki.archlinux.org/title/Kernel_parameters#systemd-boot
+        - https://bbs.archlinux.org/viewtopic.php?id=259382 in case "Not enough swap space for hibernation"
