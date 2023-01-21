@@ -1,0 +1,11 @@
+[Unit]
+Description=Echo LID to Wakeup
+
+[Service]
+User=root
+Group=root
+Type=oneshot
+ExecStart=/bin/sh -c "echo ' LID' > /proc/acpi/wakeup"
+
+[Install]
+WantedBy=multi-user.target
