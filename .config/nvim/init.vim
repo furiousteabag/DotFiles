@@ -122,9 +122,12 @@ nnoremap g] ]pfzz                                 " Go to previous function with
 " nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
 " nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
 
+nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>a :Ag<CR>
 let g:jedi#completions_command = "<C-p>"
 let g:jedi#usages_command = "<leader>u"
 let g:SuperTabDefaultCompletionType = "context" " Trigger jedi vim completion
+let g:jedi#documentation_command = "<leader>q"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
@@ -135,8 +138,8 @@ let g:SuperTabDefaultCompletionType = "context" " Trigger jedi vim completion
 " map <C-k> <C-w>k
 " map <C-l> <C-w>l
 map <S-h> <C-w>h
-map <S-j> <C-w>j
-map <S-k> <C-w>k
+" map <S-j> <C-w>j
+" map <S-k> <C-w>k
 map <S-l> <C-w>l
 
 
