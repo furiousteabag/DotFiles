@@ -1,0 +1,5 @@
+#!/bin/bash
+
+shopt -s expand_aliases
+source $XDG_CONFIG_HOME/aliasrc
+venv && ipython

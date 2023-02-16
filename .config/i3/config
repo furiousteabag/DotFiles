@@ -8,6 +8,7 @@ set $mod Mod4
 floating_modifier $mod
 font pango:Source Code Pro 12
 for_window [class="^.*"] border pixel 2
+for_window [title="lnk"] floating enable, resize set 80 ppt 80 ppt, move position center
 gaps inner 0
 gaps outer 0
 
@@ -26,17 +27,19 @@ bar {
 ###############################################################
 # Programs bindings.
 ###############################################################
-bindsym $mod+r       exec --no-startup-id $TERMINAL -e $FILE_MANAGER
-bindsym $mod+c       exec --no-startup-id $BROWSER --new-window
-bindsym $mod+v       exec --no-startup-id telegram-desktop
-bindsym $mod+o       exec --no-startup-id flameshot gui
-# bindsym $mod+i       exec --no-startup-id $TERMINAL -e venv && ipython
-bindsym $mod+d       exec --no-startup-id dmenu_run -fn 'Source Code Pro-18'
-bindsym $mod+p       exec --no-startup-id passmenu -fn 'Source Code Pro-18'
-bindsym $mod+u       exec --no-startup-id udiskie-umount -a
-bindsym $mod+Shift+m exec --no-startup-id udiskie-mount -a
-bindsym control+space   exec --no-startup-id dunstctl close
-bindsym $mod+y exec nmcli c show --active | grep yandex && nmcli c down yandex || nmcli c up yandex
+bindsym $mod+r        exec --no-startup-id $TERMINAL -e $FILE_MANAGER
+bindsym $mod+c        exec --no-startup-id $BROWSER --new-window
+bindsym $mod+v        exec --no-startup-id telegram-desktop
+bindsym $mod+o        exec --no-startup-id flameshot gui
+bindsym $mod+i        exec --no-startup-id $TERMINAL -e calc
+bindsym $mod+d        exec --no-startup-id dmenu_run -l 15 -fn 'Source Code Pro-18'
+bindsym $mod+p        exec --no-startup-id passmenu -l 15 -fn 'Source Code Pro-18'
+bindsym $mod+u        exec --no-startup-id udiskie-umount -a
+bindsym control+space exec --no-startup-id dunstctl close
+bindsym $mod+Shift+m  exec --no-startup-id udiskie-mount -a
+bindsym $mod+Shift+u  exec --no-startup-id $TERMINAL -e lnk insert $(xclip -selection clipboard -out)
+bindsym $mod+Shift+y  exec --no-startup-id $TERMINAL -e lnk find
+bindsym $mod+y        exec nmcli c show --active | grep yandex && nmcli c down yandex || nmcli c up yandex
 
 ###############################################################
 # Basic bindings.
