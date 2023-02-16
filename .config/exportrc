@@ -50,3 +50,8 @@ export SUDO_ASKPASS="$HOME"/.local/bin/dpass # dpass is a script that uses dmenu
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+# Skotty.
+export SSH_AGENT_LAUNCHER='skotty'
+export SSH_AUTH_SOCK="/home/furiousteabag/.skotty/sock/default.sock" 
+export SSH_AGENT_PID=324490

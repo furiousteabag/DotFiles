@@ -18,6 +18,7 @@ alias gp='git push -u origin'
 alias gs='git status'
 alias gd='git diff'
 alias gr='git rm'
+alias gl='git log'
 
 # Arc.
 alias aa='arc add'
@@ -26,6 +27,7 @@ alias ap='arc push'
 alias as='arc status'
 alias ad='arc diff'
 alias ar='arc rm'
+alias al='arc log'
 
 # Latex.
 alias pmp='pandoc --pdf-engine=pdflatex -V lang=ru'
