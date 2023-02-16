@@ -8,7 +8,7 @@ set $mod Mod4
 floating_modifier $mod
 font pango:Source Code Pro 12
 for_window [class="^.*"] border pixel 2
-for_window [title="lnk"] floating enable, resize set 80 ppt 80 ppt, move position center
+for_window [title="^lnk$"] floating enable, resize set 80 ppt 80 ppt, move position center
 gaps inner 0
 gaps outer 0
 
