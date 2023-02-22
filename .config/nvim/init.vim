@@ -41,6 +41,7 @@ Plug 'vim-airline/vim-airline'            " Status line.
 Plug 'junegunn/goyo.vim'                  " Zen mode.
 Plug 'edkolev/tmuxline.vim'               " Make tmux look like airline.
 Plug 'Yggdroot/indentLine'                " Indent line.
+Plug 'tpope/vim-fugitive'                 " Git wrapper (used in airline).
 
 " Color changes.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
@@ -48,6 +49,7 @@ Plug 'gko/vim-coloresque'                 " Highlight color text with it's color
 Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
 Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 Plug 'TovarishFin/vim-solidity'
+Plug 'tomasiser/vim-code-dark'            " VSCode dark theme.
 
 " Editing.
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
@@ -67,6 +69,8 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " Nvim in brow
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 
 call plug#end()
+
+colorscheme codedark
 
 let g:firenvim_config = { 
     \ 'localSettings': {
@@ -103,6 +107,18 @@ let g:airline#extensions#tabline#show_splits = 0       " disables the buffer nam
 let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers
 let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
 let g:airline#extensions#whitespace#enabled = 0        " disable trailing whitespace badge on the bottom left
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.branch = ''
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.colnr = ' :'
+
+" disable git for airline
+let g:airline#extensions#branch#enabled = 0
 
 " " Exit Vim if NERDTree is the only window left.
 " autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
