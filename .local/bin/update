@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# This script is used to update the system
+# by pooling the actual dotfiles and scripts
+
+PREFIX=$HOME/DotFiles
+
+git -C $PREFIX pull
+
+cp -rsf $PREFIX/.config/ $HOME/
+cp -rsf $PREFIX/.local/ $HOME/
