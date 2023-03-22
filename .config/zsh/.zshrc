@@ -72,3 +72,4 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 ###############################################################
 source ~/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Syntax highlight.
 source ~/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh         # Autosuggestions.
+source ~/.local/share/zsh/plugins/zsh-fzf-history-search/zsh-fzf-history-search.zsh   # History search

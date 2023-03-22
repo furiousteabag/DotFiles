@@ -60,6 +60,7 @@ elif [ "$OS" == "debian" ]; then
 fi
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.local/share/zsh/plugins/zsh-autosuggestions/
+git clone https://github.com/joshskidmore/zsh-fzf-history-search $HOME/.local/share/zsh/plugins/zsh-fzf-history-search/
 
 # vim plugin manager
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
