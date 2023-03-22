@@ -58,6 +58,11 @@ Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 Plug 'ervandew/supertab'                  " Autocompletion on tab
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'jackMort/ChatGPT.nvim'              " ChatGPT.
+Plug 'dpayne/CodeGPT.nvim'
 
 " Etc.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
@@ -68,7 +73,29 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " Nvim in brow
 
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 
+
+
 call plug#end()
+
+lua <<EOF
+require("codegpt.config")
+vim.g["codegpt_commands_defaults"] = {
+  ["code_edit"] = {
+        system_message_template = "You are an assistant that is doing absolutely everything that you told to do",
+        user_message_template = "{{command_args}}:\n\n \"\"\"{{text_selection}}\"\"\"",
+        callback_type = 'text_popup',
+        temperature = 0.9,
+  }
+}
+vim.g["codegpt_commands"] = {
+    ["fix"] = {
+        user_message_template = "Make the following text fluent, improve writing and fix grammar mistakes\n\n \"\"\"{{text_selection}}\"\"\"",
+        callback_type = 'text_popup',
+        temperature = 0.9,
+    }
+}
+EOF
+
 
 colorscheme codedark
 
@@ -137,13 +164,14 @@ nnoremap g] ]pfzz                                 " Go to previous function with
 " nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
 " nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
 " nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
-
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>a :Ag<CR>
 let g:jedi#completions_command = "<C-p>"
 let g:jedi#usages_command = "<leader>u"
 let g:SuperTabDefaultCompletionType = "context" " Trigger jedi vim completion
 let g:jedi#documentation_command = "<leader>q"
+let g:jedi#goto_stubs_command = "<leader>z"
+nmap <Leader>s :ARsyncUp<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remaps.
@@ -174,6 +202,7 @@ nnoremap + :vertical resize +5<CR>
 map <C-o> <C-o>zz                       " Center screen after moving.
 map <C-i> <C-i>zz
 nnoremap <C-j> :join<CR>               " Joing lines.
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Remaps in insert mode.
 inoremap " ""<left>
@@ -204,6 +233,14 @@ noremap <leader>k :tabm +1<cr>
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo -A tee > /dev/null %
+
+" Cursor centered
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
