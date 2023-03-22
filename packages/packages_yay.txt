@@ -9,3 +9,4 @@ imlib2-heic-git
 tremc
 nsxiv
 dragon-drop
+downgrade
