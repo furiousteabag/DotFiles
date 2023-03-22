@@ -39,6 +39,8 @@ export KAGGLE_CONFIG_DIR="$XDG_CONFIG_HOME"/kaggle
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 export IPFS_PATH="$XDG_DATA_HOME"/ipfs
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
 # Programs settings.
 export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
