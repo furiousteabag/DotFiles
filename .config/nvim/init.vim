@@ -45,7 +45,7 @@ Plug 'tpope/vim-fugitive'                 " Git wrapper (used in airline).
 
 " Color changes.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
-Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
+" Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
 Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 Plug 'TovarishFin/vim-solidity'
@@ -61,7 +61,6 @@ Plug 'ervandew/supertab'                  " Autocompletion on tab
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'jackMort/ChatGPT.nvim'              " ChatGPT.
 Plug 'dpayne/CodeGPT.nvim'
 
 " Etc.
@@ -69,7 +68,6 @@ Plug 'dpayne/CodeGPT.nvim'
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf' } " In case of conflicts with local fzf installation.
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " Nvim in browser.
 
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 
