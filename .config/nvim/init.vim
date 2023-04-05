@@ -111,7 +111,7 @@ let g:indentLine_enabled = 0
 
 let g:oscyank_term = 'default' " fix copy from tmux
 let g:oscyank_silent = v:true  " do not show copy msg
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
 
 
 let g:mkdp_browser = 'brave'                  " specify browser to open preview page
