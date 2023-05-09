@@ -46,7 +46,7 @@ interval=30
 [separator]
 
 [time]
-command=date '+%d.%m.%Y %H:%M'
+command=date +'%a, %b %d, %Y %l:%M %p'
 interval=5
 
 [separator]
