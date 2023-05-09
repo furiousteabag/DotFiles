@@ -39,9 +39,13 @@ elif [ "$OS" == "debian" ] && [ "$ROOT" == 0 ]; then
         nix-env -i $package
     done < ./packages/packages_common.txt
 elif [ "$OS" == "debian" ] && [ "$ROOT" == 1 ]; then
-    sudo apt install -y $(cat ./packages/packages_common.txt)
+    while read package; do
+        sudo apt install -y $package
+    done < ./packages/packages_common.txt
     if [ "$SERVER" == 0 ]; then
-        sudo apt install -y $(cat ./packages/packages_desktop.txt)
+        while read package; do
+            sudo apt install -y $package
+        done < ./packages/packages_desktop.txt
     fi
 fi
 
