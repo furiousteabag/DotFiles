@@ -5,8 +5,8 @@
 ###############################################################
 # History.
 HISTFILE="$HOME/.local/share/zsh/.histfile"
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 # DISABLE_MAGIC_FUNCTIONS=true
 
 bindkey -v                                       # Enable vi mode.
@@ -26,6 +26,9 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
+
+eval $(ssh-agent) >/dev/null # Start ssh-agent (if not already running)
+ssh-add -k 2>/dev/null # Add ssh keys.
 
 ###############################################################
 # Sourcing configs.
