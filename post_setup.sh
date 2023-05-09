@@ -26,20 +26,22 @@ mkdir -p $(jupyter --data-dir)/nbextensions
 
 # generate ssh key
 ssh-keygen
-eval "$(ssh-agent)"
-ssh-add ~/.ssh/id_rsa
+# eval "$(ssh-agent)"
+# ssh-add ~/.ssh/id_rsa
 # add this new key to github
 
 # generate gpg key and clone password store
-mkdir -p "$XDG_DATA_HOME"/gnupg
-gpg --full-generate-key
-chown -R $(whoami) $GNUPGHOME
-sudo chmod 600 $GNUPGHOME/*
-chmod 700 $GNUPGHOME
-gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys furiousteabag@gmail.com
-gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys ru.alexander.smirnov@gmail.com
-gpg --edit-key furiousteabag@gmail.com trust
-gpg --edit-key ru.alexander.smirnov@gmail.com trust
+
+# mkdir -p "$XDG_DATA_HOME"/gnupg
+# gpg --full-generate-key
+# chown -R $(whoami) $GNUPGHOME
+# sudo chmod 600 $GNUPGHOME/*
+# chmod 700 $GNUPGHOME
+# gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys furiousteabag@gmail.com
+# gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys ru.alexander.smirnov@gmail.com
+# gpg --edit-key furiousteabag@gmail.com trust
+# gpg --edit-key ru.alexander.smirnov@gmail.com trust
+
 # gpg --export your_address@example.net | curl -T - https://keys.openpgp.org
 # on host machine: 
 #   gpg --auto-key-locate hkps://keys.openpgp.org --locate-keys user@example.net
