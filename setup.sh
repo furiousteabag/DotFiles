@@ -2,6 +2,7 @@
 
 read -p "OS [arch / debian]: " OS
 read -p "Setup [desktop (0) / server (1)]: " SERVER
+read -p "Have root [No (0) / Yes (1)]: " ROOT
 
 # disable useless daemons
 if [ "$OS" == "arch" ] && [ "$SERVER" == 0 ]; then
@@ -15,11 +16,15 @@ if [ "$OS" == "arch" ]; then
     pacman -S --needed git base-devel
     git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
     (cd $HOME/Programs/yay-bin && makepkg -si)
-elif [ "$OS" == "debian" ]; then
+# debian no root
+elif [ "$OS" == "debian" ] && [ "$ROOT" == 0 ]; then
     mkdir -p $HOME/Programs/nix
     (cd $HOME/Programs/nix && sh <(curl -L https://nixos.org/nix/install) --no-daemon)
     . $HOME/.nix-profile/etc/profile.d/nix.sh
     echo '[[ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]] && . $HOME/.nix-profile/etc/profile.d/nix.sh' >> .zprofile
+elif [ "$OS" == "debian" ] && [ "$ROOT" == 1 ]; then
+    sudo apt update
+    sudo apt upgrade
 fi
 
 # packages installation
@@ -29,10 +34,15 @@ if [ "$OS" == "arch" ]; then
         sudo pacman -S - < ./packages/packages_desktop.txt
         yay -S - < ./packages/packages_yay.txt
     fi
-elif [ "$OS" == "debian" ]; then
+elif [ "$OS" == "debian" ] && [ "$ROOT" == 0 ]; then
     while read package; do
         nix-env -i $package
     done < ./packages/packages_common.txt
+elif [ "$OS" == "debian" ] && [ "$ROOT" == 1 ]; then
+    sudo apt install -y $(cat ./packages/packages_common.txt)
+    if [ "$SERVER" == 0 ]; then
+        sudo apt install -y $(cat ./packages/packages_desktop.txt)
+    fi
 fi
 
 # symlink dotfiles
@@ -52,11 +62,12 @@ fi
 # zsh with plugins
 if [ "$OS" == "arch" ]; then
     chsh -s $(which zsh)
-elif [ "$OS" == "debian" ]; then
+elif [ "$OS" == "debian" ] && [ "$ROOT" == 0 ]; then
     [[ -e $HOME/.profile ]] && mv $HOME/.profile $HOME/.profile_copy
     [[ -e $HOME/.bash_profile ]] && mv $HOME/.bash_profile $HOME/.bash_profile_copy
     echo 'export SHELL=`which zsh`; [ -z "$ZSH_VERSION" ] && exec "$SHELL" -l' > $HOME/.profile
-
+elif [ "$OS" == "debian" ] && [ "$ROOT" == 1 ]; then
+    sudo chsh -s $(which zsh) $USER
 fi
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/
 git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.local/share/zsh/plugins/zsh-autosuggestions/
