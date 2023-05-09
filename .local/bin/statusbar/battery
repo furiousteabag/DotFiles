@@ -93,6 +93,7 @@ else:
         return "#FFFFFF"
 
     form =  '<span color="{}">{}%</span>'
+    fulltext += " "
     fulltext += form.format(color(percentleft), percentleft)
 #    fulltext += timeleft
 
