@@ -2,15 +2,17 @@
 #
 # Connecting and disconnecting vpn
 
-TUN_LOCATION="/lib/modules/$(uname -r)/kernel/drivers/net/tun.ko.zst"
-CONFIG="$XDG_DATA_HOME/vpn/Alex.ovpn"
+# TUN_LOCATION="/lib/modules/$(uname -r)/kernel/drivers/net/tun.ko.zst"
+CONFIG="$XDG_DATA_HOME/vpn/alex-yandex-pc.ovpn"
 
-if [ $1 = "on" ]; then
-    sudo insmod $TUN_LOCATION
+if [ "$1" = "on" ]; then
+    # sudo insmod $TUN_LOCATION
+    [[ $(lsmod | grep tun) ]] || sudo modprobe tun
     sudo openvpn --config $CONFIG --daemon
-elif [ $1 = "off" ]; then
+elif [ "$1" = "off" ]; then
     sudo killall openvpn
-    sudo rmmod tun
+    # sudo modprobe -r tun
+    # sudo rmmod tun
 else
-    echo "possible args: on / off / status"
+    echo "possible args: on / off"
 fi
