@@ -14,6 +14,7 @@ find ~/ -maxdepth 1 -name .xsession\* -exec rm {} \;
 sed -i '/^\# >>> conda initialize >>>$/Q' $HOME/DotFiles/.config/zsh/.zshrc
 sed -i '${/^$/d}' $HOME/DotFiles/.config/zsh/.zshrc
 rm -rf $HOME/.conda
+source $HOME/.local/share/conda
 pip install jupyter jupyter_contrib_nbextensions
 jupyter contrib nbextension install --user
 jupyter nbextensions_configurator enable --user
