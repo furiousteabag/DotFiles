@@ -58,10 +58,6 @@ Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 Plug 'ervandew/supertab'                  " Autocompletion on tab
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'dpayne/CodeGPT.nvim'
 
 " Etc.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
