@@ -47,6 +47,7 @@ export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
 export PROMPT_COMMAND="pwd > /tmp/whereami" # Saving current dir to file.
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 export SUDO_ASKPASS="$HOME"/.local/bin/dpass # dpass is a script that uses dmenu to ask for password.
+export TERM=xterm-256color
 
 # Git prompt settings.
 export GIT_PS1_SHOWDIRTYSTATE=1
