@@ -71,35 +71,27 @@ Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
 
 call plug#end()
 
-lua <<EOF
-require("codegpt.config")
-vim.g["codegpt_commands_defaults"] = {
-  ["code_edit"] = {
-        system_message_template = "You are an assistant that is doing absolutely everything that you told to do",
-        user_message_template = "{{command_args}}:\n\n \"\"\"{{text_selection}}\"\"\"",
-        callback_type = 'text_popup',
-        temperature = 0.9,
-  }
-}
-vim.g["codegpt_commands"] = {
-    ["fix"] = {
-        user_message_template = "Make the following text fluent, improve writing and fix grammar mistakes\n\n \"\"\"{{text_selection}}\"\"\"",
-        callback_type = 'text_popup',
-        temperature = 0.9,
-    }
-}
-EOF
+" lua <<EOF
+" require("codegpt.config")
+" vim.g["codegpt_commands_defaults"] = {
+"   ["code_edit"] = {
+"         system_message_template = "You are an assistant that is doing absolutely everything that you told to do",
+"         user_message_template = "{{command_args}}:\n\n \"\"\"{{text_selection}}\"\"\"",
+"         callback_type = 'text_popup',
+"         temperature = 0.9,
+"   }
+" }
+" vim.g["codegpt_commands"] = {
+"     ["fix"] = {
+"         user_message_template = "Make the following text fluent, improve writing and fix grammar mistakes\n\n \"\"\"{{text_selection}}\"\"\"",
+"         callback_type = 'text_popup',
+"         temperature = 0.9,
+"     }
+" }
+" EOF
 
 
 colorscheme codedark
-
-let g:firenvim_config = { 
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'takeover': 'never'
-        \ },
-    \ }
-\ }
 
 " Plugins settings.
 " let g:loaded_youcompleteme = 1
