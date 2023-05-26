@@ -26,3 +26,4 @@ sxiv
 syncthing
 perl-image-exiftool
 transmission-cli
+tlp
