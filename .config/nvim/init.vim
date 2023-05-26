@@ -62,6 +62,7 @@ Plug 'ervandew/supertab'                  " Autocompletion on tab
 " Etc.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
+Plug 'prabirshrestha/async.vim'           " arsync dependency
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf' } " In case of conflicts with local fzf installation.
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
 

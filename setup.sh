@@ -32,9 +32,7 @@ if [ "$OS" == "arch" ]; then
     sudo pacman -S - < ./packages/packages_common.txt
     if [ "$SERVER" == 0 ]; then
         sudo pacman -S - < ./packages/packages_desktop.txt
-        while read package; do
-            yay -S $package
-        done < ./packages/packages_yay.txt
+        yay --answerdiff N --answerclean N -S - < ./packages/packages_aur.txt
     fi
 elif [ "$OS" == "debian" ] && [ "$ROOT" == 0 ]; then
     while read package; do
