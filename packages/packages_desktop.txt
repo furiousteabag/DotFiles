@@ -12,7 +12,7 @@ pulsemixer
 gtk2
 nm-connection-editor
 adobe-source-code-pro-fonts
-ttf-nerd-fonts-symbols-2048-em-mono
+ttf-sourcecodepro-nerd
 zathura
 zathura-pdf-mupdf
 xclip
@@ -20,7 +20,7 @@ mpv
 blueberry
 autorandr
 openvpn
-nm-applet
+network-manager-applet
 pass
 sxiv
 syncthing
