@@ -32,7 +32,7 @@ markup=pango
 
 [brightness]
 command=brightness
-label=
+label= 
 interval=once
 signal=12
 
