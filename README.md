@@ -57,6 +57,7 @@
 - tmux is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
 - nsxiv images in thumbnail mode and .HEIC are rotated according to `EXIF:Orientation` tag but they shouldn't
     * maybe because of `imagemagick` package required by `betterlockscreen`
+- for virtualbox to function properly, add `ibt=off` to kernel parameters
 - suspend vs hibernate
     * suspend seems to drain a lot of battery, but it might be because of lid opens in backpack and laptop turns on
         - investigate the effect of disabling waking on lid open
