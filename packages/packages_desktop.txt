@@ -23,7 +23,14 @@ openvpn
 network-manager-applet
 pass
 sxiv
+nsxiv
 syncthing
 perl-image-exiftool
 transmission-cli
 tlp
+noto-fonts-emoji
+p7zip
+avahi
+cups
+cups-pdf
+nss-mdns
