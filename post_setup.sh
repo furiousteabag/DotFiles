@@ -25,7 +25,7 @@ mkdir -p $(jupyter --data-dir)/nbextensions
 # mkvirtualenv base
 
 # generate ssh key
-ssh-keygen
+# ssh-keygen
 # eval "$(ssh-agent)"
 # ssh-add ~/.ssh/id_rsa
 # add this new key to github
