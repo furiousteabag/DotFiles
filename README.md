@@ -58,6 +58,11 @@
 - nsxiv images in thumbnail mode and .HEIC are rotated according to `EXIF:Orientation` tag but they shouldn't
     * maybe because of `imagemagick` package required by `betterlockscreen`
 - for virtualbox to function properly, add `ibt=off` to kernel parameters
+    * to add shared folder, install `virtualbox-guest-iso` (or `virtualbox-guest-utils`), run `Devices -> Insert Guest Additions CD Image` and `My Computer -> CD Drive (VirtualBox Guest Additions) -> VBoxWindowsAdditions.exe.`
+    * add user to `vboxusers` group to detect USB devices
+- to connect MTP devices (e.g. Garmin), use [libmtp](https://wiki.archlinux.org/title/Media_Transfer_Protocol#libmtp)
+- to make printer work
+    * https://wiki.archlinux.org/title/Avahi#Hostname_resolution
 - suspend vs hibernate
     * suspend seems to drain a lot of battery, but it might be because of lid opens in backpack and laptop turns on
         - investigate the effect of disabling waking on lid open
@@ -67,3 +72,14 @@
         - create swap for hibernation https://wiki.archlinux.org/title/swap#Swap_file_creation (maybe not needed)
         - add kernel parameters https://wiki.archlinux.org/title/Kernel_parameters#systemd-boot
         - https://bbs.archlinux.org/viewtopic.php?id=259382 in case "Not enough swap space for hibernation"
+- to connect meshtastic
+    * install driver https://aur.archlinux.org/packages/ch343ser-dkms-git (maybe would've worked w/o it) & reboot
+    * `sudo pacman -S esptool`
+    * `ll /dev | grep USB`
+    * `esptool.py -p /dev/ttyCH343USB1 chip_id`
+    * Download release https://github.com/meshtastic/firmware/releases
+    * `./device-install.sh -p /dev/ttyCH343USB1 -f firmware-tbeam-2.1.19.eb7025f.bin`
+    * `meshtastic --port /dev/ttyCH343USB1 --info`
+    * `meshtastic --port /dev/ttyCH343USB1 --set lora.region 'RU'`
+- to set up wifi hotspot
+    * https://wiki.archlinux.org/title/software_access_point#linux-wifi-hotspot
