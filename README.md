@@ -60,6 +60,7 @@
 - for virtualbox to function properly, add `ibt=off` to kernel parameters
     * to add shared folder, install `virtualbox-guest-iso` (or `virtualbox-guest-utils`), run `Devices -> Insert Guest Additions CD Image` and `My Computer -> CD Drive (VirtualBox Guest Additions) -> VBoxWindowsAdditions.exe.`
     * add user to `vboxusers` group to detect USB devices
+    * shared clipboard (requires guest additions): highlight the Guest VBox in the VirtualBox console, open General -> Advanced. Here you can choose between various Shared Clipboard settings: Disabled, Guest to Host, Host to Guest or Bidirectional
 - to connect MTP devices (e.g. Garmin), use [libmtp](https://wiki.archlinux.org/title/Media_Transfer_Protocol#libmtp)
 - to make printer work
     * https://wiki.archlinux.org/title/Avahi#Hostname_resolution
@@ -81,5 +82,10 @@
     * `./device-install.sh -p /dev/ttyCH343USB1 -f firmware-tbeam-2.1.19.eb7025f.bin`
     * `meshtastic --port /dev/ttyCH343USB1 --info`
     * `meshtastic --port /dev/ttyCH343USB1 --set lora.region 'RU'`
-- to set up wifi hotspot
+- to set up wifi hotspot (shares VPN as well)
     * https://wiki.archlinux.org/title/software_access_point#linux-wifi-hotspot
+- to download/upload config to baofeng
+    * install drivers: silabs.com/developers/usb-to-uart-bridge-vcp-drivers?tab=downloads
+        - https://xn--80abhh4be6b.xn--p1ai/ivstrukcii-i-soft/drajveri
+    * install software: https://www.baofengradio.com/pages/download
+    * reboot
