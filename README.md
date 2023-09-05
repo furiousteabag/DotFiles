@@ -89,3 +89,4 @@
         - https://xn--80abhh4be6b.xn--p1ai/ivstrukcii-i-soft/drajveri
     * install software: https://www.baofengradio.com/pages/download
     * reboot
+- to fix screen tearing enable vsync with glx backend in picom
