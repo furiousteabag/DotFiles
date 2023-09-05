@@ -59,6 +59,8 @@ Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 Plug 'ervandew/supertab'                  " Autocompletion on tab
+Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
+Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
 
 " Etc.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
