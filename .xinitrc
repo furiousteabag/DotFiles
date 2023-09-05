@@ -11,15 +11,11 @@ dunst &           # Notification manager.
 udiskie -a -n &   # Automount manager.
 flameshot &       # Screenshot tool.
 nm-applet &       # Network manager icon.
-# xautolock -corners 00+- -time 10 -locker "betterlockscreen -l" & # Screen lock.
-# xautolock -time 7 -locker "systemctl suspend" &
-# powertop --auto-tune &   # Power management.
 
 ########################################
 ## Presets.
 ########################################
-# setkb                                           # Set keyboard layout.
-setbg                                           # Setting background.
+setbg             # Setting background.
 
 #######################################
 # Starting session.
