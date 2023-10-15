@@ -1,6 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General.
+"                      General Settings                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set encoding=UTF-8         " Set UTF8 as standard encoding and en_US as the standard language.
 set nocompatible           " Disable vi compatible mode.
 set hidden                 " Buffer option
@@ -9,17 +10,27 @@ set ignorecase             " Case insensetive search.
 filetype plugin on         " Sets different options for different filetypes.
 let mapleader = "\<Space>" " Setting leader key.
 set shellcmdflag=-ic       " Access aliases from vim shell (act as interactive calls).
-set noswapfile " Disable swap file.
+set noswapfile             " Disable swap file.
+
+" Indentaion rules.
+filetype plugin indent on
+set tabstop=4     " Number of spaces to tab.
+set shiftwidth=4  " Number of spaces inserted for indentation.
+set expandtab     " Insert spaces when tab is pressed.
+" set smarttab      " Inserts blanks according to rules.
+" set smartindent   " Autoindenting when starting a new line.
 
 " Edit text even if in russian layout.
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-" Folder vim code templates.
-let $TEMPLATES = "~/.config/nvim/templates/"
+" Disable autocomment on next line.
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins.
+"                   Plugins Declaration                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Motions.
@@ -46,34 +57,95 @@ Plug 'wfxr/minimap.vim'                   " Minimap.
 
 " Color changes.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
-" Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
-Plug 'mboughaba/i3config.vim'             " Coloring i3 config.
 Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
-Plug 'TovarishFin/vim-solidity'
 Plug 'tomasiser/vim-code-dark'            " VSCode dark theme.
+Plug 'mboughaba/i3config.vim'             " Syntax highlight for i3 config
+Plug 'TovarishFin/vim-solidity'           " Syntax highlight for Solitidity
+Plug 'pangloss/vim-javascript'            " Syntax highlight and indentation for JavaScript
+Plug 'leafgarland/typescript-vim'         " Syntax highlight for TypeScript
+Plug 'maxmellon/vim-jsx-pretty'           " Syntax highlight for JSX
+" Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 
 " Editing.
-" Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
-Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 Plug 'ervandew/supertab'                  " Autocompletion on tab
 Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
 Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Completions engine.
+" Plug 'rhysd/vim-clang-format'             " Prettier cpp.
+" Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 
 " Etc.
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
 Plug 'prabirshrestha/async.vim'           " arsync dependency
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf' } " In case of conflicts with local fzf installation.
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
-
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
-
-
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 
 call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                  Plugins Configuration                      "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver']
+let g:coc_user_config = {
+\   'coc.source.around.enable': v:false,
+\ }
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+
+let g:minimap_highlight_search = 1
+
+let g:indentLine_enabled = 0
+
+let g:oscyank_term = 'default' " fix copy from tmux
+let g:oscyank_silent = v:true  " do not show copy msg
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
+
+let g:mkdp_browser = 'brave' " specify browser for markdown preview page
+
+let g:prettier#autoformat_require_pragma = 0 " do not require vim-prettier annotation to prettify
+
+let NERDTreeShowHidden=1 " show hidden files NerdTree
+
+let b:csv_arrange_align = 'l*' " csv.vim arrange columns to left.
+
+autocmd BufNewFile,BufRead *.hql set syntax=sql " hightlight .hql same as .sql
+
+let g:airline#extensions#tabline#enabled = 1               " enable tabline
+let g:airline#extensions#tabline#formatter = 'unique_tail' " Display only filename.
+let g:airline#extensions#tabline#enabled = 1               " enable airline tabline
+let g:airline#extensions#tabline#show_close_button = 0     " remove 'X' at the end of the tabline
+let g:airline#extensions#tabline#tabs_label = ''           " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
+let g:airline#extensions#tabline#buffers_label = ''        " can put text here like TABS to denote tabs (I clear it so nothing is shown)
+let g:airline#extensions#tabline#show_tab_count = 0        " dont show tab numbers on the right
+let g:airline#extensions#tabline#show_buffers = 0          " dont show buffers in the tabline
+let g:airline#extensions#tabline#tab_min_count = 2         " minimum of 2 tabs needed to display the tabline
+let g:airline#extensions#tabline#show_splits = 0           " disables the buffer name that displays on the right of the tabline
+let g:airline#extensions#tabline#show_tab_nr = 0           " disable tab numbers
+let g:airline#extensions#tabline#show_tab_type = 0         " disables the weird ornage arrow on the tabline
+let g:airline#extensions#whitespace#enabled = 0            " disable trailing whitespace badge on the bottom left
+" let g:airline#extensions#tabline#fnamemod = ':t'           " disable file paths in the tab
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = ''
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.colnr = ' :'
+let g:airline#extensions#branch#enabled = 0 " disable git for airline
+
+" " Exit Vim if NERDTree is the only window left.
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+"     \ quit | endif
+" autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
+
+" let g:python3_host_prog = "/usr/bin/python3"
 
 " lua <<EOF
 " require("codegpt.config")
@@ -95,110 +167,37 @@ call plug#end()
 " EOF
 
 
-colorscheme codedark
-
-" Plugins settings.
-
-let g:minimap_highlight_search = 1
-
-" let g:loaded_youcompleteme = 1
-let g:indentLine_enabled = 0
-
-let g:oscyank_term = 'default' " fix copy from tmux
-let g:oscyank_silent = v:true  " do not show copy msg
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
-
-
-let g:mkdp_browser = 'brave'                  " specify browser to open preview page
-let g:prettier#autoformat_require_pragma = 0  " Do not require vim-prettier annotation to prettify.
-let NERDTreeShowHidden=1                      " Show hidden files NerdTree.
-let g:python3_host_prog = "/usr/bin/python3"
-let g:airline#extensions#tabline#enabled = 1  " Enable tabline
-let g:airline#extensions#tabline#formatter = 'unique_tail' " Display only filename.
-let g:airline#extensions#tabline#enabled = 1           " enable airline tabline
-let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline
-let g:airline#extensions#tabline#tabs_label = ''       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
-let g:airline#extensions#tabline#buffers_label = ''    " can put text here like TABS to denote tabs (I clear it so nothing is shown)
-" let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab
-let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right
-let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline
-let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs needed to display the tabline
-let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline
-let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers
-let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
-let g:airline#extensions#whitespace#enabled = 0        " disable trailing whitespace badge on the bottom left
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline_symbols.branch = ''
-let g:airline_symbols.linenr = ' '
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.colnr = ' :'
-
-" disable git for airline
-let g:airline#extensions#branch#enabled = 0
-
-" " Exit Vim if NERDTree is the only window left.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-"     \ quit | endif
-" autocmd BufWinEnter * silent NERDTreeMirror   " Open the existing NERDTree on each new tab.
-
-let b:csv_arrange_align = 'l*'                " csv.vim arrange columns to left.
-autocmd BufNewFile,BufRead *.hql set syntax=sql
-
-
-" Plugin remaps.
-" nnoremap <leader>n :NERDTreeToggle<CR>            " Toggle NerdTree.
-nnoremap <Leader>n <plug>NERDTreeTabsToggle<CR>
-nnoremap <Leader>m :MinimapToggle<CR>
-nnoremap g[ [pfzz                                 " Go to next function with python textobj plugin.
-nnoremap g] ]pfzz                                 " Go to previous function with python textobj plugin.
-" nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
-" nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
-" nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
-nnoremap <Leader>f :FZF<CR>
-nnoremap <Leader>a :Ag<CR>
-let g:jedi#completions_command = "<C-p>"
-let g:jedi#usages_command = "<leader>u"
-let g:SuperTabDefaultCompletionType = "context" " Trigger jedi vim completion
-let g:jedi#documentation_command = "<leader>q"
-let g:jedi#goto_stubs_command = "<leader>z"
-nmap <Leader>s :ARsyncUp<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remaps.
+"                          Remaps                             "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Shortcutting split navigation, saving a keypress:
-" map <C-h> <C-w>h
-" map <C-j> <C-w>j
-" map <C-k> <C-w>k
-" map <C-l> <C-w>l
+
+nmap <CR> o<Esc>
+
+" shortcutting split navigation
 map <S-h> <C-w>h
-" map <S-j> <C-w>j
-" map <S-k> <C-w>k
 map <S-l> <C-w>l
 
-
-" Remaps in normal mode.
+" visit row split across multiple lines
 nmap j gj
 nmap k gk
-nmap <CR> o<Esc>
-" nmap 1 A<esc>p
-nnoremap <leader>ы :w<CR>               " Save.
+
 nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 nnoremap <leader>l :set lbr!<CR>        " Toggle word splits.
-autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
+
 autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
+
 nnoremap _ :vertical resize -5<CR>      " Resizing shortcuts.
 nnoremap + :vertical resize +5<CR>
-map <C-o> <C-o>zz                       " Center screen after moving.
-map <C-i> <C-i>zz
-nnoremap <C-j> :join<CR>               " Joing lines.
-nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" Remaps in insert mode.
+" center screen after moving.
+map <C-i> <C-i>zz
+" map <C-o> <C-o>zz                       
+
+nnoremap <C-j> :join<CR> " Joing lines.
+
+nnoremap <leader>sv :source $MYVIMRC<CR> " reload config
+
+" brackets completions
 inoremap " ""<left>
 inoremap ' ''<left>
 inoremap ( ()<left>
@@ -208,8 +207,6 @@ inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
 " Tabs switching.
-" nnoremap <C-j> :tabprevious<CR>                                                                            
-" nnoremap <C-k> :tabnext<CR>
 nnoremap <S-j> :tabprevious<CR>                                                                            
 nnoremap <S-k> :tabnext<CR>
 noremap <leader>1 1gt
@@ -236,9 +233,62 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" latex
+let $TEMPLATES = "~/.config/nvim/templates/"
+autocmd filetype tex nmap <leader>b :read $TEMPLATES/latex/frame.tex <CR>
+autocmd filetype tex nmap <leader>i :read $TEMPLATES/latex/itemize.tex <CR>
+autocmd filetype tex nmap <leader>f :read $TEMPLATES/latex/figure.tex <CR>
+autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex files.
+
+""""""""""""""""""""""""""""""
+"         Plugins            "
+""""""""""""""""""""""""""""""
+
+nmap <Leader>s :ARsyncUp<CR>
+
+nnoremap <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+nnoremap <silent> <Leader>m :MinimapToggle<CR>
+
+nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>a :Ag<CR>
+
+nnoremap g[ [pfzz " Go to next function with python textobj plugin.
+nnoremap g] ]pfzz " Go to previous function with python textobj plugin.
+
+" choose suggestion on Enter
+inoremap <silent><expr> <CR>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ "<C-g>u<CR>"
+
+nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>r <Plug>(coc-references)
+nmap <silent> <Leader>t <Plug>(coc-format)
+nmap <silent> <Leader>qf <Plug>(coc-fix-current)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gt <Plug>(coc-format)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+" nmap <leader>ac  <Plug>(coc-codeaction)
+
+" let g:jedi#completions_command = "<C-p>"
+" let g:jedi#usages_command = "<leader>u"
+" let g:SuperTabDefaultCompletionType = "context" " Trigger jedi vim completion
+" let g:jedi#documentation_command = "<leader>q"
+" let g:jedi#goto_stubs_command = "<leader>z"
+
+" nnoremap <leader>a :%ArrangeColumn<CR>            " csv.vim arrange columns.
+" nnoremap <leader>u :%UnArrangeColumn<CR>          " csv.vim arrange columns.
+" nnoremap <leader>m :MarkdownPreview<CR>           " Toggle md preview.
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme codedark
+
 syntax on          " Syntax highlighting.
 set number         " Display current line number.
 set relativenumber " Display relative line number.
@@ -257,32 +307,17 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
 set scrolloff=2  " Keep lines before and after cursor when scrolling.
-" " Setting colorsheme.
-" let g:gruvbox_contrast_dark = 'soft'
-" colorscheme gruvbox
 
 " " Transparent background.
 " highlight Normal     ctermbg=NONE guibg=NONE
 " highlight LineNr     ctermbg=NONE guibg=NONE
 " highlight SignColumn ctermbg=NONE guibg=NONE
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Editing.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable autocomment on next line.
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Indentaion rules.
-filetype plugin indent on
-set tabstop=4     " Number of spaces to tab.
-set shiftwidth=4  " Number of spaces inserted for indentation.
-set expandtab     " Insert spaces when tab is pressed.
-" set smarttab      " Inserts blanks according to rules.
-" set smartindent   " Autoindenting when starting a new line.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Commands.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Execute make watch in current directory.
 command Mw execute '!tmux new -d make watch'
 
@@ -303,36 +338,3 @@ function! Synctex()
     execute "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " " . g:syncpdf
 endfunction
 nnoremap <C-enter> :call Synctex()<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Latex shortcuts.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd filetype tex nmap <leader>b :read $TEMPLATES/latex/frame.tex <CR>
-autocmd filetype tex nmap <leader>i :read $TEMPLATES/latex/itemize.tex <CR>
-autocmd filetype tex nmap <leader>f :read $TEMPLATES/latex/figure.tex <CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" HTML shortcuts.
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd filetype html inoremap ,b <b></b><space><++><esc>fbt>i
-autocmd filetype html inoremap ,it <em></em><space><++><esc>fet>i
-autocmd filetype html inoremap ,1 <h1></h1><enter><enter><++><esc>2kf<i
-autocmd filetype html inoremap ,2 <h2></h2><enter><enter><++><esc>2kf<i
-autocmd filetype html inoremap ,3 <h3></h3><enter><enter><++><esc>2kf<i
-autocmd filetype html inoremap ,p <p></p><enter><enter><++><esc>02kf>a
-autocmd filetype html inoremap ,a <a<space>href=""><++></a><space><++><esc>14hi
-autocmd filetype html inoremap ,e <a<space>target="_blank"<space>href=""><++></a><space><++><esc>14hi
-autocmd filetype html inoremap ,ul <ul><enter><li></li><enter></ul><enter><enter><++><esc>03kf<i
-autocmd filetype html inoremap ,li <esc>o<li></li><esc>f>a
-autocmd filetype html inoremap ,ol <ol><enter><li></li><enter></ol><enter><enter><++><esc>03kf<i
-autocmd filetype html inoremap ,im <img src="" alt="<++>"><++><esc>fcf"a
-autocmd filetype html inoremap ,td <td></td><++><esc>fdcit
-autocmd filetype html inoremap ,tr <tr></tr><enter><++><esc>kf<i
-autocmd filetype html inoremap ,th <th></th><++><esc>fhcit
-autocmd filetype html inoremap ,tab <table><enter></table><esc>o
-autocmd FileType html inoremap ,gr <font color="green"></font><Esc>F>a
-autocmd FileType html inoremap ,rd <font color="red"></font><Esc>F>a
-autocmd FileType html inoremap ,yl <font color="yellow"></font><Esc>F>a
-autocmd FileType html inoremap ,dt <dt></dt><Enter><dd><++></dd><Enter><++><esc>2kcit
-autocmd FileType html inoremap ,dl <dl><Enter><Enter></dl><enter><enter><++><esc>3kcc
-autocmd FileType html inoremap ,di <div class=""><Enter><Enter></div><enter><enter><++><esc>3kcc
