@@ -284,7 +284,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Visual.
+"                        Visuals                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme codedark
@@ -315,7 +315,7 @@ set scrolloff=2  " Keep lines before and after cursor when scrolling.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Commands.
+"                         Commands                            "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Execute make watch in current directory.
