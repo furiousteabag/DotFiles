@@ -6,5 +6,5 @@
 # Loading config.
 [[ -f ~/.config/zsh/.zshrc ]] && . ~/.config/zsh/.zshrc
 
-# Start X session on login.
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+# Start X session on login or tmux session if on server.
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx || tmux attach
