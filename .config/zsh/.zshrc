@@ -71,6 +71,23 @@ echo -ne '\e[6 q'                # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 
 ###############################################################
+# Functions.
+###############################################################
+
+venv() {
+  source $XDG_DATA_HOME/conda
+  CURRENT_FOLDER=$(echo $PWD | awk -F '/' '{print $NF}')
+  if [ ! -z "$1" ]; then
+    conda activate $1
+  else
+    conda env list | cut -d' ' -f 1 | grep -q $CURRENT_FOLDER
+    if [ $? -eq 0 ]; then
+      conda activate $CURRENT_FOLDER
+    fi
+  fi
+}
+
+###############################################################
 # Plugins.
 ###############################################################
 source ~/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh # Syntax highlight.
