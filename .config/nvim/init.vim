@@ -92,7 +92,7 @@ call plug#end()
 "                  Plugins Configuration                      "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3']
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
 \ }
@@ -181,8 +181,8 @@ map <S-l> <C-w>l
 nmap j gj
 nmap k gk
 
-nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 nnoremap <leader>l :set lbr!<CR>        " Toggle word splits.
+" nnoremap <leader>c :setlocal spell!<CR> " Toggle spellcheck.
 
 autocmd FileType cpp nnoremap <Leader>p :ClangFormat<CR> " Prettify cpp files.
 
@@ -265,6 +265,7 @@ nmap <silent> <Leader>d <Plug>(coc-definition)
 nmap <silent> <Leader>r <Plug>(coc-references)
 nmap <silent> <Leader>t <Plug>(coc-format)
 nmap <silent> <Leader>qf <Plug>(coc-fix-current)
+nmap <silent> <Leader>c <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gt <Plug>(coc-format)
