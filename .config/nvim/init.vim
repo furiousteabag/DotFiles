@@ -11,6 +11,7 @@ filetype plugin on         " Sets different options for different filetypes.
 let mapleader = "\<Space>" " Setting leader key.
 set shellcmdflag=-ic       " Access aliases from vim shell (act as interactive calls).
 set noswapfile             " Disable swap file.
+set updatetime=300         " Default is 4000. For faster coc-nvim's CursorHold.
 
 " Indentaion rules.
 filetype plugin indent on
@@ -92,12 +93,19 @@ call plug#end()
 "                  Plugins Configuration                      "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css']
+" 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
+\   'coc.preferences.formatOnSaveFiletypes': ["javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html"],
 \ }
+"\   'eslint.autoFixOnSave': v:true,
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+
+let g:tagalong_additional_filetypes = ['javascript', 'typescript']
 
 let g:minimap_highlight_search = 1
 
@@ -261,17 +269,20 @@ inoremap <silent><expr> <CR>
       \ pumvisible() ? coc#_select_confirm() :
       \ "<C-g>u<CR>"
 
+nmap <silent> <Leader>i :call CocActionAsync('doHover')<CR>
 nmap <silent> <Leader>d <Plug>(coc-definition)
 nmap <silent> <Leader>r <Plug>(coc-references)
-nmap <silent> <Leader>t <Plug>(coc-format)
+nmap <silent> <Leader>t <Plug>(coc-type-definition)
 nmap <silent> <Leader>qf <Plug>(coc-fix-current)
 nmap <silent> <Leader>c <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gt <Plug>(coc-format)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> <Leader>t <Plug>(coc-format)
+" nmap <silent> gt <Plug>(coc-format)
 " nmap <leader>ac  <Plug>(coc-codeaction)
+" inoremap <silent><expr> <c-space> coc#refresh()
 
 " let g:jedi#completions_command = "<C-p>"
 " let g:jedi#usages_command = "<leader>u"
@@ -293,6 +304,10 @@ colorscheme codedark
 syntax on          " Syntax highlighting.
 set number         " Display current line number.
 set relativenumber " Display relative line number.
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
+set signcolumn=yes
 
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
