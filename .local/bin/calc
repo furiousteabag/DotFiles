@@ -1,5 +1,8 @@
 #!/bin/bash
 
-shopt -s expand_aliases
-source $XDG_CONFIG_HOME/aliasrc
-venv && ipython
+# shopt -s expand_aliases
+# source $XDG_CONFIG_HOME/aliasrc
+source $XDG_CONFIG_HOME/zsh/.zshrc
+clear
+venv
+ipython
