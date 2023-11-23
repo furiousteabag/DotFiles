@@ -21,3 +21,4 @@ graphviz
 rustup
 rust-analyzer
 rust-src
+nodejs

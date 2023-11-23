@@ -11,3 +11,4 @@ nsxiv
 dragon-drop
 downgrade
 dockerfile-language-server-bin
+code-minimap
