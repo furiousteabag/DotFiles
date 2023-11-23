@@ -21,6 +21,11 @@ set expandtab     " Insert spaces when tab is pressed.
 " set smarttab      " Inserts blanks according to rules.
 " set smartindent   " Autoindenting when starting a new line.
 
+" Fold rules.
+set foldmethod=indent " Fold based on indentaion levels.
+set foldlevel=999     " Do not fold by default.
+set foldclose=all     " Automatically close after leaving (not used).
+
 " Edit text even if in russian layout.
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
@@ -65,6 +70,7 @@ Plug 'TovarishFin/vim-solidity'           " Syntax highlight for Solitidity
 Plug 'pangloss/vim-javascript'            " Syntax highlight and indentation for JavaScript
 Plug 'leafgarland/typescript-vim'         " Syntax highlight for TypeScript
 Plug 'maxmellon/vim-jsx-pretty'           " Syntax highlight for JSX
+Plug 'aklt/plantuml-syntax'               " Syntax highlight for PlantUML
 " Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 
 " Editing.
@@ -83,6 +89,8 @@ Plug 'kenn7/vim-arsync'                   " Sync files with remote.
 Plug 'prabirshrestha/async.vim'           " arsync dependency
 Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf' } " In case of conflicts with local fzf installation.
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
+Plug 'tyru/open-browser.vim'              " Open browser. Required for weirongxu/plantuml-previewer.vim.
+Plug 'weirongxu/plantuml-previewer.vim'   " Preview plantuml files.
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 
@@ -93,17 +101,24 @@ call plug#end()
 "                  Plugins Configuration                      "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer']
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
-\   'coc.preferences.formatOnSaveFiletypes': ["javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html"],
+\   'coc.preferences.formatOnSaveFiletypes': ["javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust"],
+\   'languageserver': {
+\       'dockerfile': {
+\           'command': 'docker-langserver',
+\           'filetypes': ['dockerfile'],
+\           'args': ['--stdio']
+\       }
+\   }
 \ }
 "\   'eslint.autoFixOnSave': v:true,
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.md'
 
 let g:tagalong_additional_filetypes = ['javascript', 'typescript']
 
