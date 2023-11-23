@@ -17,3 +17,7 @@ man
 the_silver_searcher
 htop
 xorg-xkill
+graphviz
+rustup
+rust-analyzer
+rust-src
