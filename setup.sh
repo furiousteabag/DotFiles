@@ -142,7 +142,7 @@ cmd_install_debian() {
 
         # Installing latest version of tmux
         sudo apt remove -y tmux
-        sudo apt install libevent-dev ncurses-dev
+        sudo apt install -y libevent-dev ncurses-dev
         (cd $HOME/Programs &&
              wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz &&
              tar -zxf tmux-*.tar.gz
