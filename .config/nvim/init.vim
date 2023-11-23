@@ -59,7 +59,7 @@ Plug 'junegunn/goyo.vim'                  " Zen mode.
 Plug 'edkolev/tmuxline.vim'               " Make tmux look like airline.
 Plug 'Yggdroot/indentLine'                " Indent line.
 Plug 'tpope/vim-fugitive'                 " Git wrapper (used in airline).
-Plug 'wfxr/minimap.vim'                   " Minimap.
+" Plug 'wfxr/minimap.vim'                   " Minimap.
 
 " Color changes.
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
