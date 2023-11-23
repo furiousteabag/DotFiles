@@ -10,3 +10,4 @@ image/jpeg=img.desktop;
 image/gif=img.desktop;
 image/heic=img.desktop;
 inode/directory=file.desktop
+x-scheme-handler/webcal=brave-browser.desktop
