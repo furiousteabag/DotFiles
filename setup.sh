@@ -117,11 +117,38 @@ cmd_install_debian() {
 
     if [ "$root" == 1 ]; then
         sudo apt update
-        sudo apt upgrade
+
+        # Adding sources for the latest Node version
+        sudo apt install -y ca-certificates curl gnupg
+        sudo mkdir -p /etc/apt/keyrings
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+        NODE_MAJOR=20
+        echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+        sudo apt update
+
+        sudo apt -y upgrade
 
         while read package; do
             sudo apt install -y $package
         done < ./packages/packages_common.txt
+
+        # Installing last version of neovim
+        sudo apt remove -y neovim
+        mkdir -p $HOME/Programs
+        (cd $HOME/Programs &&
+             wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz &&
+             tar -xzf nvim-linux64.tar.gz &&
+             ln -s $PWD/nvim-linux64/bin/nvim /usr/bin/nvim)
+
+        # Installing latest version of tmux
+        sudo apt remove -y tmux
+        sudo apt install libevent-dev ncurses-dev
+        (cd $HOME/Programs &&
+             wget https://github.com/tmux/tmux/releases/download/3.3a/tmux-3.3a.tar.gz &&
+             tar -zxf tmux-*.tar.gz
+             cd tmux-*/
+             ./configure
+             make && sudo make install)
 
         sudo chsh -s $(which zsh) $USER
     else
