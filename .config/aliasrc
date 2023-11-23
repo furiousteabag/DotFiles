@@ -19,6 +19,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gr='git rm'
 alias gl='git log'
+alias gh="git remote get-url origin | sed 's/:/\//' | sed 's/git@/https:\/\//' | sed 's/.git$//' | tee >(xclip -sel clip)"
 
 # Arc.
 alias aa='arc add'
