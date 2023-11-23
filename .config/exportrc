@@ -2,6 +2,8 @@
 # It lies in separate file because it can be
 # used by multiple shells.
 
+export LANG=en_US.UTF-8
+
 # Default programs.
 export TERMINAL="st"
 export EDITOR="nvim"
