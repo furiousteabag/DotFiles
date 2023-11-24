@@ -10,6 +10,8 @@ alias pi='sudo pacman -S'
 alias vim='nvim'
 alias ta='tmux attach'
 alias s='sudo systemctl'
+alias treeh='tree -s -h --du'
+alias wnv='watch -n 1 nvidia-smi'
 
 # Git.
 alias ga='git add'
