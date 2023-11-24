@@ -2,8 +2,6 @@ zsh
 zsh-completions
 tmux
 neovim
-python3
-python-pip
 ranger
 tldr
 tree
