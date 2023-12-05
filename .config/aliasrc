@@ -10,7 +10,7 @@ alias pi='sudo pacman -S'
 alias vim='nvim'
 alias ta='tmux attach'
 alias s='sudo systemctl'
-alias treeh='tree -s -h --du'
+alias treeh='tree -s -h --du -I ".git|node_modules|__pycache__|.ipynb_checkpoints"'
 alias wnv='watch -n 1 nvidia-smi'
 
 # Git.
