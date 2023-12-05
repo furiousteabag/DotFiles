@@ -21,6 +21,7 @@ bindkey '^e' edit-command-line
 PROMPT_EOL_MARK='' # Hide % at the end of output.
 
 # Basic auto/tab complete:
+fpath+=$HOME/.local/share/zfunc
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
