@@ -90,3 +90,32 @@
   - install software: https://www.baofengradio.com/pages/download
   - reboot
 - to fix screen tearing enable vsync with glx backend in picom
+- OpenVPN fix
+
+```
+diff --git a/openvpn-install.sh b/openvpn-install.sh
+index 06ad608..a2e26cc 100755
+--- a/openvpn-install.sh
++++ b/openvpn-install.sh
+@@ -775,9 +775,8 @@ function installOpenVPN() {
+                echo "proto ${PROTOCOL}6" >>/etc/openvpn/server.conf
+        fi
+
++       # https://www.reddit.com/r/archlinux/comments/16zgq47/is_anyone_able_to_run_openvpn_server_as_a_daemon/
+        echo "dev tun
+-user nobody
+-group $NOGROUP
+ persist-key
+ persist-tun
+ keepalive 10 120
+@@ -923,6 +922,9 @@ verb 3" >>/etc/openvpn/server.conf
+                fi
+        fi
+
++       # https://github.com/angristan/openvpn-install/issues/788
++       chown -R openvpn:network /etc/openvpn/ /var/log/openvpn/
++
+        # Finally, restart and enable OpenVPN
+        if [[ $OS == 'arch' || $OS == 'fedora' || $OS == 'centos' || $OS == 'oracle' ]]; then
+                # Don't modify package-provided service
+```
