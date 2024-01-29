@@ -90,7 +90,7 @@
   - install software: https://www.baofengradio.com/pages/download
   - reboot
 - to fix screen tearing enable vsync with glx backend in picom
-- OpenVPN fix
+- OpenVPN fix (TCP > UDP)
 
 ```
 diff --git a/openvpn-install.sh b/openvpn-install.sh
