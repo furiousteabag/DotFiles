@@ -32,7 +32,8 @@ bar {
 ###############################################################
 bindsym $mod+r        exec --no-startup-id $TERMINAL -e $FILE_MANAGER
 bindsym $mod+c        exec --no-startup-id $BROWSER --new-window
-bindsym $mod+v        exec --no-startup-id telegram-desktop
+# bindsym $mod+v        exec --no-startup-id telegram-desktop
+bindsym $mod+v        exec --no-startup-id nmcli c show --active | grep furiouspc && nmcli c down furiouspc || nmcli c up furiouspc
 bindsym $mod+o        exec --no-startup-id flameshot gui
 bindsym $mod+i        exec --no-startup-id $TERMINAL -e calc
 bindsym $mod+d        exec --no-startup-id dmenu_run -l 5 -fn 'Source Code Pro-18'
