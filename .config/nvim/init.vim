@@ -81,6 +81,7 @@ Plug 'ervandew/supertab'                  " Autocompletion on tab
 Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
 Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Completions engine.
+Plug 'puremourning/vimspector'            " Debugger.
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 " Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 
@@ -100,6 +101,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                  Plugins Configuration                      "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vimspector_enable_mappings = 'HUMAN'
 
 let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer']
 " 'coc-eslint',
@@ -266,6 +268,12 @@ autocmd FileType tex nnoremap <Leader>p :%!latexindent<CR> " Prettify latex file
 """"""""""""""""""""""""""""""
 "         Plugins            "
 """"""""""""""""""""""""""""""
+
+" mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
 
 nmap <Leader>s :ARsyncUp<CR>
 
