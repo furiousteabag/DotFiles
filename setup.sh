@@ -36,6 +36,9 @@ cmd_install_common() {
         "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-autosuggestions/
     git clone https://github.com/joshskidmore/zsh-fzf-history-search \
         "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-fzf-history-search/
+    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-docker-completion/_docker \
+        --create-dirs \
+        https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
 
     curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
         --create-dirs \
