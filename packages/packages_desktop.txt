@@ -34,3 +34,4 @@ avahi
 cups
 cups-pdf
 nss-mdns
+xdg-desktop-portal-gtk
