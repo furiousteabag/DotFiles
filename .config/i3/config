@@ -8,9 +8,19 @@ set $mod Mod4
 floating_modifier $mod
 font pango:Source Code Pro 12
 for_window [class="^.*"] border pixel 2
+
 for_window [title="^lnk$"] floating enable, resize set 80 ppt 80 ppt, move position center
+for_window [title="^ChatGPT"] move container to workspace number $ws1
+for_window [class="TelegramDesktop"] move container to workspace number $ws5
+for_window [class="Whatsapp-for-linux"] move container to workspace number $ws5
+for_window [title="^.*Gmail - Brave.*"] move container to workspace number $ws6
+# assign [title="^.*Gmail - Brave.*"] $ws6
 for_window [title="^Zoom"] move container to workspace number $ws8
 assign [title="^Meet "] $ws8
+for_window [class="Slack"] move container to workspace number $ws9
+for_window [class="discord"] move container to workspace number $ws9
+for_window [title="^asmirnov.xyz - Calendar"] move container to workspace number $ws10
+for_window [title="^Google Calendar"] move container to workspace number $ws10
 
 gaps inner 0
 gaps outer 0
