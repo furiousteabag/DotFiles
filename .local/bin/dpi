@@ -1,0 +1,21 @@
+#!/bin/bash
+
+dpi=${1:-100}
+
+if ! grep -q "Xft.dpi:" ~/.Xresources; then
+    echo "Xft.dpi: $dpi" >> ~/.Xresources
+else
+    sed -i "/Xft.dpi:/c\Xft.dpi: $dpi" ~/.Xresources
+fi
+
+xrdb -merge ~/.Xresources
+
+killall brave
+killall telegram-desktop
+
+i3-msg restart
+
+setbg
+
+nohup brave &>/dev/null &
+nohup telegram-desktop &>/dev/null &
