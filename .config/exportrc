@@ -47,6 +47,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export NLTK_DATA="$XDG_DATA_HOME"/nltk
+export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
 
 # Programs settings.
 export RANGER_LOAD_DEFAULT_RC=FALSE         # Assigning ranger config.
