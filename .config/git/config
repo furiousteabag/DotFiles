@@ -2,12 +2,7 @@
     hooksPath = .githooks
 [user]
     name = Alexander Smirnov
-    email = furiousteabag@gmail.com
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+    email = alex@asmirnov.xyz
 [push]
     autoSetupRemote = true
 [alias]
