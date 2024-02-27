@@ -24,3 +24,5 @@ rustup
 rust-analyzer
 rust-src
 nodejs
+git-lfs
+pyenv
