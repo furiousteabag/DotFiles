@@ -59,6 +59,7 @@ Plug 'junegunn/goyo.vim'                  " Zen mode.
 Plug 'edkolev/tmuxline.vim'               " Make tmux look like airline.
 Plug 'Yggdroot/indentLine'                " Indent line.
 Plug 'tpope/vim-fugitive'                 " Git wrapper (used in airline).
+" Plug 'taketwo/vim-ros'                    " ROS syntax highlight.
 " Plug 'wfxr/minimap.vim'                   " Minimap.
 
 " Color changes.
@@ -107,18 +108,23 @@ let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaeg
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
-\   'coc.preferences.formatOnSaveFiletypes': ["javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust"],
+\   'coc.preferences.formatOnSaveFiletypes': ["python", "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust"],
 \   'languageserver': {
 \       'dockerfile': {
 \           'command': 'docker-langserver',
 \           'filetypes': ['dockerfile'],
 \           'args': ['--stdio']
 \       }
-\   }
+\   },
+\   'python.formatting.provider': 'black',
+\   'python.formatting.blackArgs': ['--line-length=120'],
+\   'pyright.organizeimports.provider': 'isort'
 \ }
 "\   'eslint.autoFixOnSave': v:true,
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports').
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.md'
 
