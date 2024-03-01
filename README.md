@@ -34,6 +34,7 @@ These are config files and scripts which power my arch linux system.
      - [Grammarly](https://chromewebstore.google.com/detail/grammarly-ai-writing-and/kbfnbcaeplbcioakkpcpgfkobkghlhen)
      - [Copy Unicode URLs](https://chromewebstore.google.com/detail/copy-unicode-urls/fnbbfiapefhkicjhecnoepbijhanpkjp)
      - [ActivityWatch](https://chromewebstore.google.com/detail/activitywatch-web-watcher/nglaklhklhcoonedhgnpgddginnjdadi)
+     - [Ctrl Zoom](https://chromewebstore.google.com/detail/ctrl-zoom/indpmklmjbcfkbnbhoknlggplddednhp)
 
 ## Additional Configuration Info
 
@@ -77,6 +78,11 @@ These are config files and scripts which power my arch linux system.
   export ROS_HOSTNAME=$(ip route | grep wlan0 | grep src | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | tail -1)
   export ROS_MASTER_URI=http://$ROS_HOSTNAME:11311
   ```
+- to enable zoom in `st` (to make it work in neovim -- disable mouse `:set mouse=`):
+  ```
+  { ControlMask,          Button4, zoom,           {.f = +1} },
+  { ControlMask,          Button5, zoom,           {.f = -1} },
+  ```
 
 ## ToDo
 
@@ -86,11 +92,4 @@ These are config files and scripts which power my arch linux system.
 - come up with solution for notes management
 - rewrite mute script to iterate through all sources and mute/unmute them
   - display muted status as **every** output is muted
-- add `st` terminal emulator plugins patches:
-  - [font2](https://st.suckless.org/patches/font2/)
-    - `static char *font2[] = { "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };`
-  - [scrollback](https://st.suckless.org/patches/scrollback/)
-  - [alpha](https://st.suckless.org/patches/alpha/)
-  - [copyurl](https://st.suckless.org/patches/copyurl/)
-  - [open_copied_url](https://st.suckless.org/patches/open_copied_url/)
 - complete deletion [script](./config/nsxiv/exec/key-handler) of marked photos in nsxiv
