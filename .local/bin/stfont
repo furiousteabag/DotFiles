@@ -4,14 +4,12 @@ ST_LOCATION=$HOME/Programs/st
 
 [ ! -d $ST_LOCATION ] && echo "st not found in $ST_LOCATION" && exit 1
 
-cur_font_line=$(grep "*font" $ST_LOCATION/config.def.h)
+cur_font_line=$(grep "*font =" $ST_LOCATION/config.def.h)
 cur_font_size=$(echo $cur_font_line | tr -d -c 0-9)
 [ -z "$1" ] && echo "Current font size is $cur_font_size" && exit 0
 
 new_font_line=$(echo $cur_font_line | sed "s/$cur_font_size/$1/")
 
-sed -i "s|.*\*font.*|$new_font_line|" $ST_LOCATION/config.def.h
+sed -i "s|.*\*font =.*|$new_font_line|" $ST_LOCATION/config.def.h
 
 (cd $ST_LOCATION && sudo rm config.h && sudo make clean install && echo "Font size changed from $cur_font_size to $1" || echo "Did nothing, exiting...")
-
-
