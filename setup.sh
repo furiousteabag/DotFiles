@@ -94,12 +94,25 @@ cmd_install_arch() {
         sudo cp -rs $PWD/.config/etc /
 
         # Install and configure st terminal emulator
+        # "https://st.suckless.org/patches/alpha/st-alpha-osc11-20220222-0.8.5.diff"
+        # "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.5.diff"
+        patches=(
+            "https://st.suckless.org/patches/font2/st-font2-0.8.5.diff"
+            "https://st.suckless.org/patches/copyurl/st-copyurl-multiline-20230406-211964d.diff"
+        )
         mkdir -p $HOME/Programs/st
-        git clone https://git.suckless.org/st $HOME/Programs/st
-        (cd $HOME/Programs/st && \
-            sed -i 's/static char \*font.*/static char \*font = "Source Code Pro:size=18";/' config.def.h && \
-            sed -i 's/int allowwindowops = 0;/int allowwindowops = 1;/' config.def.h && \
-            sudo make clean install)
+        git clone https://git.suckless.org/st $HOME/Programs/st && cd $HOME/Programs/st
+        for patch in "${patches[@]}"; do
+            wget $patch -P $HOME/Programs/st/patches/
+            git apply $HOME/Programs/st/patches/$(basename $patch)
+        done
+        sed -i 's/static char \*font =.*/static char \*font = "Source Code Pro:size=11";/' config.def.h
+        sed -i '/static char \*font2\[\] = {/,/};/c\static char *font2[] = { "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };' config.def.h
+        sed -i 's/int allowwindowops = 0;/int allowwindowops = 1;/' config.def.h
+        sed -i 's/"black", \/\* default background colour \*\//"#1e1e1e", \/\* default background colour \*\//' config.def.h
+        sed -i -e 's/XK_l,/XK_u,/g' -e 's/XK_L,/XK_U,/g' config.def.h
+        sudo make clean install
+        cd
     fi
 
     chsh -s $(which zsh)
