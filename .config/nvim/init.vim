@@ -75,7 +75,7 @@ Plug 'aklt/plantuml-syntax'               " Syntax highlight for PlantUML
 " Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 
 " Editing.
-Plug 'github/copilot.vim'                 " Suggestions.
+" Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 Plug 'ervandew/supertab'                  " Autocompletion on tab
@@ -104,7 +104,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'HUMAN'
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd']
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
@@ -118,7 +118,8 @@ let g:coc_user_config = {
 \   },
 \   'python.formatting.provider': 'black',
 \   'python.formatting.blackArgs': ['--line-length=120'],
-\   'pyright.organizeimports.provider': 'isort'
+\   'pyright.organizeimports.provider': 'isort',
+\   'clangd.fallbackFlags': ['-xc']
 \ }
 "\   'eslint.autoFixOnSave': v:true,
 
@@ -352,6 +353,7 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[2 q"
 
 set scrolloff=2  " Keep lines before and after cursor when scrolling.
+set mousescroll=ver:1,hor:6 " Change scroll speed from default ver:3
 
 " " Transparent background.
 " highlight Normal     ctermbg=NONE guibg=NONE
