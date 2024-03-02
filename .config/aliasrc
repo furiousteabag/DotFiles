@@ -46,6 +46,6 @@ alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
 alias printer="systemctl start avahi-daemon && systemctl start cups"
 
 # Etc.
-alias sr="vim \$(find $HOME/DotFiles $HOME/Files $HOME/.ssh $HOME/Programs/st -type f -o -type l | fzf -q \')"
+alias sr="vim \$(find $HOME/DotFiles $HOME/Files $HOME/.ssh $HOME/Programs/st \( ! -path '*/.git/*' \) -type f -o -type l | fzf -q \')"
 alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 alias untar='tar xvzf'
