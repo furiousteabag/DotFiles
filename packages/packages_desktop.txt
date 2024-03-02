@@ -35,3 +35,5 @@ cups
 cups-pdf
 nss-mdns
 xdg-desktop-portal-gtk
+wmctrl
+xdotool

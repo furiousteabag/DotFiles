@@ -88,6 +88,9 @@ cmd_install_arch() {
         sudo systemctl daemon-reload
         sudo systemctl enable --now disable-lid-on-open
 
+        # Add user to input group to read touchpad device (libinput-gestures)
+        sudo gpasswd -a $USER input
+
         # Copy X11 settings
         cp -rs $PWD/.xinitrc ~/
         sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
