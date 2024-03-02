@@ -43,7 +43,7 @@ bar {
 bindsym $mod+r        exec --no-startup-id $TERMINAL -e $FILE_MANAGER
 bindsym $mod+c        exec --no-startup-id $BROWSER --new-window
 # bindsym $mod+v        exec --no-startup-id telegram-desktop
-bindsym $mod+v        exec --no-startup-id nmcli c show --active | grep furiouspc && nmcli c down furiouspc || nmcli c up furiouspc
+bindsym $mod+v        exec --no-startup-id nmcli c show --active | grep furiouspc-openvpn-ipv6 && nmcli c down furiouspc-openvpn-ipv6 || nmcli c up furiouspc-openvpn-ipv6
 bindsym $mod+o        exec --no-startup-id flameshot gui
 bindsym $mod+i        exec --no-startup-id $TERMINAL -e calc
 bindsym $mod+d        exec --no-startup-id dmenu_run -l 5 -fn 'Source Code Pro-18'
@@ -84,7 +84,7 @@ bindsym $mod+Shift+c reload  # Reload the configuration file.
 bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
 
 # bindsym $mod+Shift+q		  exec --no-startup-id systemctl hibernate
-bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+q		  exec --no-startup-id betterlockscreen -l && systemctl suspend
 bindsym $mod+Shift+w		  exec --no-startup-id betterlockscreen -l
 bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
 bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
