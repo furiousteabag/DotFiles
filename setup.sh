@@ -102,12 +102,13 @@ cmd_install_arch() {
         patches=(
             "https://st.suckless.org/patches/font2/st-font2-0.8.5.diff"
             "https://st.suckless.org/patches/copyurl/st-copyurl-multiline-20230406-211964d.diff"
+            "https://st.suckless.org/patches/externalpipe/st-externalpipe-0.8.4.diff"
         )
         mkdir -p $HOME/Programs/st
         git clone https://git.suckless.org/st $HOME/Programs/st && cd $HOME/Programs/st
         for patch in "${patches[@]}"; do
             wget $patch -P $HOME/Programs/st/patches/
-            git apply $HOME/Programs/st/patches/$(basename $patch)
+            patch < $HOME/Programs/st/patches/$(basename $patch)
         done
         sed -i 's/static char \*font =.*/static char \*font = "Source Code Pro:size=11";/' config.def.h
         sed -i '/static char \*font2\[\] = {/,/};/c\static char *font2[] = { "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };' config.def.h
