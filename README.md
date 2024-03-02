@@ -83,6 +83,13 @@ These are config files and scripts which power my arch linux system.
   { ControlMask,          Button4, zoom,           {.f = +1} },
   { ControlMask,          Button5, zoom,           {.f = -1} },
   ```
+  put them before `XK_ANY_MOD` masks
+- to copy output, add:
+  ```
+  static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
+  { MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
+  ```
+- if laptop immediately wakes up after `suspend` or `hibernate` -> maybe I am touching touchpad?
 
 ## ToDo
 
