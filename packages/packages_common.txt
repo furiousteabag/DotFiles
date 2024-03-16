@@ -1,3 +1,5 @@
+wget
+curl
 zsh
 zsh-completions
 tmux
