@@ -114,6 +114,12 @@ let g:coc_user_config = {
 \           'command': 'docker-langserver',
 \           'filetypes': ['dockerfile'],
 \           'args': ['--stdio']
+\       },
+\       'dockercompose': {
+\           'command': "docker-compose-langserver",
+\           'args': ['--stdio'],
+\           'filetypes': ['dockercompose'],
+\           'rootPatterns': [".git", ".env", "docker-compose.yml", "compose.yml"]
 \       }
 \   },
 \   'python.formatting.provider': 'black',
