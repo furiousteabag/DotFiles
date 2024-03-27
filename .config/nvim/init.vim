@@ -129,6 +129,13 @@ let g:coc_user_config = {
 \ }
 "\   'eslint.autoFixOnSave': v:true,
 
+" Filetypes for dockercompose language server
+au FileType yaml if bufname("%") =~# "docker-compose.yml" | set ft=yaml.docker-compose | endif
+au FileType yaml if bufname("%") =~# "compose.yml" | set ft=yaml.docker-compose | endif
+let g:coc_filetype_map = {
+\   'yaml.docker-compose': 'dockercompose',
+\ }
+
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports').
