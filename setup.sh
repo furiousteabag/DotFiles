@@ -153,6 +153,10 @@ cmd_install_debian() {
             sudo apt install -y $package
         done < ./packages/packages_common.txt
 
+        # Make bat a valid executable so ranger
+        # filemanager can use it for syntax highlight
+        command -v batcat >/dev/null && { mkdir -p ~/.local/bin; ln -s /usr/bin/batcat ~/.local/bin/bat; }
+
         # Installing last version of neovim
         sudo apt remove -y neovim
         mkdir -p $HOME/Programs
