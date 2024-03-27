@@ -124,6 +124,7 @@ let g:coc_user_config = {
 \   },
 \   'python.formatting.provider': 'black',
 \   'pyright.organizeimports.provider': 'isort',
+\   'prettier.proseWrap': 'never',
 \   'clangd.fallbackFlags': ['-xc']
 \ }
 "\   'eslint.autoFixOnSave': v:true,
