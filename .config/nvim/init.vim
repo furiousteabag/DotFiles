@@ -123,7 +123,6 @@ let g:coc_user_config = {
 \       }
 \   },
 \   'python.formatting.provider': 'black',
-\   'python.formatting.blackArgs': ['--line-length=120'],
 \   'pyright.organizeimports.provider': 'isort',
 \   'clangd.fallbackFlags': ['-xc']
 \ }
