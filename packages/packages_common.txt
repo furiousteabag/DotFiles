@@ -28,3 +28,4 @@ rust-src
 nodejs
 git-lfs
 pyenv
+bat
