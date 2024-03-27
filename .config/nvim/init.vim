@@ -244,12 +244,20 @@ nnoremap <leader>sv :source $MYVIMRC<CR> " reload config
 
 " brackets completions
 inoremap " ""<left>
-inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
+
+" complete quotes everywhere except markdown
+augroup FileTypeSpecificMappings
+  autocmd!
+  " Checks if the file type is not markdown
+  autocmd FileType * if &ft != 'markdown'
+  \ | execute "inoremap ' ''<left>"
+  \ | endif
+augroup END
 
 " Tabs switching.
 nnoremap <S-j> :tabprevious<CR>                                                                            
