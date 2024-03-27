@@ -38,6 +38,10 @@ These are config files and scripts which power my arch linux system.
 
 ## Additional Configuration Info
 
+- to enable pacman parallel download follow [Arch Wiki | pacman / Enabling parallel downloads](https://wiki.archlinux.org/title/pacman#Enabling_parallel_downloads)
+- if you can't log in after a couple of failed attempts it is probably caused by `faillock` [Arch Wiki | security / Lock out user after three failed login attempts](https://wiki.archlinux.org/title/security#Lock_out_user_after_three_failed_login_attempts)
+- to change `sudo` timeout follow [Arch Wiki | sudo / Tips and tricks / Reduce the number of times you have to type a password](https://wiki.archlinux.org/title/sudo#Reduce_the_number_of_times_you_have_to_type_a_password)
+- `ranger` is not previewing anything when user is `root`. This is on purpose and should be toggled with `zp` (enable syntax highlighting with `zv`) [GitHub | ranger / issues](https://github.com/ranger/ranger/issues/1369#issuecomment-450562777)
 - `tmux` is not loading config from `$XDG_CONFIG_HOME/tmux/tmux.conf` on old versions
 - `nsxiv` images in thumbnail mode and `.HEIC` are rotated according to `EXIF:Orientation` tag but they shouldn't
   - maybe because of `imagemagick` package required by `betterlockscreen`
@@ -100,3 +104,4 @@ These are config files and scripts which power my arch linux system.
 - rewrite mute script to iterate through all sources and mute/unmute them
   - display muted status as **every** output is muted
 - complete deletion [script](./config/nsxiv/exec/key-handler) of marked photos in nsxiv
+- preinstall coc extensions in a setup script, which is useful for docker environments; begin [here](https://github.com/neoclide/coc.nvim/issues/2237) and [here](https://github.com/neoclide/coc.nvim/issues/118)
