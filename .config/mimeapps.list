@@ -3,11 +3,12 @@
 # xdg-open will use these settings to determine how to open filetypes.
 # These .desktop entries can also be seen and changed in ~/.local/share/applications/
 
-text/plain=text.desktop;
-application/pdf=pdf.desktop;
-image/png=img.desktop;
-image/jpeg=img.desktop;
-image/gif=img.desktop;
-image/heic=img.desktop;
+text/plain=text.desktop
+application/pdf=pdf.desktop
+image/png=img.desktop
+image/jpeg=img.desktop
+image/gif=img.desktop
+image/heic=img.desktop
+image/svg+xml=img.desktop
 inode/directory=file.desktop
 x-scheme-handler/webcal=brave-browser.desktop
