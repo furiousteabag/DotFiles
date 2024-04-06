@@ -19,6 +19,7 @@ unzip
 ncdu
 man
 the_silver_searcher
+silversearcher-ag
 htop
 xorg-xkill
 graphviz
