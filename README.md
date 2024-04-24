@@ -39,6 +39,7 @@ These are config files and scripts which power my arch linux system.
 ## Additional Configuration Info
 
 - to enable pacman parallel download follow [Arch Wiki | pacman / Enabling parallel downloads](https://wiki.archlinux.org/title/pacman#Enabling_parallel_downloads)
+- to speed up pacman packages download, update mirrorlist by something like `sudo reflector --sort rate --connection-timeout 2 --download-timeout 2 --threads 10 --save /etc/pacman.d/mirrorlist`
 - if you can't log in after a couple of failed attempts it is probably caused by `faillock` [Arch Wiki | security / Lock out user after three failed login attempts](https://wiki.archlinux.org/title/security#Lock_out_user_after_three_failed_login_attempts)
 - to change `sudo` timeout follow [Arch Wiki | sudo / Tips and tricks / Reduce the number of times you have to type a password](https://wiki.archlinux.org/title/sudo#Reduce_the_number_of_times_you_have_to_type_a_password)
 - `ranger` is not previewing anything when user is `root`. This is on purpose and should be toggled with `zp` (enable syntax highlighting with `zv`) [GitHub | ranger / issues](https://github.com/ranger/ranger/issues/1369#issuecomment-450562777)
@@ -94,6 +95,10 @@ These are config files and scripts which power my arch linux system.
   { MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
   ```
 - if laptop immediately wakes up after `suspend` or `hibernate` -> maybe I am touching touchpad?
+- to use local X11 display from remote server, use:
+  - add `-listen tcp` to X11 startup args `/etc/X11/xinit/xserverrc`
+  - `xhost +`
+  - export DISPLAY=IP:0.0
 
 ## ToDo
 
