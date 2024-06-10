@@ -95,10 +95,11 @@ These are config files and scripts which power my arch linux system.
   { MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
   ```
 - if laptop immediately wakes up after `suspend` or `hibernate` -> maybe I am touching touchpad?
-- to use local X11 display from remote server, use:
+- to use local X11 display from remote server via ssh, use:
   - add `-listen tcp` to X11 startup args `/etc/X11/xinit/xserverrc`
   - `xhost +`
   - export DISPLAY=IP:0.0
+- gparted might not format partition because of udiskie automount; disable it
 
 ## ToDo
 
