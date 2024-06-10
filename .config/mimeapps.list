@@ -4,6 +4,7 @@
 # These .desktop entries can also be seen and changed in ~/.local/share/applications/
 
 text/plain=text.desktop
+application/json=text.desktop
 application/pdf=pdf.desktop
 image/png=img.desktop
 image/jpeg=img.desktop
