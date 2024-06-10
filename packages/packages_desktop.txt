@@ -38,3 +38,5 @@ xdg-desktop-portal-gtk
 wmctrl
 xdotool
 kdenlive
+reflector
+breeze
