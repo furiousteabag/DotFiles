@@ -15,6 +15,7 @@ export READER="zathura"
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="/venv/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH"
 export PATH="$PATH:$HOME/.local/share/cargo/bin"
+export PATH="$PATH:$HOME/.local/share/npm/bin"
 
 # XDG base directory.
 export XDG_CONFIG_HOME="$HOME"/.config    # User-specific configurations (analogous to /etc).
