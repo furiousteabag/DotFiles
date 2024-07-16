@@ -22,6 +22,7 @@ autorandr
 openvpn
 network-manager-applet
 pass
+gcr
 sxiv
 nsxiv
 syncthing
