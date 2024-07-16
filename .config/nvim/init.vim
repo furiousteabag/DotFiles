@@ -31,6 +31,7 @@ set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNO
 
 " Disable autocomment on next line.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd BufNewFile,BufRead *.mdx set filetype=markdown
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -82,7 +83,7 @@ Plug 'ervandew/supertab'                  " Autocompletion on tab
 Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
 Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Completions engine.
-Plug 'puremourning/vimspector'            " Debugger.
+" Plug 'puremourning/vimspector'            " Debugger.
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 " Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 
@@ -93,6 +94,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.local/share/fzf' } " In case of conflicts with
 Plug 'junegunn/fzf.vim'                   " Fuzzy finder.
 Plug 'tyru/open-browser.vim'              " Open browser. Required for weirongxu/plantuml-previewer.vim.
 Plug 'weirongxu/plantuml-previewer.vim'   " Preview plantuml files.
+Plug 'mpas/marp-nvim'                     " md to html
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 
@@ -104,11 +106,12 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'HUMAN'
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx']
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
 \   'coc.preferences.formatOnSaveFiletypes': ["python", "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust"],
+\   "coc.preferences.willSaveHandlerTimeout": 2000,
 \   'languageserver': {
 \       'dockerfile': {
 \           'command': 'docker-langserver',
