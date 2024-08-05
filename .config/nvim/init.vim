@@ -325,6 +325,7 @@ inoremap <silent><expr> <CR>
 
 nmap <silent> <Leader>i :call CocActionAsync('doHover')<CR>
 nmap <silent> <Leader>d <Plug>(coc-definition)
+nmap <silent> <Leader>D :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> <Leader>r <Plug>(coc-references)
 nmap <silent> <Leader>t <Plug>(coc-type-definition)
 nmap <silent> <Leader>qf <Plug>(coc-fix-current)
