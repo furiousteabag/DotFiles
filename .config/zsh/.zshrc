@@ -62,6 +62,9 @@ ssh-add -k 2>/dev/null # Add ssh keys.
 # Initializing git prompt.
 [[ -f ~/.config/git/git-prompt.sh ]] && . ~/.config/git/git-prompt.sh
 
+# Loading environment variables.
+[[ -f /etc/environment ]] && . /etc/environment
+
 ###############################################################
 # Initializing prompt.
 ###############################################################
