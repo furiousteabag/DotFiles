@@ -34,6 +34,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead *.mdx set filetype=markdown
 
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                   Plugins Declaration                       "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,7 +51,9 @@ Plug 'kana/vim-textobj-user'              " Plugin to add objects.
 Plug 'kana/vim-textobj-indent'            " Indent object.
 Plug 'kana/vim-textobj-line'              " Line object.
 Plug 'kana/vim-textobj-entire'            " Whole file object.
-Plug 'bps/vim-textobj-python'             " Python functions and classes objects.
+" Plug 'bps/vim-textobj-python'             " Python functions and classes objects.
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 " Visual changes.
 Plug 'preservim/nerdtree'                 " File browser.
@@ -76,16 +79,31 @@ Plug 'aklt/plantuml-syntax'               " Syntax highlight for PlantUML
 " Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 
 " Editing.
-" Plug 'github/copilot.vim'                 " Suggestions.
+Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 Plug 'ervandew/supertab'                  " Autocompletion on tab
 Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
 Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Completions engine.
+Plug 'pasky/claude.vim'                   " Claude copilo
 " Plug 'puremourning/vimspector'            " Debugger.
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 " Plug 'davidhalter/jedi-vim'               " Python autocompletion.
+
+" Cursor AI completions
+Plug 'yetone/avante.nvim', { 'do': 'make' }
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'stevearc/dressing.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'echasnovski/mini.nvim'  " If you use the mini.nvim suite
+" Or use one of these instead of mini.nvim:
+" Plug 'echasnovski/mini.icons'  " If you use standalone mini plugins
+" Plug 'nvim-tree/nvim-web-devicons'  " If you prefer nvim-web-devicons
+
 
 " Etc.
 Plug 'kenn7/vim-arsync'                   " Sync files with remote.
@@ -96,7 +114,7 @@ Plug 'tyru/open-browser.vim'              " Open browser. Required for weirongxu
 Plug 'weirongxu/plantuml-previewer.vim'   " Preview plantuml files.
 Plug 'mpas/marp-nvim'                     " md to html
 " Plug 'tpope/vim-obsession'                " Save session for tmux restoring.
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}       " Previewing md files.
 
 call plug#end()
 
@@ -110,7 +128,7 @@ let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaeg
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
-\   'coc.preferences.formatOnSaveFiletypes': ["python", "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust"],
+\   'coc.preferences.formatOnSaveFiletypes': ["python", "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust", "c", "cpp"],
 \   "coc.preferences.willSaveHandlerTimeout": 2000,
 \   'languageserver': {
 \       'dockerfile': {
@@ -131,6 +149,11 @@ let g:coc_user_config = {
 \   'clangd.fallbackFlags': ['-xc']
 \ }
 "\   'eslint.autoFixOnSave': v:true,
+
+
+let g:copilot_filetypes = {
+\ 'markdown': v:false,
+\ }
 
 " Filetypes for dockercompose language server
 au FileType yaml if bufname("%") =~# "docker-compose.yml" | set ft=yaml.docker-compose | endif
@@ -187,6 +210,97 @@ let g:airline_symbols.linenr = ' '
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.colnr = ' :'
 let g:airline#extensions#branch#enabled = 0 " disable git for airline
+
+let g:claude_api_key = $CLAUDE_API_KEY
+
+
+highlight AvanteCurrentDiff guibg=#2a2a3a
+highlight AvanteIncomingDiff guibg=#2a3a2a
+
+" Setup avante.nvim
+lua << EOF
+local avante = require('avante')
+avante.setup({
+  highlights = {
+    diff = {
+      current = "AvanteCurrentDiff",
+      incoming = "AvanteIncomingDiff",
+    },
+  },
+})
+
+require('render-markdown').setup({
+  file_types = { "markdown", "Avante" },
+  latex = { enabled = false }
+})
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "markdown", "markdown_inline" },
+  highlight = {
+    enable = true,
+    disable = function(lang, buf)
+      return lang ~= "markdown" and lang ~= "markdown_inline"
+    end,
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+vim.opt.termguicolors = true
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {
+    "typescript",
+    "javascript",
+    "tsx",
+    "markdown",
+    "markdown_inline",
+    "python"
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["aa"] = "@parameter.outer",
+        ["ia"] = "@parameter.inner",
+        ["ai"] = "@conditional.outer",
+        ["ii"] = "@conditional.inner",
+        ["al"] = "@loop.outer",
+        ["il"] = "@loop.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]f"] = "@function.outer",
+        ["]c"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]F"] = "@function.outer",
+        ["]C"] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[f"] = "@function.outer",
+        ["[c"] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[F"] = "@function.outer",
+        ["[C"] = "@class.outer",
+      },
+    },
+  },
+}
+EOF
+
+colorscheme codedark
 
 " " Exit Vim if NERDTree is the only window left.
 " autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -354,7 +468,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 "                        Visuals                              "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme codedark
 
 syntax on          " Syntax highlighting.
 set number         " Display current line number.
@@ -379,6 +492,27 @@ let &t_EI = "\<Esc>[2 q"
 
 set scrolloff=2  " Keep lines before and after cursor when scrolling.
 set mousescroll=ver:1,hor:6 " Change scroll speed from default ver:3
+
+" JsonL syntax highlighting
+augroup jsonl_syntax
+  autocmd!
+  autocmd BufNewFile,BufRead *.jsonl setlocal filetype=jsonl
+  autocmd FileType jsonl call SetJSONLSyntax()
+augroup END
+
+function! SetJSONLSyntax()
+  if !exists("main_syntax")
+    if exists("b:current_syntax")
+      finish
+    endif
+    let main_syntax = 'jsonl'
+  endif
+  runtime syntax/json.vim
+  syntax clear jsonMissingCommaError
+  syntax match   jsonMissingCommaError /\("\|\]\|\d\)\zs\_s\+\ze"/
+  syntax match   jsonMissingCommaError /\(\]\|\}\)\_s\+\ze"/ "arrays/objects as values
+  syntax match   jsonMissingCommaError /\(true\|false\)\_s\+\ze"/ "true/false as value
+endfunction
 
 " " Transparent background.
 " highlight Normal     ctermbg=NONE guibg=NONE
@@ -410,3 +544,6 @@ function! Synctex()
     execute "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . bufname('%') . " " . g:syncpdf
 endfunction
 nnoremap <C-enter> :call Synctex()<cr>
+
+hi CocFloating ctermbg=238 guibg=#4e4e4e
+" hi CocMenuSel ctermbg=239 guibg=#4e4e4e
