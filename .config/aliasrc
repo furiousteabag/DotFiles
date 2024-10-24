@@ -46,6 +46,7 @@ alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
 alias printer="systemctl start avahi-daemon && systemctl start cups"
 
 # Etc.
-alias sr="vim \$(find $HOME/DotFiles $HOME/Files $HOME/.ssh $HOME/Programs/st \( ! -path '*/.git/*' \) -type f -o -type l | fzf -q \')"
+alias sr='file=$(fd . /home/furiousteabag/DotFiles /home/furiousteabag/Files /home/furiousteabag/.ssh /home/furiousteabag/Programs/st /home/furiousteabag/Projects/asmirnov.xyz --hidden --follow --exclude .git -t f -t l | sed "s|^/home/furiousteabag/||" | fzf --preview "echo -e \"\033[1;34mLast modified:\033[0m \n\$(ls -l /home/furiousteabag/{} | awk '\''{print \$6, \$7, \$8}'\'') \n\n\033[1;34mFile contents:\033[0m\n\"; bat --color=always --style=numbers /home/furiousteabag/{}" --preview-window up:50% --bind "ctrl-/:change-preview-window(down|hidden|)"); [ -n "$file" ] && vim /home/furiousteabag/$file'
 alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 alias untar='tar xvzf'
+alias ro="export ROS_DOMAIN_ID=42; source /opt/ros/humble/setup.zsh; source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh; source /usr/share/colcon_cd/function/colcon_cd.sh; source /home/furiousteabag/colcon-workspace/install/setup.zsh;"
