@@ -92,14 +92,14 @@ Plug 'pasky/claude.vim'                   " Claude copilo
 " Plug 'davidhalter/jedi-vim'               " Python autocompletion.
 
 " Cursor AI completions
-Plug 'yetone/avante.nvim', { 'do': 'make' }
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'stevearc/dressing.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'MunifTanjim/nui.nvim'
-Plug 'MeanderingProgrammer/render-markdown.nvim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'echasnovski/mini.nvim'  " If you use the mini.nvim suite
+" Plug 'yetone/avante.nvim', { 'do': 'make' }
+" Plug 'nvim-tree/nvim-web-devicons'
+" Plug 'stevearc/dressing.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'MunifTanjim/nui.nvim'
+" Plug 'MeanderingProgrammer/render-markdown.nvim'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'echasnovski/mini.nvim'  " If you use the mini.nvim suite
 " Or use one of these instead of mini.nvim:
 " Plug 'echasnovski/mini.icons'  " If you use standalone mini plugins
 " Plug 'nvim-tree/nvim-web-devicons'  " If you prefer nvim-web-devicons
@@ -218,35 +218,36 @@ highlight AvanteCurrentDiff guibg=#2a2a3a
 highlight AvanteIncomingDiff guibg=#2a3a2a
 
 " Setup avante.nvim
+" lua << EOF
+" local avante = require('avante')
+" avante.setup({
+"   highlights = {
+"     diff = {
+"       current = "AvanteCurrentDiff",
+"       incoming = "AvanteIncomingDiff",
+"     },
+"   },
+" })
+
+" require('render-markdown').setup({
+"   file_types = { "markdown", "Avante" },
+"   latex = { enabled = false }
+" })
+
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = { "markdown", "markdown_inline" },
+"   highlight = {
+"     enable = true,
+"     disable = function(lang, buf)
+"       return lang ~= "markdown" and lang ~= "markdown_inline"
+"     end,
+"     additional_vim_regex_highlighting = false,
+"   },
+" }
+
+" vim.opt.termguicolors = true
+
 lua << EOF
-local avante = require('avante')
-avante.setup({
-  highlights = {
-    diff = {
-      current = "AvanteCurrentDiff",
-      incoming = "AvanteIncomingDiff",
-    },
-  },
-})
-
-require('render-markdown').setup({
-  file_types = { "markdown", "Avante" },
-  latex = { enabled = false }
-})
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "markdown", "markdown_inline" },
-  highlight = {
-    enable = true,
-    disable = function(lang, buf)
-      return lang ~= "markdown" and lang ~= "markdown_inline"
-    end,
-    additional_vim_regex_highlighting = false,
-  },
-}
-
-vim.opt.termguicolors = true
-
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {
     "typescript",
