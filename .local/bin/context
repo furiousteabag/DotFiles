@@ -1,0 +1,226 @@
+#!/bin/bash
+
+PROGRAM="${0##*/}"
+
+show_usage() {
+    echo "Usage: $PROGRAM [-i|--ignore pattern1,pattern2,...]"
+    echo "Options:"
+    echo "  -i, --ignore    Additional patterns to ignore (comma-separated)"
+    echo "Example: $PROGRAM -i 'tests,docs,*.log'"
+    exit 1
+}
+
+# Function to check if commands exist
+check_commands() {
+    if ! command -v tree &> /dev/null; then
+        echo "Error: 'tree' command not found. Please install it first."
+        exit 1
+    fi
+
+    if [[ "$(uname)" == "Linux" && ! $(command -v xclip) ]]; then
+        echo "Error: 'xclip' command not found. Please install it first."
+        exit 1
+    elif [[ "$(uname)" == "Darwin" && ! $(command -v pbcopy) ]]; then
+        echo "Error: 'pbcopy' command not found."
+        exit 1
+    fi
+}
+
+# Function to copy to clipboard based on OS
+copy_to_clipboard() {
+    if [[ "$(uname)" == "Linux" ]]; then
+        xclip -selection clipboard
+    elif [[ "$(uname)" == "Darwin" ]]; then
+        pbcopy
+    fi
+}
+
+# Function to detect and format file type
+get_file_type() {
+    local file="$1"
+    local ext="${file##*.}"
+    case "$ext" in
+        js|ts|jsx|tsx) echo "javascript" ;;
+        py) echo "python" ;;
+        rb) echo "ruby" ;;
+        php) echo "php" ;;
+        java) echo "java" ;;
+        cpp|cc|c) echo "cpp" ;;
+        h|hpp) echo "cpp" ;;
+        go) echo "go" ;;
+        rs) echo "rust" ;;
+        sh) echo "bash" ;;
+        md|markdown) echo "markdown" ;;
+        yml|yaml) echo "yaml" ;;
+        json) echo "json" ;;
+        xml) echo "xml" ;;
+        sql) echo "sql" ;;
+        css) echo "css" ;;
+        html|htm) echo "html" ;;
+        *) echo "text" ;;
+    esac
+}
+
+# Function to check if file should be excluded
+should_exclude_file() {
+    local file="$1"
+    local ext="${file##*.}"
+    
+    # List of extensions to exclude
+    local exclude_extensions=(
+        # Media files
+        jpg jpeg png gif bmp ico svg webp avif
+        mp3 wav ogg m4a aac
+        mp4 avi mov mkv webm
+        ttf otf woff woff2 eot
+        
+        # Binary and compiled files
+        pdf exe dll so dylib class pyc
+        
+        # Lock files and large generated files
+        lock lockb
+        map min.js min.css
+        
+        # Archive files
+        zip tar gz rar 7z
+        
+        # Database files
+        db sqlite sqlite3
+    )
+    
+    # List of specific filenames to exclude
+    local exclude_files=(
+        ".DS_Store"
+        "Thumbs.db"
+        "desktop.ini"
+        ".gitkeep"
+    )
+    
+    # Check against specific filenames
+    for exclude_file in "${exclude_files[@]}"; do
+        if [[ "${file##*/}" == "$exclude_file" ]]; then
+            return 0
+        fi
+    done
+    
+    # Check against extensions
+    for exclude_ext in "${exclude_extensions[@]}"; do
+        if [[ "$ext" == "$exclude_ext" ]]; then
+            return 0
+        fi
+    done
+    
+    # Check if file is binary using 'file' command
+    if command -v file >/dev/null 2>&1; then
+        if file "$file" | grep -q "binary"; then
+            return 0
+        fi
+    fi
+    
+    return 1
+}
+
+# Function to format file size
+format_size() {
+    local size=$1
+    if ((size < 1024)); then
+        echo "${size}B"
+    elif ((size < 1024*1024)); then
+        echo "$((size/1024))KB"
+    else
+        echo "$((size/(1024*1024)))MB"
+    fi
+}
+
+# Parse command line arguments
+ADDITIONAL_IGNORES=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -i|--ignore)
+            if [ -n "$2" ]; then
+                ADDITIONAL_IGNORES="$2"
+                shift 2
+            else
+                echo "Error: Ignore pattern is missing"
+                show_usage
+            fi
+            ;;
+        -h|--help)
+            show_usage
+            ;;
+        *)
+            echo "Unknown option: $1"
+            show_usage
+            ;;
+    esac
+done
+
+# Check required commands
+check_commands
+
+# Build ignore patterns
+IGNORE_PATTERNS=".git"
+if [ -f .gitignore ]; then
+    while IFS= read -r pattern; do
+        if [[ -n "$pattern" && ! "$pattern" =~ ^# ]]; then
+            IGNORE_PATTERNS="$IGNORE_PATTERNS|$pattern"
+        fi
+    done < .gitignore
+fi
+
+if [ -n "$ADDITIONAL_IGNORES" ]; then
+    IGNORE_PATTERNS="$IGNORE_PATTERNS|${ADDITIONAL_IGNORES//,/|}"
+fi
+
+# Start output
+{
+    echo "# Project Structure"
+    echo
+    echo "## Directory Tree"
+    echo
+    echo '```'
+    tree -I "$IGNORE_PATTERNS" --dirsfirst
+    echo '```'
+    echo
+    echo "## Files"
+    echo
+
+    # Create grep pattern for filtering
+    GREP_PATTERN=""
+    if [ -n "$ADDITIONAL_IGNORES" ]; then
+        GREP_PATTERN=$(echo "$ADDITIONAL_IGNORES" | tr ',' '|')
+    fi
+
+    # Process files
+    while IFS= read -r file; do
+        if [ -f "$file" ] && ! should_exclude_file "$file"; then
+            # Get file size
+            size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+            formatted_size=$(format_size "$size")
+            
+            # Get file type for syntax highlighting
+            file_type=$(get_file_type "$file")
+            
+            # Skip files larger than 500KB
+            if [ "$size" -lt $((500 * 1024)) ]; then
+                echo
+                echo $file
+                echo
+                echo '```'"$file_type"
+                cat "$file"
+                echo '```'
+                echo
+            else
+                echo
+                echo "$file ($formatted_size) *[file too large to include]*"
+            fi
+        fi
+    done < <(if [ -n "$GREP_PATTERN" ]; then
+        git ls-files | grep -vE "$GREP_PATTERN"
+    else
+        git ls-files
+    fi)
+
+} | copy_to_clipboard
+
+echo "Project structure and file contents have been copied to clipboard!"
