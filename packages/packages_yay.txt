@@ -14,3 +14,4 @@ dockerfile-language-server-bin
 nodejs-compose-language-service
 code-minimap
 libinput-gestures
+fstl
