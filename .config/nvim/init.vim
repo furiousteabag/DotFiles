@@ -58,11 +58,13 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Visual changes.
 Plug 'preservim/nerdtree'                 " File browser.
 Plug 'jistr/vim-nerdtree-tabs'            " Nerdtree tabs fixer.
+Plug 'Xuyuanp/nerdtree-git-plugin'        " Git status flags for NERDTree
 Plug 'vim-airline/vim-airline'            " Status line.
 Plug 'junegunn/goyo.vim'                  " Zen mode.
 Plug 'edkolev/tmuxline.vim'               " Make tmux look like airline.
 Plug 'Yggdroot/indentLine'                " Indent line.
 Plug 'tpope/vim-fugitive'                 " Git wrapper (used in airline).
+Plug 'airblade/vim-gitgutter'         " Git diff in the sign column
 " Plug 'taketwo/vim-ros'                    " ROS syntax highlight.
 " Plug 'wfxr/minimap.vim'                   " Minimap.
 
@@ -70,8 +72,9 @@ Plug 'tpope/vim-fugitive'                 " Git wrapper (used in airline).
 Plug 'ryanoasis/vim-devicons'             " Adding icons support (NerdTree).
 Plug 'rafi/awesome-vim-colorschemes'      " Color schemes.
 Plug 'tomasiser/vim-code-dark'            " VSCode dark theme.
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'mboughaba/i3config.vim'             " Syntax highlight for i3 config
-Plug 'TovarishFin/vim-solidity'           " Syntax highlight for Solitidity
+" Plug 'TovarishFin/vim-solidity'           " Syntax highlight for Solitidity
 Plug 'pangloss/vim-javascript'            " Syntax highlight and indentation for JavaScript
 Plug 'leafgarland/typescript-vim'         " Syntax highlight for TypeScript
 Plug 'maxmellon/vim-jsx-pretty'           " Syntax highlight for JSX
@@ -124,7 +127,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'HUMAN'
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx', '@nomicfoundation/coc-solidity']
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
@@ -210,6 +213,7 @@ let g:airline_symbols.linenr = ' '
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.colnr = ' :'
 let g:airline#extensions#branch#enabled = 0 " disable git for airline
+" let g:airline_theme = 'catppuccin'
 
 let g:claude_api_key = $CLAUDE_API_KEY
 
@@ -271,8 +275,8 @@ require'nvim-treesitter.configs'.setup {
         ["ia"] = "@parameter.inner",
         ["ai"] = "@conditional.outer",
         ["ii"] = "@conditional.inner",
-        ["al"] = "@loop.outer",
-        ["il"] = "@loop.inner",
+        -- ["al"] = "@loop.outer",
+        -- ["il"] = "@loop.inner",
         ["ab"] = "@block.outer",
         ["ib"] = "@block.inner",
       },
@@ -301,7 +305,14 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" if has('termguicolors')
+"   set termguicolors
+" endif
+
+" set background=dark
+
 colorscheme codedark
+" colorscheme catppuccin-mocha
 
 " " Exit Vim if NERDTree is the only window left.
 " autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -427,6 +438,78 @@ nnoremap <Leader>n <plug>NERDTreeTabsToggle<CR>
 
 nnoremap <silent> <Leader>m :MinimapToggle<CR>
 
+
+" Function to open file in existing tab if open, otherwise open in new tab
+function! OpenFileInTab(files)
+    " Ensure we have a list of files
+    if type(a:files) == type('')
+        let files = [a:files]
+    else
+        let files = a:files
+    endif
+
+    for file in files
+        let filename = fnamemodify(file, ':p')
+        let bufnr = bufnr(filename)
+        if bufnr != -1 && buflisted(bufnr)
+            " Buffer exists, now check if it's open in a tab
+            let found = 0
+            for tabnr in range(1, tabpagenr('$'))
+                let buflist = tabpagebuflist(tabnr)
+                if index(buflist, bufnr) != -1
+                    " Found the buffer in tab tabnr
+                    execute 'tabnext' tabnr
+                    " Switch to window with the buffer
+                    for winnr in range(1, tabpagewinnr(tabnr, '$'))
+                        if tabpagebuflist(tabnr)[winnr - 1] == bufnr
+                            execute winnr . 'wincmd w'
+                            break
+                        endif
+                    endfor
+                    let found = 1
+                    break
+                endif
+            endfor
+            if !found
+                " Buffer is loaded but not displayed, open in new tab
+                execute 'tabnew' fnameescape(filename)
+            endif
+        else
+            " Buffer is not loaded, open file in new tab
+            execute 'tabnew' fnameescape(filename)
+        endif
+    endfor
+endfunction
+
+" Function to open file(s) in current buffer
+function! OpenFileInCurrentBuffer(files)
+    " Ensure we have a list of files
+    if type(a:files) == type('')
+        let files = [a:files]
+    else
+        let files = a:files
+    endif
+
+    " Open the last selected file in the current buffer
+    execute 'edit' fnameescape(files[-1])
+    
+    " Optionally, you can open multiple files in splits if desired
+    " for file in files
+    "     execute 'edit' fnameescape(file)
+    " endfor
+endfunction
+
+
+" Set up custom actions for fzf
+let g:fzf_action = {
+    \ 'enter': function('OpenFileInTab'),
+    \ 'ctrl-e': function('OpenFileInCurrentBuffer'),
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
+
+
+
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>a :Ag<CR>
 
@@ -547,4 +630,16 @@ endfunction
 nnoremap <C-enter> :call Synctex()<cr>
 
 hi CocFloating ctermbg=238 guibg=#4e4e4e
+
+function! CocClean() abort
+  let g:extensions_to_clean = CocAction("loadedExtensions")
+      \ ->filter({idx, extension -> extension !~ 'friendly-snippets'})
+      \ ->filter({idx, extension -> index(g:coc_global_extensions, extension) == -1})
+  if len(g:extensions_to_clean)
+    exe 'CocUninstall' join(map(g:extensions_to_clean, {_, line -> split(line)[0]}))
+  else
+    echo 'Nothing to clean'
+  endif
+endfunction
+command! -nargs=0 CocClean :call CocClean()
 " hi CocMenuSel ctermbg=239 guibg=#4e4e4e
