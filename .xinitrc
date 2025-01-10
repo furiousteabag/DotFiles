@@ -11,9 +11,9 @@ dunst &                # Notification manager.
 udiskie -a -n &        # Automount manager.
 flameshot &            # Screenshot tool.
 nm-applet --no-agent & # Network manager icon w/o notification on connections.
-aw-qt &                # Activity watch tool.
 lxqt-policykit-agent & # Authorize as root via GUI.
 libinput-gestures-setup start & # Start gestures service.
+# aw-qt &                # Activity watch tool.
 
 ########################################
 ## Presets.
