@@ -4,9 +4,35 @@
 #	Run by itself, set the wallpaper (at X start).
 #	If given a file, set that as the new wallpaper.
 #	If given a directory, choose random file in it.
+#	If given a color (in hex format), set that as the wallpaper.
 
-[ -f "$1" ] && cp "$1" ~/.config/wall.png && notify-send -i "Changing wallpaper..."
+WALLPAPER_DIR="$HOME/.config"
+WALLPAPER_FILE="$WALLPAPER_DIR/wall.png"
 
-[ -d "$1" ] && cp "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" ~/.config/wall.png && notify-send -i "Random Wallpaper chosen."
+# Ensure the wallpaper directory exists
+mkdir -p "$WALLPAPER_DIR"
 
-xwallpaper --zoom ~/.config/wall.png
+set_color_wallpaper() {
+    color="$1"
+    if command -v magick &> /dev/null; then
+        magick -size 1x1 xc:"$color" PNG24:"$WALLPAPER_FILE"
+    else
+        convert -size 1x1 xc:"$color" PNG24:"$WALLPAPER_FILE"
+    fi
+    notify-send "Setting solid color wallpaper..."
+}
+
+if [[ "$1" =~ ^#[0-9A-Fa-f]{6}$ ]]; then
+    set_color_wallpaper "$1"
+elif [ -f "$1" ]; then
+    cp "$1" "$WALLPAPER_FILE" && notify-send "Changing wallpaper..."
+elif [ -d "$1" ]; then
+    cp "$(find "$(readlink -f "$1")" -iregex '.*.\(jpg\|jpeg\|png\|gif\)' -type f | shuf -n 1)" "$WALLPAPER_FILE" && notify-send "Random Wallpaper chosen."
+fi
+
+if [ -f "$WALLPAPER_FILE" ]; then
+    xwallpaper --zoom "$WALLPAPER_FILE"
+else
+    echo "No wallpaper file found at $WALLPAPER_FILE"
+    exit 1
+fi
