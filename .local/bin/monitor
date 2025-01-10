@@ -1,0 +1,134 @@
+#!/bin/bash
+
+# Check if inotify-tools is installed
+if ! command -v inotifywait &> /dev/null; then
+    echo "inotify-tools is required but not installed."
+    echo "Install it using:"
+    echo "  Debian/Ubuntu: sudo apt-get install inotify-tools"
+    echo "  RHEL/CentOS: sudo yum install inotify-tools"
+    echo "  Arch Linux: sudo pacman -S inotify-tools"
+    exit 1
+fi
+
+# Default values
+WATCH_PATH="."
+COMMAND=""
+IS_FILE=false
+
+# Function to print usage
+print_usage() {
+    echo "Usage: $0 [-d <directory> | -f <file>] -c <command>"
+    echo "Options:"
+    echo "  -d, --directory   Directory to watch (default: current directory)"
+    echo "  -f, --file       Single file to watch"
+    echo "  -c, --command    Command to execute when changes are detected"
+    echo ""
+    echo "Example: $0 -d ./src -c 'npm test'"
+    echo "Example: $0 -f config.json -c 'docker-compose restart'"
+}
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -d|--directory)
+            if [ "$IS_FILE" = true ]; then
+                echo "Error: Cannot specify both file and directory"
+                print_usage
+                exit 1
+            fi
+            WATCH_PATH="$2"
+            shift 2
+            ;;
+        -f|--file)
+            if [ "$WATCH_PATH" != "." ]; then
+                echo "Error: Cannot specify both file and directory"
+                print_usage
+                exit 1
+            fi
+            WATCH_PATH="$2"
+            IS_FILE=true
+            shift 2
+            ;;
+        -c|--command)
+            COMMAND="$2"
+            shift 2
+            ;;
+        -h|--help)
+            print_usage
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            print_usage
+            exit 1
+            ;;
+    esac
+done
+
+# Verify required arguments
+if [ -z "$COMMAND" ]; then
+    echo "Error: Command is required"
+    print_usage
+    exit 1
+fi
+
+# Convert to absolute path
+WATCH_PATH=$(realpath "$WATCH_PATH")
+
+# Validate watch path exists
+if [ ! -e "$WATCH_PATH" ]; then
+    echo "Error: $WATCH_PATH does not exist"
+    exit 1
+fi
+
+# Validate file/directory based on specified option
+if [ "$IS_FILE" = true ] && [ ! -f "$WATCH_PATH" ]; then
+    echo "Error: $WATCH_PATH is not a file"
+    exit 1
+elif [ "$IS_FILE" = false ] && [ ! -d "$WATCH_PATH" ]; then
+    echo "Error: $WATCH_PATH is not a directory"
+    exit 1
+fi
+
+echo "Watching $WATCH_PATH for changes"
+echo "Will execute: $COMMAND"
+
+# Function to handle debouncing
+declare -A last_trigger_time
+DEBOUNCE_DELAY=1  # seconds
+
+handle_event() {
+    local current_time
+    current_time=$(date +%s)
+    local last_time=${last_trigger_time["$1"]:-0}
+    
+    if ((current_time - last_time >= DEBOUNCE_DELAY)); then
+        echo "Change detected: $2 on $1"
+        eval "$COMMAND"
+        last_trigger_time["$1"]=$current_time
+    fi
+}
+
+# Main watch loop with different parameters based on file/directory
+if [ "$IS_FILE" = true ]; then
+    # Watch single file - include parent directory to catch saves properly
+    WATCH_DIR=$(dirname "$WATCH_PATH")
+    FILE_NAME=$(basename "$WATCH_PATH")
+    
+    inotifywait -m \
+        -e modify \
+        "$WATCH_DIR" --format "%w%f %e" |
+    while read -r CHANGED_FILE EVENT; do
+        if [ "$(basename "$CHANGED_FILE")" = "$FILE_NAME" ]; then
+            handle_event "$CHANGED_FILE" "$EVENT"
+        fi
+    done
+else
+    # Watch directory recursively
+    inotifywait -m -r \
+        -e modify \
+        "$WATCH_PATH" --format "%w%f %e" |
+    while read -r CHANGED_FILE EVENT; do
+        handle_event "$CHANGED_FILE" "$EVENT"
+    done
+fi
