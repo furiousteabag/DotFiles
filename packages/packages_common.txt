@@ -31,3 +31,4 @@ git-lfs
 pyenv
 bat
 fd
+delta
