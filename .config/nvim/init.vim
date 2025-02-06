@@ -510,7 +510,7 @@ let g:fzf_action = {
     \ 'ctrl-v': 'vsplit' }
 
 
-
+let $AG_OPTIONS = '--ignore *.lock --ignore package-lock.json --ignore yarn.lock --ignore Gemfile.lock'
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>a :Ag<CR>
 
