@@ -133,6 +133,7 @@ let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
 \   'coc.preferences.formatOnSaveFiletypes': ["python", "javascript", "javascriptreact", "typescript", "typescriptreact", "css", "json", "markdown", "html", "rust", "c", "cpp"],
 \   "coc.preferences.willSaveHandlerTimeout": 2000,
+\   'suggest.filetypeBlacklist': ['markdown'],
 \   'languageserver': {
 \       'dockerfile': {
 \           'command': 'docker-langserver',
