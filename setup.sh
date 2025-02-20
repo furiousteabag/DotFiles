@@ -161,9 +161,9 @@ cmd_install_debian() {
         sudo apt remove -y neovim
         mkdir -p $HOME/Programs
         (cd $HOME/Programs &&
-             wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz &&
-             tar -xzf nvim-linux64.tar.gz &&
-             ln -s $PWD/nvim-linux64/bin/nvim /usr/bin/nvim)
+             wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz &&
+             tar -xzf nvim-linux-x86_64.tar.gz &&
+             ln -s $PWD/nvim-linux-x86_64/bin/nvim /usr/bin/nvim)
 
         # Installing latest version of tmux
         sudo apt remove -y tmux
