@@ -15,6 +15,13 @@ interval=persist
 
 # [separator]
 
+[bluetooth]
+command=bluetooth-status
+interval=persist
+markup=pango
+
+[separator]
+
 [volume]
 command=volume
 interval=once

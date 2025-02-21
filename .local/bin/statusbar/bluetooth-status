@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# FontAwesome icons
+ICON_BT='\uf293'         # Bluetooth symbol
+ICON_BT_OFF='\uf00d'     # X symbol
+ICON_BT_CONNECTED='\uf1e6' # Plug symbol
+
+print_status() {
+    if ! systemctl is-active bluetooth >/dev/null 2>&1; then
+        # Service not running - red X
+        # echo -e "<span font='FontAwesome' color='#666666'>$ICON_BT_OFF $ICON_BT</span>"
+        echo -e "<span font='FontAwesome' color='#666666'>$ICON_BT</span>"
+        return
+    fi
+
+    state=$(bluetoothctl show | grep Powered | cut -d' ' -f2)
+    if [ "$state" != "yes" ]; then
+        # Bluetooth off - orange
+        echo -e "<span font='FontAwesome' color='#FFAE00'>$ICON_BT</span>"
+        return
+    fi
+
+    connected=$(bluetoothctl devices Connected | head -n1)
+    if [ -n "$connected" ]; then
+        device_name=$(echo "$connected" | cut -d' ' -f3-)
+        num_devices=$(bluetoothctl devices Connected | wc -l)
+        if [ ${#device_name} -gt 12 ]; then
+            device_name="${device_name:0:12}..."
+        fi
+        # Connected - green with device name
+        # if [ "$num_devices" -gt 1 ]; then
+        #     echo -e "<span font='FontAwesome' color='#00FF00'>$ICON_BT $ICON_BT_CONNECTED</span> $device_name +$((num_devices-1))"
+        # else
+        #     echo -e "<span font='FontAwesome' color='#00FF00'>$ICON_BT $ICON_BT_CONNECTED</span> $device_name"
+        # fi
+        echo -e "<span font='FontAwesome' color='#00FF00'>$ICON_BT</span>"
+        # else
+    else
+        # On but not connected - white
+        echo -e "<span font='FontAwesome' color='#FFFFFF'>$ICON_BT</span>"
+    fi
+}
+
+print_status
+
+# while true; do
+#     print_status
+#     sleep 2
+# done
+
+
+# Start monitoring udev events for bluetooth
+(
+    # Monitor adapter properties (power, discoverable, etc.)
+    dbus-monitor --system "type='signal',sender='org.bluez',path='/org/bluez/hci0',interface='org.freedesktop.DBus.Properties'" &
+    
+    # Monitor device connections/disconnections
+    dbus-monitor --system "type='signal',sender='org.bluez',path_namespace='/org/bluez/hci0/dev_',interface='org.freedesktop.DBus.Properties'" &
+    
+    # Monitor device interface added/removed
+    dbus-monitor --system "type='signal',sender='org.bluez',interface='org.freedesktop.DBus.ObjectManager'" &
+    
+    wait
+) 2>/dev/null | \
+while read -r line; do
+    if echo "$line" | grep -qE "string|boolean|array|InterfacesAdded|InterfacesRemoved"; then
+        # Small delay to let the state settle
+        sleep 0.1
+        print_status
+    fi
+done
