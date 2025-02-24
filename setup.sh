@@ -45,6 +45,7 @@ cmd_install_common() {
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     pip3 install neovim
     nvim +PlugInstall +qall
+    nvim +'call coc#util#install()' +qall
 
     git clone https://github.com/alexanderjeurissen/ranger_devicons \
         "${XDG_CONFIG_HOME:-$HOME/.config}"/ranger/plugins/ranger_devicons
