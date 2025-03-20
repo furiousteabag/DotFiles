@@ -31,4 +31,5 @@ git-lfs
 pyenv
 bat
 fd
+fd-find
 delta
