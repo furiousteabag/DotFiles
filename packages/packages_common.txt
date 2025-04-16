@@ -33,3 +33,4 @@ bat
 fd
 fd-find
 delta
+ffmpeg
