@@ -44,6 +44,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Motions.
 Plug 'tpope/vim-surround'                 " Surround motions.
 Plug 'vim-scripts/ReplaceWithRegister'    " Replace motions.
+" Plug 'inkarkat/vim-ReplaceWithRegister'
 Plug 'tpope/vim-commentary'               " Comments motions.
 
 " Text objects.
@@ -85,7 +86,7 @@ Plug 'aklt/plantuml-syntax'               " Syntax highlight for PlantUML
 Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
-Plug 'ervandew/supertab'                  " Autocompletion on tab
+" Plug 'ervandew/supertab'                  " Autocompletion on tab
 Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
 Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Completions engine.
@@ -530,13 +531,16 @@ nmap <silent> <Leader>t <Plug>(coc-type-definition)
 nmap <silent> <Leader>qf <Plug>(coc-fix-current)
 nmap <silent> <Leader>c <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> <Leader>t <Plug>(coc-format)
 " nmap <silent> gt <Plug>(coc-format)
 " nmap <leader>ac  <Plug>(coc-codeaction)
 " inoremap <silent><expr> <c-space> coc#refresh()
+lua vim.keymap.del('n', 'gri')
+lua vim.keymap.del('n', 'gra')
+
 
 " let g:jedi#completions_command = "<C-p>"
 " let g:jedi#usages_command = "<leader>u"
