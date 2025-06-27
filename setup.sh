@@ -76,7 +76,9 @@ cmd_install_arch() {
     (cd $HOME/Programs/yay-bin && makepkg -si)
 
     # Install common packages
-    sudo pacman -S - < ./packages/packages_common.txt
+    while read package; do
+        sudo pacman -S --noconfirm $package
+    done < ./packages/packages_common.txt
 
     if [ "$desktop" == 1 ]; then
         # Install desktop-specific packages
