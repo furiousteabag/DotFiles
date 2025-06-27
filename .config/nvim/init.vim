@@ -83,7 +83,7 @@ Plug 'aklt/plantuml-syntax'               " Syntax highlight for PlantUML
 " Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 
 " Editing.
-Plug 'github/copilot.vim'                 " Suggestions.
+" Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 " Plug 'ervandew/supertab'                  " Autocompletion on tab
