@@ -25,19 +25,22 @@ These are config files and scripts which power my arch linux system.
    <C-b> + I
    ```
 6. Configure Brave browser:
-   - disable password savings: `brave://settings/passwords`
-   - change search engine to Google: `brave://settings/search`
-   - enable autocomplete searches option: `brave://settings/privacy`
-   - install extensions:
-     - [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
-     - [Unhook](https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid)
-     - [Grammarly](https://chromewebstore.google.com/detail/grammarly-ai-writing-and/kbfnbcaeplbcioakkpcpgfkobkghlhen)
-     - [Copy Unicode URLs](https://chromewebstore.google.com/detail/copy-unicode-urls/fnbbfiapefhkicjhecnoepbijhanpkjp)
-     - [ActivityWatch](https://chromewebstore.google.com/detail/activitywatch-web-watcher/nglaklhklhcoonedhgnpgddginnjdadi)
-     - [Ctrl Zoom](https://chromewebstore.google.com/detail/ctrl-zoom/indpmklmjbcfkbnbhoknlggplddednhp)
+   - enable brave sync: `brave://settings/braveSync/setup` or:
+     - disable password savings: `brave://settings/passwords`
+     - change search engine to Google: `brave://settings/search`
+     - enable autocomplete searches option: `brave://settings/privacy`
+     - install extensions:
+       - [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
+       - [Unhook](https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid)
+       - [Grammarly](https://chromewebstore.google.com/detail/grammarly-ai-writing-and/kbfnbcaeplbcioakkpcpgfkobkghlhen)
+       - [Copy Unicode URLs](https://chromewebstore.google.com/detail/copy-unicode-urls/fnbbfiapefhkicjhecnoepbijhanpkjp)
+       - [ActivityWatch](https://chromewebstore.google.com/detail/activitywatch-web-watcher/nglaklhklhcoonedhgnpgddginnjdadi)
+       - [Ctrl Zoom](https://chromewebstore.google.com/detail/ctrl-zoom/indpmklmjbcfkbnbhoknlggplddednhp)
 
 ## Additional Configuration Info
 
+- `.xinitrc` should be copied from default and edited [Arch Wiki | Xinit / xinitrc](https://wiki.archlinux.org/title/Xinit#xinitrc)
+- for the iGPU/GPU laptop, follow info from my thread [Arch Forum | Xorg: Cannot run in framebuffer mode](https://bbs.archlinux.org/viewtopic.php?pid=2248491)
 - to enable pacman parallel download follow [Arch Wiki | pacman / Enabling parallel downloads](https://wiki.archlinux.org/title/pacman#Enabling_parallel_downloads)
 - to speed up pacman packages download, update mirrorlist by something like `sudo reflector --sort rate --connection-timeout 2 --download-timeout 2 --threads 10 --save /etc/pacman.d/mirrorlist`
 - if you can't log in after a couple of failed attempts it is probably caused by `faillock` [Arch Wiki | security / Lock out user after three failed login attempts](https://wiki.archlinux.org/title/security#Lock_out_user_after_three_failed_login_attempts)
