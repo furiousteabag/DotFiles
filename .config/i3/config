@@ -67,7 +67,8 @@ bindsym $mod+Shift+Return exec --no-startup-id cd "$(xcwd)" && exec $TERMINAL
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume.
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume.
 bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks  # Mute sound.
-bindsym $mod+m               exec --no-startup-id pactl list short sources | awk '{system("pactl set-source-mute " $1 " toggle")}' && pkill -RTMIN+20 i3blocks  # Mute micro.
+bindsym $mod+m               exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && pkill -RTMIN+20 i3blocks  # Mute default micro
+# bindsym $mod+m               exec --no-startup-id pactl list short sources | awk '{system("pactl set-source-mute " $1 " toggle")}' && pkill -RTMIN+20 i3blocks  # Mute micro.
 
 
 bindcode $mod+60 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%   && pkill -RTMIN+10 i3blocks  # Increase sound volume headphones.
@@ -84,7 +85,8 @@ bindsym $mod+Shift+c reload  # Reload the configuration file.
 bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3).
 
 # bindsym $mod+Shift+q		  exec --no-startup-id systemctl hibernate
-bindsym $mod+Shift+q		  exec --no-startup-id betterlockscreen -l && systemctl suspend
+# bindsym $mod+Shift+q		  exec --no-startup-id betterlockscreen -l && systemctl suspend
+bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
 bindsym $mod+Shift+w		  exec --no-startup-id betterlockscreen -l
 bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
 bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
