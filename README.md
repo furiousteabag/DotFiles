@@ -100,6 +100,13 @@ These are config files and scripts which power my arch linux system.
   - `xhost +`
   - export DISPLAY=IP:0.0
 - gparted might not format partition because of udiskie automount; disable it
+- to enable play/pause via Bluetooth headset, use `systemctl --user enable --now mpris-proxy` (https://wiki.archlinux.org/title/MPRIS#Bluetooth)
+- to stream game window with OBS even if window is not in focus:
+  - install gamescope for separate X session (https://wiki.archlinux.org/title/Gamescope)
+    - if doesn't work, use https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=gamescope-git, specifying pkgver (remove pkgver function later in the file)
+  - install https://github.com/nowrep/obs-vkcapture
+  - run lutris game with gamescope `OBS_VKCAPTURE=1 gamescope -W 1920 -H 1080 -- gamemoderun obs-gamecapture lutris lutris:rungame/battlenet`
+  - in OBS choose Game Capture as a source
 
 ## ToDo
 
