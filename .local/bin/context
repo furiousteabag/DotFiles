@@ -94,6 +94,8 @@ should_exclude_file() {
         "Thumbs.db"
         "desktop.ini"
         ".gitkeep"
+        "package-lock.json"
+        "LICENSE"
     )
     
     # Check against specific filenames
