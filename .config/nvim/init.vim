@@ -149,6 +149,7 @@ let g:coc_user_config = {
 \       }
 \   },
 \   'python.formatting.provider': 'black',
+\   "python.sortImports.path": "isort",
 \   'pyright.organizeimports.provider': 'isort',
 \   'prettier.proseWrap': 'never',
 \   'clangd.fallbackFlags': ['-xc']
@@ -169,7 +170,7 @@ let g:coc_filetype_map = {
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports').
+" autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.md'
 
