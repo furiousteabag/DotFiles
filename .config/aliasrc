@@ -21,6 +21,7 @@ alias gd='git diff'
 alias gr='git rm'
 alias gl='git log'
 alias gh="git remote get-url origin | sed 's/:/\//' | sed 's/git@/https:\/\//' | sed 's/.git$//' | tee >(xclip -sel clip)"
+alias gsp='git stash pop'
 
 # Arc.
 alias aa='arc add'
@@ -45,7 +46,34 @@ alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
 alias printer="systemctl start avahi-daemon && systemctl start cups"
 
 # Etc.
-alias sr='file=$(fd . /home/furiousteabag/DotFiles /home/furiousteabag/Files /home/furiousteabag/.ssh /home/furiousteabag/Programs/st /home/furiousteabag/Projects/asmirnov.xyz --hidden --follow --exclude .git -t f -t l | sed "s|^/home/furiousteabag/||" | fzf --preview "echo -e \"\033[1;34mLast modified:\033[0m \n\$(ls -l /home/furiousteabag/{} | awk '\''{print \$6, \$7, \$8}'\'') \n\n\033[1;34mFile contents:\033[0m\n\"; bat --color=always --style=numbers /home/furiousteabag/{}" --preview-window up:50% --bind "ctrl-/:change-preview-window(down|hidden|)"); [ -n "$file" ] && vim /home/furiousteabag/$file'
+alias sr='
+search_dirs=();
+for dir in "$HOME/DotFiles" "$HOME/Files" "$HOME/.ssh" "$HOME/Programs/st" "$HOME/Projects/asmirnov.xyz"; do
+    if [ -d "$dir" ]; then
+        search_dirs+=("$dir");
+    fi
+done
+
+if [ ${#search_dirs[@]} -eq 0 ]; then
+    echo "No valid search directories found.";
+    return 1;
+fi
+
+file=$(fd . "${search_dirs[@]}" \
+    --hidden \
+    --follow \
+    --exclude .git \
+    -t f \
+    -t l \
+    | sed "s|^$HOME/||" \
+    | fzf \
+        --preview "echo -e \"\033[1;34mLast modified:\033[0m \n\$(ls -l $HOME/{} | awk '\''{print \$6, \$7, \$8}'\'') \n\n\033[1;34mFile contents:\033[0m\n\"; bat --color=always --style=numbers $HOME/{}" \
+        --preview-window "up:50%" \
+        --bind "ctrl-/:toggle-preview"
+);
+
+[ -n "$file" ] && vim "$HOME/$file"'
 alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 alias untar='tar xvzf'
-alias ro="export ROS_DOMAIN_ID=42; source /opt/ros/humble/setup.zsh; source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh; source /usr/share/colcon_cd/function/colcon_cd.sh; source /home/furiousteabag/colcon-workspace/install/setup.zsh;"
+alias ro="export ROS_DOMAIN_ID=42; source /opt/ros/humble/setup.zsh; source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.zsh; source /usr/share/colcon_cd/function/colcon_cd.sh; source $HOME/colcon-workspace/install/setup.zsh;"
+alias tb="nc termbin.com 9999"
