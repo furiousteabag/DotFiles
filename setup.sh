@@ -168,6 +168,12 @@ cmd_install_debian() {
              tar -xzf nvim-linux-x86_64.tar.gz &&
              ln -s $PWD/nvim-linux-x86_64/bin/nvim /usr/bin/nvim)
 
+        # rm -rf $HOME/Programs/nvim-linux-x86_64 $HOME/Programs/nvim-linux-x86_64.tar.gz /usr/bin/nvim
+        # (cd $HOME/Programs &&
+        #      wget https://github.com/neovim/neovim-releases/releases/latest/download/nvim-linux-x86_64.tar.gz &&
+        #      tar -xzf nvim-linux-x86_64.tar.gz &&
+        #      ln -s $PWD/nvim-linux-x86_64/bin/nvim /usr/bin/nvim)
+
         # Installing latest version of tmux
         sudo apt remove -y tmux
         sudo apt install -y libevent-dev ncurses-dev
