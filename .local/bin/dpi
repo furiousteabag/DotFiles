@@ -11,11 +11,11 @@ fi
 xrdb -merge ~/.Xresources
 
 killall brave
-killall telegram-desktop
+killall Telegram
 
 i3-msg restart
 
 setbg
 
 nohup brave &>/dev/null &
-nohup telegram-desktop &>/dev/null &
+nohup Telegram &>/dev/null &
