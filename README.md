@@ -110,6 +110,9 @@ These are config files and scripts which power my arch linux system.
   - install https://github.com/nowrep/obs-vkcapture
   - run lutris game with gamescope `OBS_VKCAPTURE=1 gamescope -W 1920 -H 1080 -- gamemoderun obs-gamecapture lutris lutris:rungame/battlenet`
   - in OBS choose Game Capture as a source
+- laptop wakes up on physical connections and lid
+  - [Arch Wiki | Power management | Wakeup triggers | Ryzen 7000 Series](https://wiki.archlinux.org/title/Power_management/Wakeup_triggers#Ryzen_7000_Series)
+  - (supplementary, maybe not needed) to not do anything on lid close, change relevant params in `/etc/systemd/logind.conf` [Reddit comment](https://www.reddit.com/r/archlinux/comments/xfikhq/help_dont_suspend_after_closing_laptop_lid_when_i/)
 
 ## ToDo
 
