@@ -17,6 +17,8 @@ zathura
 zathura-pdf-mupdf
 xclip
 mpv
+bluez
+bluez-utils
 blueberry
 autorandr
 openvpn
@@ -41,3 +43,4 @@ xdotool
 kdenlive
 reflector
 breeze
+ttf-droid

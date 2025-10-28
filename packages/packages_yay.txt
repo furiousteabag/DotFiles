@@ -15,3 +15,5 @@ nodejs-compose-language-service
 code-minimap
 libinput-gestures
 fstl
+scc-bin
+dragon-drop

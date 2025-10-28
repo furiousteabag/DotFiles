@@ -34,3 +34,4 @@ fd
 fd-find
 delta
 ffmpeg
+git-delta
