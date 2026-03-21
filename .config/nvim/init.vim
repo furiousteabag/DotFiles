@@ -83,7 +83,7 @@ Plug 'aklt/plantuml-syntax'               " Syntax highlight for PlantUML
 " Plug 'gko/vim-coloresque'                 " Highlight color text with it's color.
 
 " Editing.
-" Plug 'github/copilot.vim'                 " Suggestions.
+Plug 'github/copilot.vim'                 " Suggestions.
 Plug 'chrisbra/csv.vim'                   " csv editing.
 Plug 'ojroques/vim-oscyank'               " Copy from ssh sessions.
 " Plug 'ervandew/supertab'                  " Autocompletion on tab
@@ -128,7 +128,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'HUMAN'
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-prettier', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx', '@nomicfoundation/coc-solidity']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx', '@nomicfoundation/coc-solidity', 'coc-xml', 'coc-biome']
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
@@ -148,9 +148,10 @@ let g:coc_user_config = {
 \           'rootPatterns': [".git", ".env", "docker-compose.yml", "compose.yml"]
 \       }
 \   },
-\   'python.formatting.provider': 'black',
-\   "python.sortImports.path": "isort",
-\   'pyright.organizeimports.provider': 'isort',
+\   'python.formatting.provider': 'ruff',
+\   'python.linting.ruffEnabled': 'true',
+\   "python.sortImports.path": "ruff",
+\   'pyright.organizeimports.provider': 'ruff',
 \   'prettier.proseWrap': 'never',
 \   'clangd.fallbackFlags': ['-xc']
 \ }
@@ -171,6 +172,10 @@ let g:coc_filetype_map = {
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
+" autocmd BufWritePre *.py silent! :!uvx ruff check --select I --fix
+
+autocmd BufWritePost *.py silent! :!uvx ruff check --select I --fix %
+" autocmd BufWritePre *.py :CocCommand python.sortImports
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.md'
 
