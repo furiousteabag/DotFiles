@@ -1,4 +1,9 @@
 #!/bin/bash
 
-BRIGHTNESS=$(( $(brightnessctl get) * 100 / $(brightnessctl max) ))
+RAW_BRIGHTNESS=$(( $(brightnessctl -d "$BRIGHTNESS_DEVICE" get) * 100 / $(brightnessctl -d "$BRIGHTNESS_DEVICE" max) ))
+
+# Round to the closest multiple of 5
+ROUNDING_FACTOR=5
+BRIGHTNESS=$(( (RAW_BRIGHTNESS + ROUNDING_FACTOR/2) / ROUNDING_FACTOR * ROUNDING_FACTOR ))
+
 echo "${BRIGHTNESS}%"
