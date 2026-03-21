@@ -11,6 +11,7 @@ export BROWSER="brave"
 export FILE_MANAGER="ranger"
 export READER="zathura"
 export SYSTEMD_EDITOR="$EDITOR"
+export BRIGHTNESS_DEVICE="amdgpu_bl2"
 
 # Adds `~/.local/bin` and all subfolders to $PATH.
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
