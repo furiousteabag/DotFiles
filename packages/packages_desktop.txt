@@ -44,3 +44,4 @@ kdenlive
 reflector
 breeze
 ttf-droid
+ddcutil

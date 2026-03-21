@@ -11,7 +11,7 @@ python3-pip
 ranger
 tldr
 tree
-neofetch
+fastfetch
 rsync
 fzf
 zip
