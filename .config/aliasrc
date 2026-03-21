@@ -20,7 +20,8 @@ alias gs='git status'
 alias gd='git diff'
 alias gr='git rm'
 alias gl='git log'
-alias gh="git remote get-url origin | sed 's/:/\//' | sed 's/git@/https:\/\//' | sed 's/.git$//' | tee >(xclip -sel clip)"
+alias gco='git checkout'
+alias gh='git remote get-url origin | sed "s/:/\//" | sed "s/git@/https:\/\//" | sed "s/.git$//" | sed "s|$|/tree/$(git branch --show-current)|" | tee >(xclip -sel clip)'
 alias gsp='git stash pop'
 
 # Arc.
