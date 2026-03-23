@@ -45,6 +45,8 @@ bindsym $mod+c        exec --no-startup-id $BROWSER --new-window
 # bindsym $mod+v        exec --no-startup-id telegram-desktop
 bindsym $mod+v        exec --no-startup-id nmcli c show --active | grep furiouspc-openvpn-ipv6 && nmcli c down furiouspc-openvpn-ipv6 || nmcli c up furiouspc-openvpn-ipv6
 bindsym $mod+o        exec --no-startup-id flameshot gui
+# bindsym $mod+Shift+o        exec --no-startup-id flameshot gui --accept-on-select --raw | tesseract -l eng+rus+kor stdin stdout | xclip -in -selection clipboard -rmlastnl
+bindsym $mod+Shift+o exec --no-startup-id sh -lc 'flameshot gui --accept-on-select --raw | tesseract -l eng+rus+kor stdin stdout --oem 1 --psm 6 2>/dev/null | xargs | xclip -in -selection clipboard -rmlastnl && notify-send -a OCR -r 4242 "Copied OCR text" "$(xclip -o -selection clipboard)"'
 bindsym $mod+i        exec --no-startup-id $TERMINAL -e calc
 bindsym $mod+d        exec --no-startup-id dmenu_run -l 5 -fn 'Source Code Pro-18'
 bindsym $mod+p        exec --no-startup-id passmenu -l 5 -fn 'Source Code Pro-18'
@@ -75,8 +77,10 @@ bindcode $mod+60 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% 
 bindcode $mod+59 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%   && pkill -RTMIN+10 i3blocks  # Decrease sound volume headphones.
 bindcode $mod+61 exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks  # Mute sound headphones.
 
-bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl s +10% && pkill -RTMIN+12 i3blocks  # Increase screen brightness.
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 10%- && pkill -RTMIN+12 i3blocks  # Decrease screen brightness.
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl -d $BRIGHTNESS_DEVICE s +10% && pkill -RTMIN+12 i3blocks  # Increase screen brightness.
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -d $BRIGHTNESS_DEVICE s 10%- && pkill -RTMIN+12 i3blocks  # Decrease screen brightness.
+bindsym Shift+XF86MonBrightnessUp   exec --no-startup-id ddcutil setvcp 10 + 10
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id ddcutil setvcp 10 - 10
 
 # bindsym Print exec --no-startup-id "deepin-screen-recorder -s ~/Pictures/Screenshots && rm -rf ~/.deepin-screen-recorder/"
 bindsym Print exec --no-startup-id "flameshot gui"
@@ -87,7 +91,7 @@ bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session
 # bindsym $mod+Shift+q		  exec --no-startup-id systemctl hibernate
 # bindsym $mod+Shift+q		  exec --no-startup-id betterlockscreen -l && systemctl suspend
 bindsym $mod+Shift+q		  exec --no-startup-id systemctl suspend
-bindsym $mod+Shift+w		  exec --no-startup-id betterlockscreen -l
+bindsym $mod+Shift+w		  exec --no-startup-id xscreensaver-command -lock
 bindsym $mod+Shift+braceright exec --no-startup-id shutdown now
 bindsym $mod+Shift+braceleft  exec --no-startup-id reboot
 
@@ -208,7 +212,8 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # bindsym $mod+minus move workspace to output left
-# bindsym $mod+equal move workspace to output right
+bindsym $mod+equal move workspace to output next
+bindsym $mod+Tab workspace back_and_forth
 
 ###############################################################
 # Resize.
