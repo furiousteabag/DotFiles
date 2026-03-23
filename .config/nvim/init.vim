@@ -246,7 +246,7 @@ highlight AvanteIncomingDiff guibg=#2a3a2a
 "   latex = { enabled = false }
 " })
 
-" require'nvim-treesitter.configs'.setup {
+" require'nvim-treesitter.config'.setup {
 "   ensure_installed = { "markdown", "markdown_inline" },
 "   highlight = {
 "     enable = true,
@@ -260,7 +260,7 @@ highlight AvanteIncomingDiff guibg=#2a3a2a
 " vim.opt.termguicolors = true
 
 lua << EOF
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter.config'.setup {
   ensure_installed = {
     "typescript",
     "javascript",
