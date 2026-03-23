@@ -77,7 +77,9 @@ cmd_install_arch() {
     (cd $HOME/Programs/yay-bin && makepkg -si --noconfirm)
 
     # Install common packages
-    sudo pacman -S --noconfirm --needed - < ./packages/packages_common.txt
+    while read package; do
+        sudo pacman -S --noconfirm --needed $package || true
+    done < ./packages/packages_common.txt
 
     if [ "$desktop" == 1 ]; then
         # Install desktop-specific packages
@@ -121,7 +123,7 @@ cmd_install_arch() {
         cd
     fi
 
-    chsh -s $(which zsh)
+    sudo chsh -s $(which zsh) $USER
 
     cmd_install_common
 }
