@@ -70,10 +70,11 @@ cmd_install_arch() {
     [[ ! -z "$1" || $err -ne 0 ]] && die "Usage: $PROGRAM $COMMAND [--desktop,-d]"
 
     # Install yay for AUR packages
-    mkdir -p $HOME/Programs/yay-bin
     sudo pacman -S --needed git base-devel
-    git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
-    (cd $HOME/Programs/yay-bin && makepkg -si)
+    if [ ! -d "$HOME/Programs/yay-bin/.git" ]; then
+        git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
+    fi
+    (cd $HOME/Programs/yay-bin && makepkg -si --noconfirm)
 
     # Install common packages
     while read package; do
@@ -82,8 +83,8 @@ cmd_install_arch() {
 
     if [ "$desktop" == 1 ]; then
         # Install desktop-specific packages
-        sudo pacman -S - < ./packages/packages_desktop.txt
-        yay --answerdiff N --answerclean N -S - < ./packages/packages_aur.txt
+        sudo pacman -S --noconfirm - < ./packages/packages_desktop.txt
+        yay --answerdiff N --answerclean N --noconfirm -S - < ./packages/packages_aur.txt
 
         # Disable useless daemons on startup
         sudo systemctl disable lightdm.service
