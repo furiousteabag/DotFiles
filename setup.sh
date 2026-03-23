@@ -71,7 +71,7 @@ cmd_install_arch() {
 
     # Install yay for AUR packages
     mkdir -p $HOME/Programs/yay-bin
-    pacman -S --needed git base-devel
+    sudo pacman -S --needed git base-devel
     git clone https://aur.archlinux.org/yay-bin.git $HOME/Programs/yay-bin
     (cd $HOME/Programs/yay-bin && makepkg -si)
 
@@ -96,7 +96,7 @@ cmd_install_arch() {
 
         # Copy X11 settings
         cp -rs $PWD/.xinitrc ~/
-        sudo rm /etc/X11/xorg.conf.d/00-keyboard.conf
+        sudo rm -f /etc/X11/xorg.conf.d/00-keyboard.conf
         sudo cp -rs $PWD/.config/etc /
 
         # Install and configure st terminal emulator
@@ -109,9 +109,9 @@ cmd_install_arch() {
         )
         mkdir -p $HOME/Programs/st
         git clone https://git.suckless.org/st $HOME/Programs/st && cd $HOME/Programs/st
-        for patch in "${patches[@]}"; do
-            wget $patch -P $HOME/Programs/st/patches/
-            patch < $HOME/Programs/st/patches/$(basename $patch)
+        for patch_url in "${patches[@]}"; do
+            wget $patch_url -P $HOME/Programs/st/patches/
+            patch < $HOME/Programs/st/patches/$(basename $patch_url)
         done
         sed -i 's/static char \*font =.*/static char \*font = "Source Code Pro:size=11";/' config.def.h
         sed -i '/static char \*font2\[\] = {/,/};/c\static char *font2[] = { "NotoColorEmoji:pixelsize=10:antialias=true:autohint=true" };' config.def.h
