@@ -26,16 +26,19 @@ die() {
 }
 
 cmd_install_common() {
-    cp -rs $PWD/.config/ ~/
-    cp -rs $PWD/.local/ ~/
-    cp -rs $PWD/.zprofile ~/
+    cp -rsf $PWD/.config/ ~/
+    cp -rsf $PWD/.local/ ~/
+    cp -rsf $PWD/.zprofile ~/
 
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-        "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-syntax-highlighting/
-    git clone https://github.com/zsh-users/zsh-autosuggestions \
-        "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-autosuggestions/
-    git clone https://github.com/joshskidmore/zsh-fzf-history-search \
-        "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-fzf-history-search/
+    [ ! -d "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/zsh-syntax-highlighting/.git" ] && \
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+            "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-syntax-highlighting/
+    [ ! -d "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/zsh-autosuggestions/.git" ] && \
+        git clone https://github.com/zsh-users/zsh-autosuggestions \
+            "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-autosuggestions/
+    [ ! -d "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/zsh-fzf-history-search/.git" ] && \
+        git clone https://github.com/joshskidmore/zsh-fzf-history-search \
+            "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-fzf-history-search/
     curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/zsh/plugins/zsh-docker-completion/_docker \
         --create-dirs \
         https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
@@ -43,18 +46,20 @@ cmd_install_common() {
     curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
         --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    pip3 install neovim
+    pip3 install --break-system-packages neovim
     nvim +PlugInstall +qall
     nvim +'call coc#util#install()' +qall
 
-    git clone https://github.com/alexanderjeurissen/ranger_devicons \
-        "${XDG_CONFIG_HOME:-$HOME/.config}"/ranger/plugins/ranger_devicons
+    [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/ranger/plugins/ranger_devicons/.git" ] && \
+        git clone https://github.com/alexanderjeurissen/ranger_devicons \
+            "${XDG_CONFIG_HOME:-$HOME/.config}"/ranger/plugins/ranger_devicons
     # echo "default_linemode devicons" >> \
     #     "${XDG_CONFIG_HOME:-$HOME/.config}"/ranger/rc.conf
 
     # tmux plugin manager
-    git clone https://github.com/tmux-plugins/tpm \
-        "${XDG_DATA_HOME:-$HOME/.local/share}"/tmux/plugins/tpm
+    [ ! -d "${XDG_DATA_HOME:-$HOME/.local/share}/tmux/plugins/tpm/.git" ] && \
+        git clone https://github.com/tmux-plugins/tpm \
+            "${XDG_DATA_HOME:-$HOME/.local/share}"/tmux/plugins/tpm
 }
 
 cmd_install_arch() {
