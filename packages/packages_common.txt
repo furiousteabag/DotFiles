@@ -30,6 +30,8 @@ nodejs
 npm
 bun
 uv
+docker
+docker-compose
 git-lfs
 pyenv
 bat

@@ -131,6 +131,9 @@ cmd_install_arch() {
         cd
     fi
 
+    sudo systemctl enable --now docker
+    sudo usermod -aG docker $USER
+
     sudo chsh -s $(which zsh) $USER
 
     cmd_install_common
@@ -165,6 +168,12 @@ cmd_install_debian() {
             sudo apt install -y $package
         done < ./packages/packages_common.txt
 
+        # Adding sources for Docker
+        curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list
+        sudo apt update
+        sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
         # Install uv and bun via official installers
         curl -LsSf https://astral.sh/uv/install.sh | sh
         curl -fsSL https://bun.sh/install | bash
@@ -198,6 +207,9 @@ cmd_install_debian() {
              cd tmux-*/
              ./configure
              make && sudo make install)
+
+        sudo systemctl enable --now docker
+        sudo usermod -aG docker $USER
 
         sudo chsh -s $(which zsh) $USER
     else
