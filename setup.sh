@@ -76,6 +76,9 @@ cmd_install_arch() {
     fi
     (cd $HOME/Programs/yay-bin && makepkg -si --noconfirm)
 
+    # Sync package database
+    sudo pacman -Sy
+
     # Install common packages
     while read package; do
         sudo pacman -S --noconfirm --needed $package || true
