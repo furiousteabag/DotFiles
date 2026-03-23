@@ -92,7 +92,7 @@ cmd_install_arch() {
     if [ "$desktop" == 1 ]; then
         # Install desktop-specific packages
         sudo pacman -S --noconfirm - < ./packages/packages_desktop.txt
-        yay --answerdiff N --answerclean N --noconfirm -S - < ./packages/packages_aur.txt
+        yay --answerdiff N --answerclean N --noconfirm -S - < ./packages/packages_yay.txt
 
         # Disable useless daemons on startup
         sudo systemctl disable lightdm.service
@@ -164,6 +164,10 @@ cmd_install_debian() {
         while read package; do
             sudo apt install -y $package
         done < ./packages/packages_common.txt
+
+        # Install uv and bun via official installers
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        curl -fsSL https://bun.sh/install | bash
 
         # Make bat a valid executable so ranger
         # filemanager can use it for syntax highlight;

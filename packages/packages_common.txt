@@ -27,6 +27,9 @@ rustup
 rust-analyzer
 rust-src
 nodejs
+npm
+bun
+uv
 git-lfs
 pyenv
 bat
