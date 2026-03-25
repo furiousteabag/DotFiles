@@ -40,3 +40,4 @@ fd-find
 delta
 ffmpeg
 git-delta
+ripgrep
