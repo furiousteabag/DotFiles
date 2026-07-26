@@ -32,6 +32,8 @@ set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNO
 " Disable autocomment on next line.
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufNewFile,BufRead *.mdx set filetype=markdown
+" Table mode + nowrap for journals in the quant repo.
+autocmd BufReadPost,BufNewFile */Projects/quant/*/journal.md setlocal nowrap | TableModeEnable
 
 
 
@@ -53,8 +55,10 @@ Plug 'kana/vim-textobj-indent'            " Indent object.
 Plug 'kana/vim-textobj-line'              " Line object.
 Plug 'kana/vim-textobj-entire'            " Whole file object.
 " Plug 'bps/vim-textobj-python'             " Python functions and classes objects.
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" 'main' is the actively developed, full-rewrite branch (and GitHub's actual
+" default branch). Pinned explicitly so :PlugUpdate can't silently switch it.
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': 'main', 'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects', {'branch': 'main'}
 
 " Visual changes.
 Plug 'preservim/nerdtree'                 " File browser.
@@ -91,6 +95,7 @@ Plug 'AndrewRadev/tagalong.vim'           " HTML tags editing.
 Plug 'alvan/vim-closetag'                 " Automatically close HTML tags.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Completions engine.
 Plug 'pasky/claude.vim'                   " Claude copilo
+Plug 'dhruvasagar/vim-table-mode'
 " Plug 'puremourning/vimspector'            " Debugger.
 " Plug 'rhysd/vim-clang-format'             " Prettier cpp.
 " Plug 'davidhalter/jedi-vim'               " Python autocompletion.
@@ -260,57 +265,74 @@ highlight AvanteIncomingDiff guibg=#2a3a2a
 " vim.opt.termguicolors = true
 
 lua << EOF
-require'nvim-treesitter.config'.setup {
-  ensure_installed = {
-    "typescript",
-    "javascript",
-    "tsx",
-    "markdown",
-    "markdown_inline",
-    "python"
+-- nvim-treesitter 'main' branch: full rewrite, no more configs.setup/
+-- ensure_installed/highlight module. Parsers install into stdpath('data')/site
+-- and highlighting is enabled per filetype via vim.treesitter.start().
+require('nvim-treesitter').setup {}
+require('nvim-treesitter').install {
+  "typescript",
+  "javascript",
+  "tsx",
+  "markdown",
+  "markdown_inline",
+  "python",
+  "bash",
+}
+
+-- Neovim core already auto-starts treesitter highlighting for lua/markdown/
+-- help/query via their bundled ftplugins; everything else needs opt-in.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typescript", "javascript", "javascriptreact", "typescriptreact", "python", "sh" },
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
+-- nvim-treesitter-textobjects moved to a standalone plugin API (main branch);
+-- it no longer registers itself as a module inside nvim-treesitter.configs.
+require("nvim-treesitter-textobjects").setup {
+  select = {
+    lookahead = true,
   },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        ["aa"] = "@parameter.outer",
-        ["ia"] = "@parameter.inner",
-        ["ai"] = "@conditional.outer",
-        ["ii"] = "@conditional.inner",
-        -- ["al"] = "@loop.outer",
-        -- ["il"] = "@loop.inner",
-        ["ab"] = "@block.outer",
-        ["ib"] = "@block.inner",
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        ["]f"] = "@function.outer",
-        ["]c"] = "@class.outer",
-      },
-      goto_next_end = {
-        ["]F"] = "@function.outer",
-        ["]C"] = "@class.outer",
-      },
-      goto_previous_start = {
-        ["[f"] = "@function.outer",
-        ["[c"] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[F"] = "@function.outer",
-        ["[C"] = "@class.outer",
-      },
-    },
+  move = {
+    set_jumps = true,
   },
 }
+
+local ts_select = require "nvim-treesitter-textobjects.select"
+local ts_move = require "nvim-treesitter-textobjects.move"
+
+local function select_textobject(query_string)
+  return function()
+    ts_select.select_textobject(query_string, "textobjects")
+  end
+end
+
+local function move_textobject(fn, query_string)
+  return function()
+    fn(query_string, "textobjects")
+  end
+end
+
+vim.keymap.set({ "x", "o" }, "af", select_textobject "@function.outer")
+vim.keymap.set({ "x", "o" }, "if", select_textobject "@function.inner")
+vim.keymap.set({ "x", "o" }, "ac", select_textobject "@class.outer")
+vim.keymap.set({ "x", "o" }, "ic", select_textobject "@class.inner")
+vim.keymap.set({ "x", "o" }, "aa", select_textobject "@parameter.outer")
+vim.keymap.set({ "x", "o" }, "ia", select_textobject "@parameter.inner")
+vim.keymap.set({ "x", "o" }, "ai", select_textobject "@conditional.outer")
+vim.keymap.set({ "x", "o" }, "ii", select_textobject "@conditional.inner")
+vim.keymap.set({ "x", "o" }, "ab", select_textobject "@block.outer")
+vim.keymap.set({ "x", "o" }, "ib", select_textobject "@block.inner")
+
+vim.keymap.set({ "n", "x", "o" }, "]f", move_textobject(ts_move.goto_next_start, "@function.outer"))
+vim.keymap.set({ "n", "x", "o" }, "]c", move_textobject(ts_move.goto_next_start, "@class.outer"))
+vim.keymap.set({ "n", "x", "o" }, "]F", move_textobject(ts_move.goto_next_end, "@function.outer"))
+vim.keymap.set({ "n", "x", "o" }, "]C", move_textobject(ts_move.goto_next_end, "@class.outer"))
+vim.keymap.set({ "n", "x", "o" }, "[f", move_textobject(ts_move.goto_previous_start, "@function.outer"))
+vim.keymap.set({ "n", "x", "o" }, "[c", move_textobject(ts_move.goto_previous_start, "@class.outer"))
+vim.keymap.set({ "n", "x", "o" }, "[F", move_textobject(ts_move.goto_previous_end, "@function.outer"))
+vim.keymap.set({ "n", "x", "o" }, "[C", move_textobject(ts_move.goto_previous_end, "@class.outer"))
 EOF
 
 " if has('termguicolors')
