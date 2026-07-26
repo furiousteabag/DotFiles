@@ -41,3 +41,4 @@ delta
 ffmpeg
 git-delta
 ripgrep
+tree-sitter-cli
