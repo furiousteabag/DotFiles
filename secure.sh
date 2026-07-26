@@ -2,7 +2,7 @@
 #
 # Hardens a fresh server:
 #   - Changes SSH port to a random 5xxxx port
-#   - Installs and configures UFW (allow only SSH port)
+#   - Installs and configures UFW (allow only SSH port, 80, and 443)
 #   - Disables SSH password authentication
 #   - Disables SSH root login
 
@@ -60,9 +60,11 @@ ufw --force reset
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow "$SSH_PORT/tcp"
+ufw allow 80/tcp
+ufw allow 443/tcp
 ufw --force enable
 
-echo "==> UFW enabled, only port $SSH_PORT/tcp allowed inbound"
+echo "==> UFW enabled, only ports $SSH_PORT/tcp, 80/tcp, 443/tcp allowed inbound"
 
 # Restart SSH
 systemctl restart sshd || systemctl restart ssh
