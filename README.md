@@ -39,6 +39,11 @@ These are config files and scripts which power my arch linux system.
 
 ## Additional Configuration Info
 
+- configure wifi card
+  * sudo pacman -S wireless-regdb
+  * sudo nvim /etc/conf.d/wireless-regdom
+  * uncomment region
+- to change monitor brightness: `sudo usermod -aG i2c $USER`
 - `.xinitrc` should be copied from default and edited [Arch Wiki | Xinit / xinitrc](https://wiki.archlinux.org/title/Xinit#xinitrc)
 - for the iGPU/GPU laptop, follow info from my thread [Arch Forum | Xorg: Cannot run in framebuffer mode](https://bbs.archlinux.org/viewtopic.php?pid=2248491)
 - to enable pacman parallel download follow [Arch Wiki | pacman / Enabling parallel downloads](https://wiki.archlinux.org/title/pacman#Enabling_parallel_downloads)
