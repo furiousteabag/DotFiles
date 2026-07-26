@@ -1,0 +1,63 @@
+#!/bin/bash
+# Switch display output without hardcoding port names.
+# Usage: extmon [on|off|extend|mirror]
+#   on      - external only (default)
+#   off     - internal only
+#   extend  - extend desktop to the right of internal
+#   mirror  - mirror internal on external
+
+internal=$(xrandr | awk '/ connected/ && /^eDP/ {print $1; exit}')
+mapfile -t externals < <(xrandr | awk '/ connected/ && !/^eDP/ {print $1}')
+
+if [ ${#externals[@]} -eq 0 ]; then
+    echo "No external monitor connected"
+    exit 1
+fi
+
+case "${1:-on}" in
+    toggle)
+        # If any external is currently active, go back to internal; otherwise go external
+        active_external=$(xrandr | awk '!/^eDP/ && / connected [0-9]/ {print $1; exit}')
+        if [ -n "$active_external" ]; then
+            exec "$0" off
+        else
+            exec "$0" on
+        fi
+        ;;
+    on)
+        args=()
+        for ext in "${externals[@]}"; do
+            args+=(--output "$ext" --auto)
+        done
+        [ -n "$internal" ] && args+=(--output "$internal" --off)
+        xrandr "${args[@]}"
+        ;;
+    off)
+        args=()
+        [ -n "$internal" ] && args+=(--output "$internal" --auto)
+        for ext in "${externals[@]}"; do
+            args+=(--output "$ext" --off)
+        done
+        xrandr "${args[@]}"
+        ;;
+    extend)
+        args=(--output "$internal" --auto)
+        prev="$internal"
+        for ext in "${externals[@]}"; do
+            args+=(--output "$ext" --auto --right-of "$prev")
+            prev="$ext"
+        done
+        xrandr "${args[@]}"
+        ;;
+    mirror)
+        args=(--output "$internal" --auto)
+        for ext in "${externals[@]}"; do
+            args+=(--output "$ext" --auto --same-as "$internal")
+        done
+        xrandr "${args[@]}"
+        ;;
+    *)
+        echo "Usage: $(basename "$0") [on|off|extend|mirror|toggle]"
+        exit 1
+        ;;
+esac
