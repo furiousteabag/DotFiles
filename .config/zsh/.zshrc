@@ -50,7 +50,13 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-eval $(ssh-agent) >/dev/null # Start ssh-agent (if not already running)
+# Start a shared ssh-agent only if none is reachable (keeps forwarded agents).
+ssh-add -l >/dev/null 2>&1
+if [ $? -eq 2 ]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/tmp}/ssh-agent-$UID.sock"
+  ssh-add -l >/dev/null 2>&1
+  [ $? -eq 2 ] && eval "$(ssh-agent -a "$SSH_AUTH_SOCK")" >/dev/null
+fi
 ssh-add -k 2>/dev/null # Add ssh keys.
 
 ###############################################################
