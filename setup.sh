@@ -153,6 +153,9 @@ cmd_install_debian() {
     [[ ! -z "$1" || $err -ne 0 ]] && die "Usage: $PROGRAM $COMMAND [--no-root,-n]"
 
     if [ "$root" == 1 ]; then
+        # Keep debconf from blocking an unattended run.
+        export DEBIAN_FRONTEND=noninteractive
+
         sudo apt update
 
         # Adding sources for the latest Node version
@@ -186,12 +189,22 @@ cmd_install_debian() {
         command -v fdfind >/dev/null && { mkdir -p ~/.local/bin; ln -s /usr/bin/fdfind ~/.local/bin/fd; }
 
         # Installing last version of neovim
-        sudo apt remove -y neovim
+        case "$(uname -m)" in
+            x86_64)        NVIM_ARCH=x86_64 ;;
+            aarch64|arm64) NVIM_ARCH=arm64 ;;
+            *)             NVIM_ARCH= ;;
+        esac
         mkdir -p $HOME/Programs
-        (cd $HOME/Programs &&
-             wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz &&
-             tar -xzf nvim-linux-x86_64.tar.gz &&
-             sudo ln -s $PWD/nvim-linux-x86_64/bin/nvim /usr/bin/nvim)
+        # Only drop the distro package once the upstream build is unpacked,
+        # otherwise a failed download leaves the machine with no nvim at all.
+        if [ -n "$NVIM_ARCH" ] && (cd $HOME/Programs &&
+                 wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$NVIM_ARCH.tar.gz &&
+                 tar -xzf nvim-linux-$NVIM_ARCH.tar.gz); then
+            sudo apt remove -y neovim
+            sudo ln -sf $HOME/Programs/nvim-linux-$NVIM_ARCH/bin/nvim /usr/bin/nvim
+        else
+            echo "setup: no upstream nvim for $(uname -m), keeping distro neovim" >&2
+        fi
 
         # rm -rf $HOME/Programs/nvim-linux-x86_64 $HOME/Programs/nvim-linux-x86_64.tar.gz /usr/bin/nvim
         # (cd $HOME/Programs &&
@@ -200,17 +213,33 @@ cmd_install_debian() {
         #      ln -s $PWD/nvim-linux-x86_64/bin/nvim /usr/bin/nvim)
 
         # Installing latest version of tmux
-        sudo apt remove -y tmux
         sudo apt install -y libevent-dev ncurses-dev bison
-        (cd $HOME/Programs &&
-             wget https://github.com/tmux/tmux/releases/download/3.6a/tmux-3.6a.tar.gz &&
-             tar -zxf tmux-*.tar.gz
-             cd tmux-*/
-             ./configure
-             make && sudo make install)
+        # The tarball name carries the version, so GitHub's /latest/download/
+        # shortcut is unusable here; resolve the tag from the /latest redirect.
+        TMUX_URL=$(curl -fsSLI -o /dev/null -w '%{url_effective}' \
+            https://github.com/tmux/tmux/releases/latest)
+        TMUX_TAG="${TMUX_URL##*/}"
+        # Same as nvim above: only drop the distro package once the build
+        # from source has actually installed, so a failed build cannot
+        # leave the machine with no tmux at all.
+        if [ -n "$TMUX_TAG" ] && (cd $HOME/Programs &&
+                 wget https://github.com/tmux/tmux/releases/download/$TMUX_TAG/tmux-$TMUX_TAG.tar.gz &&
+                 tar -zxf tmux-$TMUX_TAG.tar.gz &&
+                 cd tmux-$TMUX_TAG/ &&
+                 ./configure &&
+                 make && sudo make install); then
+            sudo apt remove -y tmux
+        else
+            echo "setup: tmux build failed, keeping distro tmux" >&2
+        fi
 
-        sudo systemctl enable --now docker
-        sudo usermod -aG docker $USER
+        # dockerd cannot start inside a nested-virt guest (e.g. Android's
+        # Linux Terminal), so do not let it stop the rest of the setup.
+        if command -v docker >/dev/null; then
+            sudo systemctl enable --now docker || \
+                echo "setup: docker service unavailable, skipping" >&2
+            sudo usermod -aG docker $USER
+        fi
 
         sudo chsh -s $(which zsh) $USER
     else
