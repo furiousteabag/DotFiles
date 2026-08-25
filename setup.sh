@@ -180,7 +180,7 @@ cmd_install_debian() {
 
         # Install uv and bun via official installers
         curl -LsSf https://astral.sh/uv/install.sh | sh
-        curl -fsSL https://bun.sh/install | bash
+        curl -fsSL https://bun.sh/install | BUN_INSTALL="$HOME/.local/share/bun" bash
 
         # Make bat a valid executable so ranger
         # filemanager can use it for syntax highlight;
