@@ -127,6 +127,7 @@ cmd_install_arch() {
         sed -i 's/int allowwindowops = 0;/int allowwindowops = 1;/' config.def.h
         sed -i 's/"black", \/\* default background colour \*\//"#1e1e1e", \/\* default background colour \*\//' config.def.h
         sed -i -e 's/XK_l,/XK_u,/g' -e 's/XK_L,/XK_U,/g' config.def.h
+        sed -i '/{ XK_BackSpace,     XK_NO_MOD,      "\\177",          0,    0},/a\	{ XK_BackSpace,     ControlMask,    "\\027",          0,    0},' config.def.h
         sudo make clean install
         cd
     fi
