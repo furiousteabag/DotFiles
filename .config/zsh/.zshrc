@@ -57,7 +57,9 @@ if [ $? -eq 2 ]; then
   ssh-add -l >/dev/null 2>&1
   [ $? -eq 2 ] && eval "$(ssh-agent -a "$SSH_AUTH_SOCK")" >/dev/null
 fi
-ssh-add -k </dev/null 2>/dev/null # Add ssh keys (skips passphrase-protected ones).
+# Add ssh keys. The askpass stub makes ssh-add skip passphrase-protected
+# keys instead of prompting: it reads from /dev/tty, so </dev/null won't do.
+SSH_ASKPASS=/bin/false SSH_ASKPASS_REQUIRE=force ssh-add -k 2>/dev/null
 
 ###############################################################
 # Sourcing configs.
