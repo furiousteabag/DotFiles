@@ -179,7 +179,25 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " autocmd BufWritePre *.py silent! :call CocAction('runCommand', 'python.sortImports')
 " autocmd BufWritePre *.py silent! :!uvx ruff check --select I --fix
 
-autocmd BufWritePost *.py silent! :!uvx ruff check --select I --fix %
+" Sort imports on save. Runs asynchronously: a blocking ':!' here froze nvim
+" whenever the network stalled (uvx resolves the tool over the wire), so use a
+" locally installed ruff (uv tool install ruff) driven by vim.system().
+lua << RUFF_ISORT
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.py",
+  callback = function(args)
+    if vim.fn.executable("ruff") == 0 then return end
+    local file = vim.api.nvim_buf_get_name(args.buf)
+    vim.system({ "ruff", "check", "--select", "I", "--fix", file }, {}, function()
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(args.buf) then
+          vim.api.nvim_buf_call(args.buf, function() vim.cmd("silent! checktime") end)
+        end
+      end)
+    end)
+  end,
+})
+RUFF_ISORT
 " autocmd BufWritePre *.py :CocCommand python.sortImports
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.md'
