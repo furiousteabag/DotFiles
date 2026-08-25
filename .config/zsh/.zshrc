@@ -57,7 +57,7 @@ if [ $? -eq 2 ]; then
   ssh-add -l >/dev/null 2>&1
   [ $? -eq 2 ] && eval "$(ssh-agent -a "$SSH_AUTH_SOCK")" >/dev/null
 fi
-ssh-add -k 2>/dev/null # Add ssh keys.
+ssh-add -k </dev/null 2>/dev/null # Add ssh keys (skips passphrase-protected ones).
 
 ###############################################################
 # Sourcing configs.
