@@ -178,8 +178,9 @@ cmd_install_debian() {
         sudo apt update
         sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-        # Install uv and bun via official installers
+        # Install uv, ruff and bun via official installers
         curl -LsSf https://astral.sh/uv/install.sh | sh
+        curl -LsSf https://astral.sh/ruff/install.sh | sh
         curl -fsSL https://bun.sh/install | BUN_INSTALL="$HOME/.local/share/bun" bash
 
         # Make bat a valid executable so ranger
