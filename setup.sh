@@ -81,6 +81,9 @@ cmd_install_arch() {
     fi
     (cd $HOME/Programs/yay-bin && makepkg -si --noconfirm)
 
+    # Cache cleanup after installs
+    yay --save --cleanafter
+
     # Sync package database
     sudo pacman -Sy
 
@@ -132,6 +135,8 @@ cmd_install_arch() {
         cd
     fi
 
+    sudo systemctl enable --now logrotate.timer
+    sudo systemctl enable --now paccache.timer
     sudo systemctl enable --now docker
     sudo usermod -aG docker $USER
 
@@ -178,7 +183,6 @@ cmd_install_debian() {
         sudo apt update
         sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
-        # Install uv, ruff and bun via official installers
         curl -LsSf https://astral.sh/uv/install.sh | sh
         curl -LsSf https://astral.sh/ruff/install.sh | sh
         curl -fsSL https://bun.sh/install | BUN_INSTALL="$HOME/.local/share/bun" bash
@@ -196,8 +200,6 @@ cmd_install_debian() {
             *)             NVIM_ARCH= ;;
         esac
         mkdir -p $HOME/Programs
-        # Only drop the distro package once the upstream build is unpacked,
-        # otherwise a failed download leaves the machine with no nvim at all.
         if [ -n "$NVIM_ARCH" ] && (cd $HOME/Programs &&
                  wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$NVIM_ARCH.tar.gz &&
                  tar -xzf nvim-linux-$NVIM_ARCH.tar.gz); then
@@ -215,14 +217,9 @@ cmd_install_debian() {
 
         # Installing latest version of tmux
         sudo apt install -y libevent-dev ncurses-dev bison
-        # The tarball name carries the version, so GitHub's /latest/download/
-        # shortcut is unusable here; resolve the tag from the /latest redirect.
         TMUX_URL=$(curl -fsSLI -o /dev/null -w '%{url_effective}' \
             https://github.com/tmux/tmux/releases/latest)
         TMUX_TAG="${TMUX_URL##*/}"
-        # Same as nvim above: only drop the distro package once the build
-        # from source has actually installed, so a failed build cannot
-        # leave the machine with no tmux at all.
         if [ -n "$TMUX_TAG" ] && (cd $HOME/Programs &&
                  wget https://github.com/tmux/tmux/releases/download/$TMUX_TAG/tmux-$TMUX_TAG.tar.gz &&
                  tar -zxf tmux-$TMUX_TAG.tar.gz &&
