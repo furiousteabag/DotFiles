@@ -133,7 +133,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'HUMAN'
 
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx', '@nomicfoundation/coc-solidity', 'coc-xml', 'coc-biome']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', '@yaegassy/coc-tailwindcss3', 'coc-css', 'coc-sh', 'coc-sumneko-lua', 'coc-rust-analyzer', 'coc-clangd', '@yaegassy/coc-nginx', '@nomicfoundation/coc-solidity', 'coc-xml', 'coc-biome', 'coc-prettier']
 " 'coc-eslint',
 let g:coc_user_config = {
 \   'coc.source.around.enable': v:false,
@@ -158,6 +158,7 @@ let g:coc_user_config = {
 \   "python.sortImports.path": "ruff",
 \   'pyright.organizeimports.provider': 'ruff',
 \   'prettier.proseWrap': 'never',
+\   'prettier.disableLanguages': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json', 'jsonc', 'yaml', 'graphql', 'vue', 'svelte', 'astro'],
 \   'clangd.fallbackFlags': ['-xc']
 \ }
 "\   'eslint.autoFixOnSave': v:true,
