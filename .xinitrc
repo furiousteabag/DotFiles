@@ -60,7 +60,7 @@ lxqt-policykit-agent & # Authorize as root via GUI.
 libinput-gestures-setup start & # Start gestures service.
 xbindkeys &            # Keybinds from .xbindkeysrc
 # aw-qt &                # Activity watch tool.
-xscreensaver --no-splash &
+# xscreensaver --no-splash &
 
 ########################################
 ## Presets.
