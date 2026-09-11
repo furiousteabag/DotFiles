@@ -1,6 +1,15 @@
 #!/bin/bash
 
-dpi=${1:-100}
+if [ -n "$1" ]; then
+    dpi=$1
+elif xrandr | grep -q " connected.*1920x1080"; then
+    dpi=96
+else
+    dpi=144
+fi
+
+current=$(grep "Xft.dpi:" ~/.Xresources 2>/dev/null | awk '{print $2}')
+[ "$current" = "$dpi" ] && echo "DPI already $dpi, nothing to do" && exit 0
 
 if ! grep -q "Xft.dpi:" ~/.Xresources; then
     echo "Xft.dpi: $dpi" >> ~/.Xresources
@@ -12,6 +21,7 @@ xrdb -merge ~/.Xresources
 
 killall brave
 killall Telegram
+i3-msg '[workspace="2" class="st-256color"] kill'
 
 i3-msg restart
 
@@ -19,3 +29,4 @@ setbg
 
 nohup brave &>/dev/null &
 nohup Telegram &>/dev/null &
+nohup i3-msg 'workspace number 2; exec st -e tmux attach' &>/dev/null &
